@@ -187,13 +187,12 @@ public class Test {
 ```
 
 Float：32位 / 4字节
-Double：64位 / 8字节
+
 
 ```java
 public class Test {
 	public static void main(String[] args) {
 		Float f = 3.14F;
-		Double d = 3.14;
 		
 		System.out.println(f);
 		System.out.println(Float.SIZE);
@@ -202,14 +201,12 @@ public class Test {
 		System.out.println(Float.MIN_VALUE);
 		System.out.println(Float.MAX_EXPONENT);
 		System.out.println(Float.MAX_VALUE);
-		
-		System.out.println(d);
-		System.out.println(Double.SIZE);
-		System.out.println(Double.MIN_EXPONENT);
-		System.out.println(Double.MIN_NORMAL);
-		System.out.println(Double.MIN_VALUE);
-		System.out.println(Double.MAX_EXPONENT);
-		System.out.println(Double.MAX_VALUE);
+		System.out.println(Float.NEGATIVE_INFINITY);
+		System.out.println(Float.POSITIVE_INFINITY);
+		System.out.println(Float.NaN);
+		System.out.println(Float.isFinite(0));
+		System.out.println(Float.isInfinite(0));
+		System.out.println(Float.isNaN(0));
 	}
 }
 ```
@@ -224,6 +221,41 @@ public class Test {
 1.4E-45
 127
 3.4028235E38
+-Infinity
+Infinity
+NaN
+true
+false
+false
+```
+
+Double：64位 / 8字节
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		Double d = 3.14;
+		
+		System.out.println(d);
+		System.out.println(Double.SIZE);
+		System.out.println(Double.MIN_EXPONENT);
+		System.out.println(Double.MIN_NORMAL);
+		System.out.println(Double.MIN_VALUE);
+		System.out.println(Double.MAX_EXPONENT);
+		System.out.println(Double.MAX_VALUE);
+		System.out.println(Double.NEGATIVE_INFINITY);
+		System.out.println(Double.POSITIVE_INFINITY);
+		System.out.println(Double.NaN);
+		System.out.println(Double.isFinite(0));
+		System.out.println(Double.isInfinite(0));
+		System.out.println(Double.isNaN(0));
+	}
+}
+```
+
+运行结果：
+
+```
 3.14
 64
 -1022
@@ -231,6 +263,12 @@ public class Test {
 4.9E-324
 1023
 1.7976931348623157E308
+-Infinity
+Infinity
+NaN
+true
+false
+false
 ```
 
 
