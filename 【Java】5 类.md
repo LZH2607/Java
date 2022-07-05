@@ -161,6 +161,8 @@ This is instance method 1.
 This is instance method 1.
 ```
 
+
+
 静态代码块：
 
 ```java
@@ -184,6 +186,8 @@ public class Test {
 Running static block...
 This is a static string.
 ```
+
+
 
 静态导入：
 
@@ -245,6 +249,10 @@ public class Test {
 ## 继承
 
 类的三大特性：封装、继承、多态
+
+默认父类：java.lang.Object
+
+查看类的继承结构：Ctrl + T
 
 ```java
 public class Test {
@@ -319,6 +327,140 @@ class C2 extends C1 {
 	}
 
 	public void f2() {
+		System.out.println("i2: " + i2);
+	}
+}
+```
+
+运行结果：
+
+```
+i1: 1
+i2: 2
+```
+
+
+
+## instanceof
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C1 c1 = new C1();
+		C2 c2 = new C2();
+
+		System.out.println(c1 instanceof Object);
+		System.out.println(c1 instanceof C1);
+		System.out.println(c1 instanceof C2);
+
+		System.out.println(c2 instanceof Object);
+		System.out.println(c2 instanceof C1);
+		System.out.println(c2 instanceof C2);
+	}
+}
+
+class C1 {
+
+}
+
+class C2 extends C1 {
+
+}
+```
+
+运行结果：
+
+```
+true
+true
+false
+true
+true
+true
+```
+
+
+
+## toString
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		Test t = new Test();
+		System.out.println(t);
+		System.out.println(t.toString());
+	}
+}
+```
+
+运行结果：
+
+```
+Test@515f550a
+Test@515f550a
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C c = new C(1);
+		System.out.println(c);
+		System.out.println(c.toString());
+	}
+
+}
+
+class C {
+	int i;
+
+	public C(int i) {
+		this.i = i;
+	}
+
+	public String toString() {
+		return "i: " + i;
+	}
+}
+```
+
+运行结果：
+
+```
+i: 1
+i: 1
+```
+
+
+
+## 重写
+
+重写：子类对父类的方法重新编写
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C2 c = new C2();
+		c.i1 = 1;
+		c.i2 = 2;
+		c.f();
+	}
+}
+
+class C1 {
+	int i1;
+
+	public void f() {
+		System.out.println("i1: " + i1);
+	}
+}
+
+class C2 extends C1 {
+	int i2;
+
+	public void f() {
+		System.out.println("i1: " + i1);
 		System.out.println("i2: " + i2);
 	}
 }
