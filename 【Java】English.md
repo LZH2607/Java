@@ -11,7 +11,7 @@ constructor（构造函数）
 main method（主函数）
 parameter（形参）
 argument（实参）
-property（属性）
+property（属性（类的变量））
 statement（语句）
 expression（表达式）
 
@@ -43,6 +43,15 @@ string literal（字符串字面量）
 
 operator（运算符）
 assignment operator（赋值运算符）：=
+arithmetic operator（算术运算符）
+	addition operator / plus sign（加法运算符 / 加号）：+
+	subtraction operator / minus sign（减法运算符 / 减号）：-
+	multiplication operator / multiplication sign / times sign（乘法运算符 / 乘号）：*
+	division operator / division sign（除法运算符 / 除号）：/
+	modulus operator（取模运算符）：%
+	operator precedence（运算符优先级）
+	increment operator（递增运算符）：++
+	decrement operator（递减运算符）：--
 
 object-oriented programming（面向对象编程）
 programming language（编程语言）
@@ -67,14 +76,13 @@ compiling error（编译错误）
 runtime error（运行时错误）
 syntax error（语法错误）
 
-asterisk（星号）：*
+asterisk / star（星号）：*
 curly brace（花括号）：{}
 forward slash / slash（正斜杠）：/
 backward slash / backslash / downward slash（反斜杠）：\
 bracket（方括号）：[]
+dot / point（（小数）点）：.
 
 capital letter / uppercase letter（大写字母）
 lowercase letter（小写字母）
-
-
 

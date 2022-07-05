@@ -315,7 +315,7 @@ public class Test {
 
 ## 字符型
 
-char：2字节
+char：16位 / 2字节
 
 Unicode：\u0000~\uffff（0~65535）
 
@@ -361,6 +361,30 @@ public class Test {
 		System.out.println(b2);
 	}
 }
+```
+
+Boolean
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		Boolean b = true;
+		
+		System.out.println(b);
+		System.out.println(Boolean.TRUE);
+		System.out.println(Boolean.FALSE);
+		System.out.println(Boolean.TYPE);
+	}
+}
+```
+
+运行结果：
+
+```
+true
+true
+false
+boolean
 ```
 
 

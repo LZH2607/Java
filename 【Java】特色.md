@@ -105,32 +105,3 @@ public class Test {
 ```
 
 
-
-## 类的定义和构造
-
-```java
-class Student {
-	int id;
-	String name;
-	int age;
-
-	void printInfor() {
-		System.out.println("ID: " + id);
-		System.out.println("Name: " + name);
-		System.out.println("Age: " + age);
-	}
-}
-
-public class Test {
-	public static void main(String[] args) {
-		Student s = new Student();
-		s.id = 1;
-		s.name = "Tom";
-		s.age = 18;
-		s.printInfor();
-	}
-}
-```
-
-
-
