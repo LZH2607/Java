@@ -36,6 +36,8 @@ public class Test {
 
 ## 整数型
 
+### byte、short、int、long
+
 byte：8位 / 1字节
 short：16位 / 2字节
 int：32位 / 4字节
@@ -76,38 +78,26 @@ public class Test {
 }
 ```
 
+
+
+### Byte
+
 Byte：8位 / 1字节
-Short：16位 / 2字节
-Integer：32位 / 4字节
-Long：64位 / 8字节
 
 ```java
 public class Test {
 	public static void main(String[] args) {
-		Byte b = 1;
-		Short s = 2;
-		Integer i = 3;
-		Long l = 4L;
-		
-		System.out.println(b);
+		Byte b1 = 1;
+		Byte b2 = 2;
+		String s = "-1";
+
+		System.out.println(b1);
 		System.out.println(Byte.SIZE);
 		System.out.println(Byte.MIN_VALUE);
 		System.out.println(Byte.MAX_VALUE);
-		
-		System.out.println(s);
-		System.out.println(Short.SIZE);
-		System.out.println(Short.MIN_VALUE);
-		System.out.println(Short.MAX_VALUE);
-		
-		System.out.println(i);
-		System.out.println(Integer.SIZE);
-		System.out.println(Integer.MIN_VALUE);
-		System.out.println(Integer.MAX_VALUE);
-		
-		System.out.println(l);
-		System.out.println(Long.SIZE);
-		System.out.println(Long.MIN_VALUE);
-		System.out.println(Long.MAX_VALUE);
+		System.out.println(Byte.compare(b1, b2));
+		System.out.println(Byte.valueOf(s));
+		System.out.println(Byte.parseByte(s));
 	}
 }
 ```
@@ -119,23 +109,132 @@ public class Test {
 8
 -128
 127
-2
+-1
+-1
+-1
+```
+
+
+
+### Short
+
+Short：16位 / 2字节
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		Short s1 = 1;
+		Short s2 = 2;
+		String ss = "-1";
+		
+		System.out.println(s1);
+		System.out.println(Short.SIZE);
+		System.out.println(Short.MIN_VALUE);
+		System.out.println(Short.MAX_VALUE);
+		System.out.println(Short.compare(s1, s2));
+		System.out.println(Short.valueOf(ss));
+		System.out.println(Short.parseShort(ss));
+	}
+}
+```
+
+运行结果：
+
+```
+1
 16
 -32768
 32767
-3
+-1
+-1
+-1
+```
+
+
+
+### Integer
+
+Integer：32位 / 4字节
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		Integer i1 = 1;
+		Integer i2 = 2;
+		String s = "-1";
+
+		System.out.println(i1);
+		System.out.println(Integer.SIZE);
+		System.out.println(Integer.MIN_VALUE);
+		System.out.println(Integer.MAX_VALUE);
+		System.out.println(Integer.compare(i1, i2));
+		System.out.println(Integer.max(i1, i2));
+		System.out.println(Integer.min(i1, i2));
+		System.out.println(Integer.valueOf(s));
+		System.out.println(Integer.parseInt(s));
+	}
+}
+```
+
+运行结果：
+
+```
+1
 32
 -2147483648
 2147483647
-4
+-1
+2
+1
+-1
+-1
+```
+
+
+
+### Long
+
+Long：64位 / 8字节
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		Long l1 = 1L;
+		Long l2 = 2L;
+		String s = "-1";
+		
+		System.out.println(l1);
+		System.out.println(Long.SIZE);
+		System.out.println(Long.MIN_VALUE);
+		System.out.println(Long.MAX_VALUE);
+		System.out.println(Long.compare(l1, l2));
+		System.out.println(Long.max(l1, l2));
+		System.out.println(Long.min(l1, l2));
+		System.out.println(Long.valueOf(s));
+		System.out.println(Long.parseLong(s));
+	}
+}
+```
+
+运行结果：
+
+```
+1
 64
 -9223372036854775808
 9223372036854775807
+-1
+2
+1
+-1
+-1
 ```
 
 
 
 ## 浮点型
+
+### float、double
 
 float：32位 / 4字节
 double：64位 / 8字节
@@ -151,6 +250,8 @@ public class Test {
 }
 ```
 
+
+
 科学计数法
 
 ```java
@@ -164,6 +265,8 @@ public class Test {
 }
 ```
 
+
+
 浮点型的问题
 
 ```java
@@ -176,6 +279,14 @@ public class Test {
 }
 ```
 
+运行结果：
+
+```
+false
+```
+
+
+
 ```java
 public class Test {
 	public static void main(String[] args) {
@@ -186,15 +297,27 @@ public class Test {
 }
 ```
 
+运行结果：
+
+```
+true
+```
+
+
+
+### Float
+
 Float：32位 / 4字节
 
 
 ```java
 public class Test {
 	public static void main(String[] args) {
-		Float f = 3.14F;
+		Float f1 = 3.14F;
+		Float f2 = 2.72F;
+		String s = "-0.1";
 		
-		System.out.println(f);
+		System.out.println(f1);
 		System.out.println(Float.SIZE);
 		System.out.println(Float.MIN_EXPONENT);
 		System.out.println(Float.MIN_NORMAL);
@@ -204,9 +327,14 @@ public class Test {
 		System.out.println(Float.NEGATIVE_INFINITY);
 		System.out.println(Float.POSITIVE_INFINITY);
 		System.out.println(Float.NaN);
-		System.out.println(Float.isFinite(0));
-		System.out.println(Float.isInfinite(0));
-		System.out.println(Float.isNaN(0));
+		System.out.println(Float.isFinite(f1));
+		System.out.println(Float.isInfinite(f1));
+		System.out.println(Float.isNaN(f1));
+		System.out.println(Float.compare(f1, f2));
+		System.out.println(Float.max(f1, f2));
+		System.out.println(Float.min(f1, f2));
+		System.out.println(Float.valueOf(s));
+		System.out.println(Float.parseFloat(s));
 	}
 }
 ```
@@ -227,16 +355,27 @@ NaN
 true
 false
 false
+1
+3.14
+2.72
+-0.1
+-0.1
 ```
+
+
+
+### Double
 
 Double：64位 / 8字节
 
 ```java
 public class Test {
 	public static void main(String[] args) {
-		Double d = 3.14;
+		Double d1 = 3.14;
+		Double d2 = 2.72;
+		String s = "-0.1";
 		
-		System.out.println(d);
+		System.out.println(d1);
 		System.out.println(Double.SIZE);
 		System.out.println(Double.MIN_EXPONENT);
 		System.out.println(Double.MIN_NORMAL);
@@ -246,9 +385,14 @@ public class Test {
 		System.out.println(Double.NEGATIVE_INFINITY);
 		System.out.println(Double.POSITIVE_INFINITY);
 		System.out.println(Double.NaN);
-		System.out.println(Double.isFinite(0));
-		System.out.println(Double.isInfinite(0));
-		System.out.println(Double.isNaN(0));
+		System.out.println(Double.isFinite(d1));
+		System.out.println(Double.isInfinite(d1));
+		System.out.println(Double.isNaN(d1));
+		System.out.println(Double.compare(d1, d2));
+		System.out.println(Double.max(d1, d2));
+		System.out.println(Double.min(d1, d2));
+		System.out.println(Double.valueOf(s));
+		System.out.println(Double.parseDouble(s));
 	}
 }
 ```
@@ -269,6 +413,11 @@ NaN
 true
 false
 false
+1
+3.14
+2.72
+-0.1
+-0.1
 ```
 
 
@@ -350,18 +499,20 @@ public class Test {
 
 ## 布尔型
 
-boolean：1位
+boolean：4个字节 / 1个字节
+
+相关文章：[答疑 | boolean类型占几个字节？](https://zhuanlan.zhihu.com/p/138648453)
 
 ```java
 public class Test {
 	public static void main(String[] args) {
-		boolean b1 = true;
-		boolean b2 = false;
-		System.out.println(b1);
-		System.out.println(b2);
+		boolean b = true;
+		System.out.println(b);
 	}
 }
 ```
+
+
 
 Boolean
 
@@ -441,4 +592,42 @@ public class Test {
 ```
 
 
+
+## 字符串（String）
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		String s1 = "abc";
+		String s2 = "ab";
+		char c = 'a';
+		
+		System.out.println(s1.length());
+		System.out.println(s1.charAt(0));
+		System.out.println(s1 + s2);
+		System.out.println(s1.concat(s2));
+		System.out.println(String.format("%s %s", s1, s2));
+		System.out.println(s1.contains(s2));
+		System.out.println(s1.indexOf(s2));
+		System.out.println(s1.indexOf(c));
+		System.out.println(s1.lastIndexOf(s2));
+		System.out.println(s1.lastIndexOf(c));
+	}
+}
+```
+
+运行结果：
+
+```
+3
+a
+abcab
+abcab
+abc ab
+true
+0
+0
+0
+0
+```
 

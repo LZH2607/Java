@@ -11,9 +11,13 @@ constructor（构造函数）
 main method（主函数）
 parameter（形参）
 argument（实参）
-property（属性（类的变量））
+property / variable（属性 / 变量）
 statement（语句）
 expression（表达式）
+static variable / class variable（静态属性 / 静态变量）
+staitc method / class method（静态方法 / 静态函数）
+instance variable（成员属性 / 成员变量）
+instance method（成员方法 / 成员函数）
 
 keyword（关键字）
 access modifier（访问修饰符）：public、private
@@ -51,7 +55,11 @@ arithmetic operator（算术运算符）
 	modulus operator（取模运算符）：%
 	operator precedence（运算符优先级）
 	increment operator（递增运算符）：++
+		prefix increment operator（前置递增运算符）
+		postfix increment operator（后置递增运算符）
 	decrement operator（递减运算符）：--
+		prefix increment operator（前置递减运算符）
+		postfix increment operator（后置递减运算符）
 
 object-oriented programming（面向对象编程）
 programming language（编程语言）
@@ -85,4 +93,3 @@ dot / point（（小数）点）：.
 
 capital letter / uppercase letter（大写字母）
 lowercase letter（小写字母）
-

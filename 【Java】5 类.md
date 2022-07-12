@@ -71,6 +71,49 @@ public class Test {
 }
 ```
 
+```java
+class Student {
+	int id;
+	String name;
+	int age;
+
+	Student() {
+
+	}
+
+	Student(int id) {
+		this(id, "Unknown", 18);
+	}
+
+	Student(int id, String name) {
+		this(id, name, 18);
+	}
+
+	Student(int id, String name, int age) {
+		this.id = id;
+		this.name = name;
+		this.age = age;
+	}
+
+	void printInfor() {
+		System.out.println("ID: " + id);
+		System.out.println("Name: " + name);
+		System.out.println("Age: " + age);
+	}
+}
+
+public class Test {
+	public static void main(String[] args) {
+		Student s1 = new Student(1);
+		Student s2 = new Student(2, "Tom");
+		Student s3 = new Student(3, "Jack", 19);
+		s1.printInfor();
+		s2.printInfor();
+		s3.printInfor();
+	}
+}
+```
+
 
 
 ## static关键字
@@ -289,6 +332,90 @@ i1: 1
 i2: 2
 ```
 
+
+
+## super
+
+访问父类的属性
+访问父类的方法
+访问父类的构造函数
+
+### 1. 访问父类的属性
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C2 c = new C2();
+		c.f();
+	}
+}
+
+class C1 {
+	int i = 1;
+
+	public void f() {
+		System.out.println("i: " + i);
+	}
+}
+
+class C2 extends C1 {
+	int i = 2;
+
+	public void f() {
+		System.out.println("i: " + super.i);
+		System.out.println("i: " + i);
+	}
+}
+```
+
+运行结果：
+
+```
+i: 1
+i: 2
+```
+
+
+
+### 2. 访问父类的方法
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C2 c = new C2();
+		c.f();
+	}
+}
+
+class C1 {
+	int i = 1;
+
+	public void f() {
+		System.out.println("i: " + i);
+	}
+}
+
+class C2 extends C1 {
+	int i = 2;
+
+	public void f() {
+		super.f();
+		System.out.println("i: " + i);
+	}
+}
+```
+
+运行结果：
+
+```
+i: 1
+i: 2
+```
+
+
+
+### 3. 访问父类的构造函数
+
 ```java
 public class Test {
 	public static void main(String[] args) {
@@ -471,5 +598,145 @@ class C2 extends C1 {
 ```
 i1: 1
 i2: 2
+```
+
+
+
+## ==、equals
+
+### ==
+
+基本数据类型：比较值
+引用数据类型：比较地址
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int i1 = 1;
+		int i2 = 1;
+		C c1 = new C(1);
+		C c2 = new C(1);
+		System.out.println(i1 == i2);
+		System.out.println(c1 == c2);
+	}
+}
+
+class C {
+	int i;
+
+	public C(int i) {
+		this.i = i;
+	}
+}
+```
+
+运行结果：
+
+```
+true
+false
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		String s1 = new String("abc");
+		String s2 = new String("abc");
+		System.out.println(s1 == s2);
+	}
+}
+```
+
+运行结果：
+
+```
+true
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		String s1 = new String("abc");
+		String s2 = new String("abc");
+		System.out.println(s1 == s2);
+	}
+}
+```
+
+运行结果：
+
+```
+false
+```
+
+
+
+### equals
+
+如果不重写equals，则equals与==等价
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C c1 = new C(1);
+		C c2 = new C(1);
+		System.out.println(c1.equals(c2));
+	}
+}
+
+class C {
+	int i;
+
+	public C(int i) {
+		this.i = i;
+	}
+}
+```
+
+运行结果：
+
+```
+false
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C c1 = new C(1);
+		C c2 = new C(1);
+		System.out.println(c1.equals(c2));
+	}
+}
+
+class C {
+	int i;
+
+	public C(int i) {
+		this.i = i;
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
+		C o = (C) obj;
+		return i == o.i;
+	}
+}
+```
+
+运行结果：
+
+```
+true
 ```
 
