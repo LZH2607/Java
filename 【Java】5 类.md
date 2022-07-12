@@ -338,7 +338,7 @@ i2: 2
 
 访问父类的属性
 访问父类的方法
-访问父类的构造函数
+访问父类的构造方法
 
 ### 1. 访问父类的属性
 
@@ -414,7 +414,7 @@ i: 2
 
 
 
-### 3. 访问父类的构造函数
+### 3. 访问父类的构造方法
 
 ```java
 public class Test {
@@ -428,10 +428,6 @@ public class Test {
 class C1 {
 	int i1;
 
-	public C1() {
-
-	}
-
 	public C1(int i1) {
 		this.i1 = i1;
 	}
@@ -443,10 +439,6 @@ class C1 {
 
 class C2 extends C1 {
 	int i2;
-
-	public C2() {
-
-	}
 
 	public C2(int i1, int i2) {
 		super(i1);
@@ -464,6 +456,37 @@ class C2 extends C1 {
 ```
 i1: 1
 i2: 2
+```
+
+
+
+所有的构造方法默认调用super（父类的构造方法）
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C2 c = new C2();
+	}
+}
+
+class C1 {
+	public C1() {
+		System.out.println("C1");
+	}
+}
+
+class C2 extends C1 {
+	public C2() {
+		System.out.println("C2");
+	}
+}
+```
+
+运行结果：
+
+```
+C1
+C2
 ```
 
 
@@ -642,9 +665,12 @@ false
 ```java
 public class Test {
 	public static void main(String[] args) {
-		String s1 = new String("abc");
-		String s2 = new String("abc");
+		String s1 = "abc";
+		String s2 = "abc";
+		String s3 = new String("abc");
+		String s4 = new String("abc");
 		System.out.println(s1 == s2);
+		System.out.println(s3 == s4);
 	}
 }
 ```
@@ -653,23 +679,6 @@ public class Test {
 
 ```
 true
-```
-
-
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		String s1 = new String("abc");
-		String s2 = new String("abc");
-		System.out.println(s1 == s2);
-	}
-}
-```
-
-运行结果：
-
-```
 false
 ```
 
@@ -738,5 +747,345 @@ class C {
 
 ```
 true
+```
+
+
+
+## 封装、访问修饰符
+
+封装：高内聚、低耦合
+
+访问修饰符：private、default、protected、public
+
+|                | private | default | protected | public |
+| :------------: | :-----: | :-----: | :-------: | :----: |
+|    同一个类    |    √    |    √    |     √     |   √    |
+|      子类      |         |    √    |     √     |   √    |
+| 同一个文件的类 |         |    √    |     √     |   √    |
+|  同一个包的类  |         |    √    |     √     |   √    |
+|  不同包的子类  |         |         |     √     |   √    |
+|   不同包的类   |         |         |           |   √    |
+
+√：可以访问
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C1 c1 = new C1(1, 2, 3, 4);
+		C2 c2 = new C2(1, 2, 3, 4);
+		A a = new A();
+		c1.func();
+		c2.func();
+		a.func();
+	}
+}
+
+class C1 {
+	private int i1;
+	int i2;
+	protected int i3;
+	public int i4;
+
+	private void f1() {
+		System.out.println("f1");
+	}
+
+	void f2() {
+		System.out.println("f2");
+	}
+
+	protected void f3() {
+		System.out.println("f3");
+	}
+
+	public void f4() {
+		System.out.println("f4");
+	}
+
+	public C1(int i1, int i2, int i3, int i4) {
+		this.i1 = i1;
+		this.i2 = i2;
+		this.i3 = i3;
+		this.i4 = i4;
+	}
+
+	public void func() {
+		// 同一个类可以访问private、default、protected、public
+		System.out.println("i1: " + i1);
+		System.out.println("i2: " + i2);
+		System.out.println("i3: " + i3);
+		System.out.println("i4: " + i4);
+		f1();
+		f2();
+		f3();
+		f4();
+	}
+}
+
+class C2 extends C1 {
+	public C2(int i1, int i2, int i3, int i4) {
+		super(i1, i2, i3, i4);
+	}
+
+	public void func() {
+		// 子类可以访问父类的default、protected、public
+		System.out.println("i2: " + i2);
+		System.out.println("i3: " + i3);
+		System.out.println("i4: " + i4);
+		f2();
+		f3();
+		f4();
+	}
+}
+
+class A {
+	public void func() {
+		// 同一个文件的类可以访问default、protected、public
+		C1 c = new C1(1, 2, 3, 4);
+		System.out.println("i2: " + c.i2);
+		System.out.println("i3: " + c.i3);
+		System.out.println("i4: " + c.i4);
+		c.f2();
+		c.f3();
+		c.f4();
+	}
+}
+```
+
+运行结果：
+
+```
+i1: 1
+i2: 2
+i3: 3
+i4: 4
+f1
+f2
+f3
+f4
+i2: 2
+i3: 3
+i4: 4
+f2
+f3
+f4
+i2: 2
+i3: 3
+i4: 4
+f2
+f3
+f4
+```
+
+
+
+(default package) Test.java：
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		A a = new A();
+		a.func();
+	}
+}
+
+class A {
+	public void func() {
+		// 同一个包的类可以访问default、protected、public
+		C c = new C(1, 2, 3, 4);
+		System.out.println("i2: " + c.i2);
+		System.out.println("i3: " + c.i3);
+		System.out.println("i4: " + c.i4);
+		c.f2();
+		c.f3();
+		c.f4();
+	}
+}
+```
+
+(default package) C.java：
+
+```java
+class C {
+	private int i1;
+	int i2;
+	protected int i3;
+	public int i4;
+
+	private void f1() {
+		System.out.println("f1");
+	}
+
+	void f2() {
+		System.out.println("f2");
+	}
+
+	protected void f3() {
+		System.out.println("f3");
+	}
+
+	public void f4() {
+		System.out.println("f4");
+	}
+
+	public C(int i1, int i2, int i3, int i4) {
+		this.i1 = i1;
+		this.i2 = i2;
+		this.i3 = i3;
+		this.i4 = i4;
+	}
+}
+```
+
+运行结果：
+
+```
+i2: 2
+i3: 3
+i4: 4
+f2
+f3
+f4
+```
+
+
+
+(default package) Test.java：
+
+```java
+import p.C;
+
+public class Test {
+	public static void main(String[] args) {
+		A a = new A(1, 2, 3, 4);
+		a.func();
+	}
+}
+
+class A extends C {
+	public A(int i1, int i2, int i3, int i4) {
+		super(i1, i2, i3, i4);
+	}
+
+	public void func() {
+		// 不同包的子类可以访问父类的protected、public
+		System.out.println("i3: " + i3);
+		System.out.println("i4: " + i4);
+		f3();
+		f4();
+	}
+}
+```
+
+p.C.java：
+
+```java
+package p;
+
+public class C {
+	private int i1;
+	int i2;
+	protected int i3;
+	public int i4;
+
+	private void f1() {
+		System.out.println("f1");
+	}
+
+	void f2() {
+		System.out.println("f2");
+	}
+
+	protected void f3() {
+		System.out.println("f3");
+	}
+
+	public void f4() {
+		System.out.println("f4");
+	}
+
+	public C(int i1, int i2, int i3, int i4) {
+		this.i1 = i1;
+		this.i2 = i2;
+		this.i3 = i3;
+		this.i4 = i4;
+	}
+}
+```
+
+运行结果：
+
+```
+i3: 3
+i4: 4
+f3
+f4
+```
+
+
+
+(default package) Test.java：
+
+```java
+import p.C;
+
+public class Test {
+	public static void main(String[] args) {
+		A a = new A();
+		a.func();
+	}
+}
+
+class A {
+	public void func() {
+		// 不同包的类只能访问public
+		C c = new C(1, 2, 3, 4);
+		System.out.println("i4: " + c.i4);
+		c.f4();
+	}
+}
+```
+
+p.C.java：
+
+```java
+package p;
+
+public class C {
+	private int i1;
+	int i2;
+	protected int i3;
+	public int i4;
+
+	private void f1() {
+		System.out.println("f1");
+	}
+
+	void f2() {
+		System.out.println("f2");
+	}
+
+	protected void f3() {
+		System.out.println("f3");
+	}
+
+	public void f4() {
+		System.out.println("f4");
+	}
+
+	public C(int i1, int i2, int i3, int i4) {
+		this.i1 = i1;
+		this.i2 = i2;
+		this.i3 = i3;
+		this.i4 = i4;
+	}
+}
+```
+
+运行结果：
+
+```
+i4: 4
+f4
 ```
 
