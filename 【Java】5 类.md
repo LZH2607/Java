@@ -1089,3 +1089,192 @@ i4: 4
 f4
 ```
 
+
+
+## 多态
+
+多态
+	编译时多态：编译期间决定目标方法
+		方法名相同、参数不同
+		通过重载实现
+	运行时多态：运行期间（JVM）决定目标方法
+		方法名相同、参数相同
+		通过继承、重写实现
+		实现原理：方法表
+
+
+
+### 编译时多态	
+
+```java
+public class Test {	
+	public static void main(String[] args) {
+		Test t = new Test();
+		System.out.println(t.add(1, 2));
+		System.out.println(t.add(1, 2, 3));
+		System.out.println(t.add(3.17, 2.72));
+	}
+	
+	public int add(int i1, int i2) {
+		return i1 + i2;
+	}
+	
+	public int add(int i1, int i2, int i3) {
+		return i1 + i2 + i3;
+	}
+	
+	public double add(double d1, double d2) {
+		return d1 + d2;
+	}
+}
+```
+
+运行结果：
+
+```
+3
+6
+5.890000000000001
+```
+
+
+
+### 运行时多态
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C1 c1 = new C1();
+		C2 c2 = new C2();
+		C3 c3 = new C3();
+
+		func(c1);
+		func(c2);
+		func(c3);
+
+		func(new C1());
+		func(new C2());
+		func(new C3());
+	}
+
+	static void func(C1 c) {
+		c.f();
+	}
+}
+
+class C1 {
+	public void f() {
+		System.out.println("C1");
+	}
+}
+
+class C2 extends C1 {
+	public void f() {
+		System.out.println("C2");
+	}
+}
+
+class C3 extends C2 {
+	public void f() {
+		System.out.println("C3");
+	}
+}
+```
+
+运行结果：
+
+```
+C1
+C2
+C3
+C1
+C2
+C3
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C1 c1 = new C1();
+		C2 c2 = new C2();
+		C3 c3 = new C3();
+
+		func(c2);
+		func(c3);
+
+		func(new C2());
+		func(new C3());
+	}
+
+	static void func(C2 c) {
+		c.f();
+	}
+}
+
+class C1 {
+	public void f() {
+		System.out.println("C1");
+	}
+}
+
+class C2 extends C1 {
+	public void f() {
+		System.out.println("C2");
+	}
+}
+
+class C3 extends C2 {
+	public void f() {
+		System.out.println("C3");
+	}
+}
+```
+
+运行结果：
+
+```
+C2
+C3
+C2
+C3
+```
+
+
+
+## 转型
+
+向上转型：父类引用指向子类对象
+向下转型（强制类型转换）
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C1 c1 = new C2();  // 向上转型
+		C2 c2 = (C2) c1;  // 向下转型
+		System.out.println(c1);
+		System.out.println(c2);
+	}
+}
+
+class C1 {
+	public String toString() {
+		return "C1";
+	}
+}
+
+class C2 extends C1 {
+	public String toString() {
+		return "C2";
+	}
+}
+```
+
+运行结果：
+
+```
+C2
+C2
+```
+

@@ -105,3 +105,82 @@ public class Test {
 ```
 
 
+
+## final
+
+final：
+	修饰变量：常量
+	修饰方法：不可被子类重写，但可以被重载
+	修饰类：不可被继承
+
+
+
+### final修饰变量
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		final double PI = 3.14;
+		System.out.println(PI);
+	}
+}
+```
+
+
+
+### final修饰方法
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C c = new C();
+		c.f(1);
+		c.f(1, 2);
+	}
+}
+
+class C {
+	final public void f(int i) {
+		System.out.println("i: " + i);
+	}
+	
+	final public void f(int i1, int i2) {
+		System.out.println("i1: " + i1);
+		System.out.println("i2: " + i2);
+	}
+}
+```
+
+运行结果：
+
+```
+i: 1
+i1: 1
+i2: 2
+```
+
+
+
+### final修饰类
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C c = new C();
+		System.out.println(c);
+	}
+}
+
+final class C {
+	public String toString() {
+		return "C";
+	}
+}
+```
+
+运行结果：
+
+```
+C
+```
+
