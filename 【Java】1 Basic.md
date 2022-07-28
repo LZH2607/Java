@@ -6,11 +6,24 @@
 
 
 
-Java的特性：跨平台/可移植性（核心优势）、面向对象、分布式、多线程
+相关视频：
+[【零基础 快速学Java】韩顺平 零基础30天学会Java](https://www.bilibili.com/video/BV1fh411y7R8)
 
-JavaSE（Java Standard Edition）：标准版，个人计算机
-JavaEE（Java Enterprise Edition）：企业版，服务器
-JavaME（Java Micro Edition）：微型版，消费性电子产品
+[Oracle Java SE Support Roadmap](https://www.oracle.com/java/technologies/java-se-support-roadmap.html)
+![](D:\Notes\Java\Java.assets\Oracle Java SE Support Roadmap.png)
+发明者：James Gosling
+Java 8：最广泛的版本
+
+Java的特性：
+	面向对象（oop）
+	健壮性：强类型机制、异常处理、垃圾回收机制、分布式、多线程
+	跨平台性/可移植性（核心优势）：.class文件可以在多个系统上运行
+	解释型：需要解释器（JVM）来执行（如JavaScript、PHP、java）
+		编译型：直接被机器执行（如C/C++）
+
+JavaSE（Java Standard Edition） / J2SE：标准版，个人计算机
+JavaEE（Java Enterprise Edition） / J2EE：企业版，服务器
+JavaME（Java Micro Edition） / J2ME：微型版，消费性电子产品
 
 JVM（Java Virtual Machine）：Java虚拟机，执行字节码
 JRE（Java Runtime Environment）：Java运行时环境，包含JVM、库函数等
