@@ -26,21 +26,29 @@ JavaEE（Java Enterprise Edition） / J2EE：企业版，服务器
 JavaME（Java Micro Edition） / J2ME：微型版，消费性电子产品
 
 JVM（Java Virtual Machine）：Java虚拟机，执行字节码
-JRE（Java Runtime Environment）：Java运行时环境，包含JVM、库函数等
-JDK（Java Development Kit）：Java开发工具，包含JRE、编译器、调试器
+JRE（Java Runtime Environment）：Java运行时环境，包含JVM、Java SE标准类库（Java核心类库）
+JDK（Java Development Kit）：Java开发工具，包含JRE、开发工具集（java、javac、javadoc、javap······）
 
 运行Java程序，不开发Java程序：安装JRE
 运行Java程序，开发Java程序：安装JDK
 
 a.java（源文件）
-编译：javac a.java
+↓ 编译：javac a.java
 a.class（字节码文件）
-解释执行：java a
+↓ 解释执行：java a
+程序执行结果
+
+源文件：public类 ≤ 1个
+编译后：一个类对应一个class文件
+如果源文件包含一个public类，则文件名必须按该类名命名
+可以将main方法写在非public类中：运行该类的class文件时，则运行该类中的main方法
 
 eclipse：
 Ctrl + F11：运行
 Ctrl + +：放大
 Ctrl + -：缩小
+main + Alt + / + Enter：public static void main(String[] args) {}
+sysout + Alt + /：System.out.println();
 
 初始化：
 局部变量：初始化后才能使用
