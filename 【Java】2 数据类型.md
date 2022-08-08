@@ -8,14 +8,22 @@
 
 数据类型
 	基本数据类型
-		整数型：byte、short、int、long
-		浮点型：float、double
+		数值型：
+			整数型：byte、short、int、long
+			浮点型：float、double
 		字符型：char
 		布尔型：boolean
 	引用数据类型
 		类：class
 		接口：interface
-		数组
+		数组：[ ]
+
+；
+
+|        | 默认数据类型 |
+| :----: | :----------: |
+|  整数  |     int      |
+| 浮点数 |    double    |
 
 
 
@@ -274,6 +282,8 @@ public class Test {
 	public static void main(String[] args) {
 		float f = 0.1F;
 		double d = 1.0 / 10;
+		System.out.println(f);
+		System.out.println(d);
 		System.out.println(f == d);
 	}
 }
@@ -282,6 +292,40 @@ public class Test {
 运行结果：
 
 ```
+0.1
+0.1
+false
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		float f1 = 2.7F;
+		float f2 = 8.1F / 3;
+		double d1 = 2.7;
+		double d2 = 8.1 / 3;
+
+		System.out.println(f1);
+		System.out.println(f2);
+		System.out.println(f1 == f2);
+
+		System.out.println(d1);
+		System.out.println(d2);
+		System.out.println(d1 == d2);
+	}
+}
+```
+
+运行结果：
+
+```
+2.7
+2.7
+true
+2.7
+2.6999999999999997
 false
 ```
 
@@ -292,6 +336,8 @@ public class Test {
 	public static void main(String[] args) {
 		float f1 = 100000000F;
 		float f2 = f1 + 1;
+		System.out.println(f1);
+		System.out.println(f2);
 		System.out.println(f1 == f2);
 	}
 }
@@ -300,6 +346,8 @@ public class Test {
 运行结果：
 
 ```
+1.0E8
+1.0E8
 true
 ```
 
@@ -462,7 +510,7 @@ public class Test {
 
 
 
-## 字符型
+## 字符型 char
 
 char：16位 / 2字节
 
@@ -475,15 +523,76 @@ public class Test {
 	public static void main(String[] args) {
 		char c1 = 'a';
 		char c2 = '中';
-		char c3 = '\u0061';
-		char c4 = '\u4e2d';
+		char c3 = 97;
+		char c4 = 20013;
+		char c5 = '\u0061';
+		char c6 = '\u4e2d';
 		System.out.println(c1);
 		System.out.println(c2);
 		System.out.println(c3);
 		System.out.println(c4);
+		System.out.println(c5);
+		System.out.println(c6);
 	}
 }
 ```
+
+运行结果：
+
+```
+a
+中
+a
+中
+a
+中
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		char c1 = 'a';
+		char c2 = '中';
+		System.out.println((int) c1);
+		System.out.println((int) c2);
+	}
+}
+```
+
+运行结果：
+
+```
+97
+20013
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		char c1 = 'a';
+		char c2 = 'a' + 10;
+		System.out.println(c1);
+		System.out.println(c2);
+		System.out.println((int) c1);
+		System.out.println((int) c2);
+	}
+}
+```
+
+运行结果：
+
+```
+a
+k
+97
+107
+```
+
+
 
 | 转义字符 | 含义 | Unicode |
 | :------: | :--: | :-----: |
@@ -497,7 +606,7 @@ public class Test {
 
 
 
-## 布尔型
+## 布尔型 boolean
 
 boolean：4个字节 / 1个字节
 
@@ -593,7 +702,7 @@ public class Test {
 
 
 
-## 字符串（String）
+## 字符串 String
 
 ```java
 public class Test {

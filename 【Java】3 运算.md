@@ -109,10 +109,23 @@ public class Test {
 		String s = "1";
 		int i1 = 2;
 		int i2 = 3;
+		System.out.println(s + i1);
+		System.out.println(i1 + s);
 		System.out.println(s + i1 + i2);
 		System.out.println(i1 + i2 + s);
+		System.out.println(i1 + s + i2);
 	}
 }
+```
+
+运行结果：
+
+```
+12
+21
+123
+51
+213
 ```
 
 
