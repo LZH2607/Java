@@ -18,7 +18,7 @@
 		接口：interface
 		数组：[ ]
 
-；
+
 
 |        | 默认数据类型 |
 | :----: | :----------: |
@@ -606,7 +606,9 @@ k
 
 
 
-## 布尔型 boolean
+## 布尔型
+
+### boolean
 
 boolean：4个字节 / 1个字节
 
@@ -623,17 +625,19 @@ public class Test {
 
 
 
-Boolean
+### Boolean
 
 ```java
 public class Test {
 	public static void main(String[] args) {
 		Boolean b = true;
-		
+		String s = "true";
+
 		System.out.println(b);
 		System.out.println(Boolean.TRUE);
 		System.out.println(Boolean.FALSE);
 		System.out.println(Boolean.TYPE);
+		System.out.println(Boolean.parseBoolean(s));
 	}
 }
 ```
@@ -645,11 +649,14 @@ true
 true
 false
 boolean
+true
 ```
 
 
 
-## 自动类型转化
+## 自动类型转换
+
+byte → short → int → long → float → double
 
 |     →      | byte | short | int  | long | float | double |
 | :--------: | :--: | :---: | :--: | :--: | :---: | :----: |
@@ -679,9 +686,113 @@ public class Test {
 }
 ```
 
+异常：
+
+```
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+	Type mismatch: cannot convert from short to byte
+
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+	Type mismatch: cannot convert from int to byte
+	Type mismatch: cannot convert from int to short
+
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+	Type mismatch: cannot convert from long to byte
+	Type mismatch: cannot convert from long to short
+	Type mismatch: cannot convert from long to int
+
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+	Type mismatch: cannot convert from float to byte
+	Type mismatch: cannot convert from float to short
+	Type mismatch: cannot convert from float to int
+	Type mismatch: cannot convert from float to long
+
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+	Type mismatch: cannot convert from double to byte
+	Type mismatch: cannot convert from double to short
+	Type mismatch: cannot convert from double to int
+	Type mismatch: cannot convert from double to long
+	Type mismatch: cannot convert from double to float
+```
 
 
-## 常见误区：类型转化
+
+char → int → long → float → double
+
+|     →      | byte | short | **char** | int  | long | float | double |
+| :--------: | :--: | :---: | :------: | :--: | :--: | :---: | :----: |
+|  **byte**  |  √   |   √   |          |  √   |  √   |   √   |   √    |
+| **short**  |      |   √   |          |  √   |  √   |   √   |   √    |
+|  **char**  |      |       |    √     |  √   |  √   |   √   |   √    |
+|  **int**   |      |       |          |  √   |  √   |   √   |   √    |
+|  **long**  |      |       |          |      |  √   |   √   |   √    |
+| **float**  |      |       |          |      |      |   √   |   √    |
+| **double** |      |       |          |      |      |       |   √    |
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		byte b = 1;
+		short s = b;
+		char c = b;
+		int i = b;
+		long l = b;
+		float f = b;
+		double d = b;
+		System.out.println(b);
+		System.out.println(s);
+		System.out.println(i);
+		System.out.println(l);
+		System.out.println(f);
+		System.out.println(d);
+	}
+}
+```
+
+异常：
+
+```
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+	Type mismatch: cannot convert from byte to char
+
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+	Type mismatch: cannot convert from short to byte
+	Type mismatch: cannot convert from short to char
+
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+	Type mismatch: cannot convert from char to byte
+	Type mismatch: cannot convert from char to short
+
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+	Type mismatch: cannot convert from int to byte
+	Type mismatch: cannot convert from int to short
+	Type mismatch: cannot convert from int to char
+
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+	Type mismatch: cannot convert from long to byte
+	Type mismatch: cannot convert from long to short
+	Type mismatch: cannot convert from long to char
+	Type mismatch: cannot convert from long to int
+
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+	Type mismatch: cannot convert from float to byte
+	Type mismatch: cannot convert from float to short
+	Type mismatch: cannot convert from float to char
+	Type mismatch: cannot convert from float to int
+	Type mismatch: cannot convert from float to long
+
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+	Type mismatch: cannot convert from double to byte
+	Type mismatch: cannot convert from double to short
+	Type mismatch: cannot convert from double to char
+	Type mismatch: cannot convert from double to int
+	Type mismatch: cannot convert from double to long
+	Type mismatch: cannot convert from double to float
+```
+
+
+
+## 常见误区：类型转换
 
 ```java
 public class Test {
@@ -698,6 +809,187 @@ public class Test {
 		System.out.println(l2);
 	}
 }
+```
+
+运行结果：
+
+```
+1000000000
+10
+1410065408
+1410065408
+10000000000
+```
+
+
+
+byte、short、char在计算时首先转换为int
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		byte b1 = 1;
+		byte b2 = 2;
+		byte b3 = b1 + b2;
+
+		short s1 = 3;
+		short s2 = 4;
+		short s3 = s1 + s2;
+
+		char c1 = 5;
+		char c2 = 6;
+		char c3 = c1 + c2;
+
+		System.out.println(b1);
+		System.out.println(b2);
+		System.out.println(b3);
+
+		System.out.println(s1);
+		System.out.println(s2);
+		System.out.println(s3);
+
+		System.out.println(c1);
+		System.out.println(c2);
+		System.out.println(c3);
+	}
+}
+```
+
+异常：
+
+```
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+	Type mismatch: cannot convert from int to byte
+	Type mismatch: cannot convert from int to short
+	Type mismatch: cannot convert from int to char
+```
+
+
+
+## 强制类型转换
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		byte b = (byte) 2000; // 数据溢出
+		int i = (int) 1.9; // 精度损失
+		System.out.println(b);
+		System.out.println(i);
+	}
+}
+```
+
+运行结果：
+
+```
+-48
+1
+```
+
+
+
+强制类型转换只对最近的操作数有效：
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int i = (int) 8 * 1.8 + 6 * 1.6;
+		System.out.println(i);
+	}
+}
+```
+
+异常：
+
+```
+Exception in thread "main" java.lang.Error: Unresolved compilation problem: 
+	Type mismatch: cannot convert from double to int
+```
+
+使用括号：
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int i = (int) (8 * 1.8 + 6 * 1.6);
+		System.out.println(i);
+	}
+}
+```
+
+运行结果：
+
+```
+24
+```
+
+
+
+byte、short、char可以接收int常量，不能接收int变量：
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int i = 100;
+		byte b1 = 100;
+		byte b2 = i;
+		short s1 = 100;
+		short s2 = i;
+		char c1 = 100;
+		char c2 = i;
+		System.out.println(i);
+		System.out.println(b1);
+		System.out.println(b2);
+		System.out.println(s1);
+		System.out.println(s2);
+		System.out.println(c1);
+		System.out.println(c2);
+	}
+}
+```
+
+异常：
+
+```
+Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
+	Type mismatch: cannot convert from int to byte
+	Type mismatch: cannot convert from int to short
+	Type mismatch: cannot convert from int to char
+```
+
+使用强制转换：
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int i = 100;
+		byte b1 = 100;
+		byte b2 = (byte) i;
+		short s1 = 100;
+		short s2 = (short) i;
+		char c1 = 100;
+		char c2 = (char) i;
+		System.out.println(i);
+		System.out.println(b1);
+		System.out.println(b2);
+		System.out.println(s1);
+		System.out.println(s2);
+		System.out.println(c1);
+		System.out.println(c2);
+	}
+}
+```
+
+运行结果：
+
+```
+100
+100
+100
+100
+100
+d
+d
 ```
 
 
@@ -738,5 +1030,97 @@ true
 0
 0
 0
+```
+
+
+
+基本数据类型 → String
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		byte b = 1;
+		short s = 1;
+		int i = 1;
+		long l = 1;
+		float f = 1.0F;
+		double d = 1.0;
+		char c = 'a';
+		boolean bool = true;
+
+		String s1 = b + "";
+		String s2 = s + "";
+		String s3 = i + "";
+		String s4 = l + "";
+		String s5 = f + "";
+		String s6 = d + "";
+		String s7 = c + "";
+		String s8 = bool + "";
+
+		System.out.println(s1);
+		System.out.println(s2);
+		System.out.println(s3);
+		System.out.println(s4);
+		System.out.println(s5);
+		System.out.println(s6);
+		System.out.println(s7);
+		System.out.println(s8);
+	}
+}
+```
+
+运行结果：
+
+```
+1
+1
+1
+1
+1.0
+1.0
+a
+true
+```
+
+
+
+String → 基本数据类型
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		String str = "1";
+
+		byte b = Byte.parseByte(str);
+		short s = Short.parseShort(str);
+		int i = Integer.parseInt(str);
+		long l = Long.parseLong(str);
+		float f = Float.parseFloat(str);
+		double d = Double.parseDouble(str);
+		boolean bool = Boolean.parseBoolean(str);
+
+		System.out.println(str);
+		System.out.println(b);
+		System.out.println(s);
+		System.out.println(i);
+		System.out.println(l);
+		System.out.println(f);
+		System.out.println(d);
+		System.out.println(bool);
+	}
+}
+```
+
+运行结果：
+
+```
+1
+1
+1
+1
+1
+1.0
+1.0
+false
 ```
 
