@@ -40,6 +40,12 @@ public class Test {
 }
 ```
 
+运行结果：
+
+```
+3.14
+```
+
 
 
 ## 整数型
@@ -66,6 +72,17 @@ public class Test {
 }
 ```
 
+运行结果：
+
+```
+1
+2
+3
+4
+```
+
+
+
 二进制：0b
 八进制：0
 十进制：无
@@ -84,6 +101,15 @@ public class Test {
 		System.out.println(i4);
 	}
 }
+```
+
+运行结果：
+
+```
+255
+255
+255
+255
 ```
 
 
@@ -258,6 +284,13 @@ public class Test {
 }
 ```
 
+运行结果：
+
+```
+3.14
+3.14
+```
+
 
 
 科学计数法
@@ -271,6 +304,13 @@ public class Test {
 		System.out.println(d);
 	}
 }
+```
+
+运行结果：
+
+```
+3.14
+3.14
 ```
 
 
@@ -470,6 +510,23 @@ false
 
 
 
+```java
+public class Test {
+	public static void main(String[] args) {
+		double d = 1D;
+		System.out.println(d);
+	}
+}
+```
+
+运行结果：
+
+```
+1.0
+```
+
+
+
 ## BigInterger
 
 可进行任意精度的整数运算
@@ -486,6 +543,14 @@ public class Test {
 		System.out.println(bi1.compareTo(bi2));
 	}
 }
+```
+
+运行结果：
+
+```
+100000000
+100000001
+-1
 ```
 
 
@@ -508,9 +573,19 @@ public class Test {
 }
 ```
 
+运行结果：
+
+```
+0.1
+0.1
+0
+```
 
 
-## 字符型 char
+
+## 字符型
+
+### char
 
 char：16位 / 2字节
 
@@ -994,7 +1069,9 @@ d
 
 
 
-## 字符串 String
+## 字符串
+
+### String
 
 ```java
 public class Test {
@@ -1034,7 +1111,7 @@ true
 
 
 
-基本数据类型 → String
+### 基本数据类型 → String
 
 ```java
 public class Test {
@@ -1084,7 +1161,7 @@ true
 
 
 
-String → 基本数据类型
+### String → 基本数据类型
 
 ```java
 public class Test {
@@ -1097,6 +1174,7 @@ public class Test {
 		long l = Long.parseLong(str);
 		float f = Float.parseFloat(str);
 		double d = Double.parseDouble(str);
+		char c = str.charAt(0);
 		boolean bool = Boolean.parseBoolean(str);
 
 		System.out.println(str);
@@ -1106,6 +1184,7 @@ public class Test {
 		System.out.println(l);
 		System.out.println(f);
 		System.out.println(d);
+		System.out.println(c);
 		System.out.println(bool);
 	}
 }
@@ -1121,6 +1200,7 @@ public class Test {
 1
 1.0
 1.0
+1
 false
 ```
 
