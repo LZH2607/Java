@@ -259,3 +259,359 @@ public class Test {
 }
 ```
 
+
+
+## for循环
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		for (int i = 0; i < 10; i++) {
+			System.out.println(i);
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		for (int i = 0, j = 0; i < 10; i++, j += 2) {
+			System.out.println(i + " " + j);
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+0 0
+1 2
+2 4
+3 6
+4 8
+5 10
+6 12
+7 14
+8 16
+9 18
+```
+
+
+
+for死循环：
+
+```
+public class Test {
+	public static void main(String[] args) {
+		for (;;) {
+			System.out.println("Hello, World!");
+		}
+	}
+}
+```
+
+
+
+## while循环
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int i = 0;
+		while (i < 10) {
+			System.out.println(i);
+			i++;
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
+
+
+## do-while循环
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int i = 0;
+		do {
+			System.out.println(i);
+			i++;
+		} while (i < 10);
+	}
+}
+```
+
+运行结果：
+
+```
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
+
+
+## break
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 10; j++) {
+				if (j == 2) {
+					break;
+				}
+				System.out.println(i + " " + j);
+			}
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+0 0
+0 1
+1 0
+1 1
+2 0
+2 1
+3 0
+3 1
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		label: for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 10; j++) {
+				if (j == 2) {
+					break label;
+				}
+				System.out.println(i + " " + j);
+			}
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+0 0
+0 1
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		for (int i = 0; i < 4; i++) {
+			label: for (int j = 0; j < 10; j++) {
+				if (j == 2) {
+					break label;
+				}
+				System.out.println(i + " " + j);
+			}
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+0 0
+0 1
+1 0
+1 1
+2 0
+2 1
+3 0
+3 1
+```
+
+
+
+## continue
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int i = 0;
+		while (i < 4) {
+			i++;
+			if (i == 2) {
+				continue;
+			}
+			System.out.println(i);
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+1
+3
+4
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 5; j++) {
+				if (j == 2) {
+					continue;
+				}
+				System.out.println(i + " " + j);
+			}
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+0 0
+0 1
+0 3
+0 4
+1 0
+1 1
+1 3
+1 4
+2 0
+2 1
+2 3
+2 4
+3 0
+3 1
+3 3
+3 4
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		label: for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 5; j++) {
+				if (j == 2) {
+					continue label;
+				}
+				System.out.println(i + " " + j);
+			}
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+0 0
+0 1
+1 0
+1 1
+2 0
+2 1
+3 0
+3 1
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		for (int i = 0; i < 4; i++) {
+			label: for (int j = 0; j < 5; j++) {
+				if (j == 2) {
+					continue label;
+				}
+				System.out.println(i + " " + j);
+			}
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+0 0
+0 1
+0 3
+0 4
+1 0
+1 1
+1 3
+1 4
+2 0
+2 1
+2 3
+2 4
+3 0
+3 1
+3 3
+3 4
+```
+
+
+
+## return
+
+略
