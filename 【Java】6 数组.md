@@ -599,7 +599,27 @@ public class Test {
 
 ### 顺序查找
 
+```java
+public class Test {
+	public static void main(String[] args) {
+		int arr[] = { 24, 69, 80, 57, 13 };
+		int ele = 80;
+		int index = -1;
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] == ele) {
+				index = i;
+				break;
+			}
+		}
+		System.out.println(index);
+	}
+}
 ```
+
+运行结果：
+
+```
+2
 ```
 
 
@@ -710,5 +730,226 @@ public class Test {
 57
 69
 80
+```
+
+
+
+## 二维数组
+
+### 声明
+
+```
+数据类型[][] 数组名;
+数据类型 数组名[][];
+数据类型[] 数组名[];
+```
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int[][] arr1;
+		int arr2[][];
+		int[] arr3[];
+		arr1 = new int[3][4];
+		arr2 = new int[3][4];
+		arr3 = new int[3][4];
+	}
+}
+```
+
+
+
+### 静态初始化
+
+```
+数据类型 数组名[][] = {{元素1, 元素2, ···}, {元素1, 元素2, ···}, ···}
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int arr[][] = { { 0, 1, 2 }, { 10, 11, 12, 13 }, { 20, 21, 22, 23, 24 } };
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr[i].length; j++) {
+				System.out.print(arr[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+0 1 2 
+10 11 12 13 
+20 21 22 23 24 
+```
+
+
+
+### 动态初始化
+
+```
+数据类型 数组名[][] = new 数据类型[大小][大小];
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int arr[][] = new int[3][4];
+		arr[0][0] = 0;
+		arr[0][1] = 1;
+		arr[0][2] = 2;
+		arr[0][3] = 3;
+		arr[1][0] = 10;
+		arr[1][1] = 11;
+		arr[1][2] = 12;
+		arr[1][3] = 13;
+		arr[2][0] = 20;
+		arr[2][1] = 21;
+		arr[2][2] = 22;
+		arr[2][3] = 23;
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr[i].length; j++) {
+				System.out.print(arr[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+0 1 2 3 
+10 11 12 13 
+20 21 22 23 
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int arr[][];
+		arr = new int[3][4];
+		arr[0][0] = 0;
+		arr[0][1] = 1;
+		arr[0][2] = 2;
+		arr[0][3] = 3;
+		arr[1][0] = 10;
+		arr[1][1] = 11;
+		arr[1][2] = 12;
+		arr[1][3] = 13;
+		arr[2][0] = 20;
+		arr[2][1] = 21;
+		arr[2][2] = 22;
+		arr[2][3] = 23;
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr[i].length; j++) {
+				System.out.print(arr[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+0 1 2 3 
+10 11 12 13 
+20 21 22 23 
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int arr[][] = new int[3][];
+		arr[0] = new int[2];
+		arr[1] = new int[3];
+		arr[2] = new int[4];
+		arr[0][0] = 0;
+		arr[0][1] = 1;
+		arr[1][0] = 10;
+		arr[1][1] = 11;
+		arr[1][2] = 12;
+		arr[2][0] = 20;
+		arr[2][1] = 21;
+		arr[2][2] = 22;
+		arr[2][3] = 23;
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr[i].length; j++) {
+				System.out.print(arr[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+0 1 
+10 11 12 
+20 21 22 23 
+```
+
+
+
+### 遍历
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int arr[][] = { { 0, 1, 2, 3, 4 }, { 10, 11, 12, 13, 14 }, { 20, 21, 22, 23, 24 } };
+		for (int i = 0; i < arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+[I@515f550a
+[I@626b2d4a
+[I@5e91993f
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int arr[][] = { { 0, 1, 2, 3, 4 }, { 10, 11, 12, 13, 14 }, { 20, 21, 22, 23, 24 } };
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr[i].length; j++) {
+				System.out.print(arr[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+0 1 2 3 4 
+10 11 12 13 14 
+20 21 22 23 24 
 ```
 

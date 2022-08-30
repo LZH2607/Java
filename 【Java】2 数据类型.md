@@ -1079,12 +1079,13 @@ public class Test {
 		String s1 = "abc";
 		String s2 = "ab";
 		char c = 'a';
-		
+
 		System.out.println(s1.length());
 		System.out.println(s1.charAt(0));
 		System.out.println(s1 + s2);
 		System.out.println(s1.concat(s2));
 		System.out.println(String.format("%s %s", s1, s2));
+		System.out.println(s1.equals(s2));
 		System.out.println(s1.contains(s2));
 		System.out.println(s1.indexOf(s2));
 		System.out.println(s1.indexOf(c));
@@ -1102,6 +1103,7 @@ a
 abcab
 abcab
 abc ab
+false
 true
 0
 0

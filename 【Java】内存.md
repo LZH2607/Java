@@ -10,6 +10,16 @@
 
 [【尚学堂】Java300集 - 高琪(零基础初学入门)UP求求各位点个关注吧！064\_内存分析详解\_栈\_堆\_方法区\_栈帧\_程序执行的内存变化过程](https://www.bilibili.com/video/BV1ct411n7oG?p=65)
 
+[【零基础 快速学Java】韩顺平 零基础30天学会Java 0176\_韩顺平Java\_二维数组内存布局](https://www.bilibili.com/video/BV1fh411y7R8?p=177)
+
+[【零基础 快速学Java】韩顺平 零基础30天学会Java 0194\_韩顺平Java\_对象内存布局](https://www.bilibili.com/video/BV1fh411y7R8?p=195)
+
+
+
+![](D:\Notes\Java\Java.assets\二维数组在内存中存在的形式.png)
+
+![](D:\Notes\Java\Java.assets\对象在内存中存在的形式.png)
+
 
 
 ## 栈

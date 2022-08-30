@@ -116,6 +116,65 @@ public class Test {
 
 
 
+## 默认赋值
+
+| 数据类型 | 默认赋值 |
+| :------: | :------: |
+|   byte   |    0     |
+|  short   |    0     |
+|   int    |    0     |
+|   long   |    0     |
+|  float   |   0.0    |
+|  double  |   0.0    |
+|   char   |  \u0000  |
+| boolean  |  false   |
+|  String  |   null   |
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C c = new C();
+		System.out.println(c.b);
+		System.out.println(c.s);
+		System.out.println(c.i);
+		System.out.println(c.l);
+		System.out.println(c.f);
+		System.out.println(c.d);
+		System.out.println(c.c);
+		System.out.println(c.bool);
+		System.out.println(c.str);
+	}
+}
+
+class C {
+	byte b;
+	short s;
+	int i;
+	long l;
+	float f;
+	double d;
+	char c;
+	boolean bool;
+	String str;
+}
+```
+
+运行结果：
+
+```
+0
+0
+0
+0
+0.0
+0.0
+
+false
+null
+```
+
+
+
 ## static关键字
 
 static：静态属性、静态方法、静态代码块、静态导入
