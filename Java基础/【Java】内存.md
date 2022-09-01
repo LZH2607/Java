@@ -16,9 +16,9 @@
 
 
 
-![](D:\Notes\Java\Java.assets\二维数组在内存中存在的形式.png)
+![](D:\Notes\Java\Java基础\img\二维数组在内存中存在的形式.png)
 
-![](D:\Notes\Java\Java.assets\对象在内存中存在的形式.png)
+![](D:\Notes\Java\Java基础\img\对象在内存中存在的形式.png)
 
 
 

@@ -177,7 +177,14 @@ null
 
 ## static关键字
 
-static：静态属性、静态方法、静态代码块、静态导入
+static：
+	静态属性、静态方法
+	静态代码块
+	静态导入
+
+
+
+### 静态属性、静态方法
 
 静态属性、静态方法：从属于类
 成员属性、成员方法：从属于对象
@@ -265,7 +272,7 @@ This is instance method 1.
 
 
 
-静态代码块：
+### 静态代码块
 
 ```java
 public class Test {
@@ -291,7 +298,7 @@ This is a static string.
 
 
 
-静态导入：
+### 静态导入
 
 ```java
 import static java.lang.Math.PI;
