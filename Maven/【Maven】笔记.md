@@ -21,7 +21,7 @@ Maven模型：
 
 ```
 project
-├─pom.xml
+│ pom.xml
 │
 └─src
     ├─main
