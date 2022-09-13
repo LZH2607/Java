@@ -175,6 +175,222 @@ null
 
 
 
+## 方法
+
+### 自动类型转换
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C c = new C();
+		byte b1 = 1;
+		byte b2 = 2;
+		short s1 = 1;
+		short s2 = 2;
+		int i1 = 1;
+		int i2 = 2;
+		int sum1 = c.add(b1, b2);
+		int sum2 = c.add(s1, s2);
+		int sum3 = c.add(i1, i2);
+		System.out.println(sum1);
+		System.out.println(sum2);
+		System.out.println(sum3);
+	}
+}
+
+class C {
+	public int add(int i1, int i2) {
+		int sum = i1 + i2;
+		return sum;
+	}
+}
+```
+
+运行结果：
+
+```
+3
+3
+3
+```
+
+
+
+### 克隆对象
+
+#### 方法一
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C c1 = new C(1);
+		C c2 = c1.copy();
+		c2.i = 2;
+		System.out.println(c1.i);
+		System.out.println(c2.i);
+	}
+}
+
+class C {
+	int i;
+
+	C() {
+
+	}
+
+	C(int i) {
+		this.i = i;
+	}
+
+	public C copy() {
+		C c = new C();
+		c.i = this.i;
+		return c;
+	}
+}
+```
+
+运行结果：
+
+```
+1
+2
+```
+
+
+
+#### 方法二
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C c1 = new C(1);
+		C c2 = new C(c1);
+		c2.i = 2;
+		System.out.println(c1.i);
+		System.out.println(c2.i);
+	}
+}
+
+class C {
+	int i;
+
+	C(int i) {
+		this.i = i;
+	}
+
+	C(C c) {
+		this.i = c.i;
+	}
+}
+```
+
+运行结果：
+
+```
+1
+2
+```
+
+
+
+### 递归
+
+#### 示例
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C c = new C();
+		c.f(10);
+	}
+}
+
+class C {
+	public void f(int n) {
+		System.out.println(n);
+		if (n > 1) {
+			f(n - 1);
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+```
+
+
+
+#### 阶乘
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C c = new C();
+		System.out.println(c.factorial(5));
+	}
+}
+
+class C {
+	public int factorial(int n) {
+		if (n > 1) {
+			return n * factorial(n - 1);
+		} else {
+			return 1;
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+120
+```
+
+
+
+#### 斐波那契数列
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C c = new C();
+		System.out.println(c.fibonacci(10));
+	}
+}
+
+class C {
+	public int fibonacci(int n) {
+		if (n == 1 || n == 2) {
+			return 1;
+		} else {
+			return fibonacci(n - 2) + fibonacci(n - 1);
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+55
+```
+
+
+
 ## static关键字
 
 static：

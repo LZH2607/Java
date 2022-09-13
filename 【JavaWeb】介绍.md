@@ -21,7 +21,7 @@ Web核心
 	HTTP + Tomcat + Servlet
 	Request（请求） + Response（响应）
 	JSP
-	会话技术（Cookie + Session）
+	会话技术（Cookie、Session）
 	Filter（过滤器） + Listener（监听器）
 
 

@@ -487,6 +487,45 @@ public class Test {
 | boolean  |  false   |
 |  String  |   null   |
 
+```java
+public class Test {
+	public static void main(String[] args) {
+		byte b[] = new byte[1];
+		short s[] = new short[1];
+		int i[] = new int[1];
+		long l[] = new long[1];
+		float f[] = new float[1];
+		double d[] = new double[1];
+		char c[] = new char[1];
+		boolean bool[] = new boolean[1];
+		String str[] = new String[1];
+		System.out.println(b[0]);
+		System.out.println(s[0]);
+		System.out.println(i[0]);
+		System.out.println(l[0]);
+		System.out.println(f[0]);
+		System.out.println(d[0]);
+		System.out.println(c[0]);
+		System.out.println(bool[0]);
+		System.out.println(str[0]);
+	}
+}
+```
+
+运行结果：
+
+```
+0
+0
+0
+0
+0.0
+0.0
+
+false
+null
+```
+
 
 
 ## 赋值
@@ -951,5 +990,48 @@ public class Test {
 0 1 2 3 4 
 10 11 12 13 14 
 20 21 22 23 24 
+```
+
+
+
+## 封装成类
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int arr1[] = { 1, 2, 3, 4, 5 };
+		int arr2[][] = { { 11, 12, 13, 14 }, { 21, 22, 23, 24 }, { 21, 22, 23, 24 } };
+		PrintArray printArray = new PrintArray();
+		printArray.print1DArray(arr1);
+		printArray.print2DArray(arr2);
+	}
+}
+
+class PrintArray {
+	public void print1DArray(int arr[]) {
+		for (int i = 0; i < arr.length; i++) {
+			System.out.print(arr[i] + " ");
+		}
+		System.out.println();
+	}
+
+	public void print2DArray(int arr[][]) {
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr[i].length; j++) {
+				System.out.print(arr[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+}
+```
+
+运行结果：
+
+```
+1 2 3 4 5 
+11 12 13 14 
+21 22 23 24 
+21 22 23 24 
 ```
 
