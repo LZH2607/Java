@@ -182,14 +182,13 @@ public class Test {
 
 
 
-删除List中的int类型：
+#### 删除List中的基本数据类型
 
 方式一：
 
 ```java
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 public class Test {
 	public static void main(String[] args) {
@@ -218,7 +217,6 @@ public class Test {
 ```java
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 public class Test {
 	public static void main(String[] args) {
@@ -390,7 +388,7 @@ ghi
 
 
 
-### iterator
+### Iterator
 
 ```java
 import java.util.ArrayList;
@@ -440,12 +438,10 @@ public class Test {
 		l.add("ghi");
 		ListIterator it = l.listIterator();
 		while (it.hasNext()) {
-			System.out.println(it.nextIndex());
-			System.out.println(it.next());
+			System.out.println(it.nextIndex() + " " + it.next());
 		}
 		while (it.hasPrevious()) {
-			System.out.println(it.previousIndex());
-			System.out.println(it.previous());
+			System.out.println(it.previousIndex() + " " + it.previous());
 		}
 	}
 }
@@ -454,18 +450,12 @@ public class Test {
 运行结果：
 
 ```
-0
-abc
-1
-def
-2
-ghi
-2
-ghi
-1
-def
-0
-abc
+0 abc
+1 def
+2 ghi
+2 ghi
+1 def
+0 abc
 ```
 
 
@@ -575,6 +565,33 @@ public class Test {
 
 
 
+### equals
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class Test {
+	public static void main(String[] args) {
+		List l1 = new ArrayList();
+		List l2 = new ArrayList();
+		l1.add("abc");
+		l1.add("def");
+		l2.add("abc");
+		l2.add("def");
+		System.out.println(l1.equals(l2));
+	}
+}
+```
+
+运行结果：
+
+```
+true
+```
+
+
+
 ## 获取子列
 
 ### subList
@@ -582,7 +599,6 @@ public class Test {
 ```java
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 public class Test {
 	public static void main(String[] args) {

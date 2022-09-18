@@ -102,6 +102,60 @@ public class Test {
 
 
 
+#### 删除Collection中的基本数据类型
+
+```java
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class Test {
+	public static void main(String[] args) {
+		Collection c = new ArrayList();
+		c.add(10);
+		c.add(20);
+		c.add(30);
+		c.remove(20);
+		System.out.println(c.size());
+		System.out.println(c);
+	}
+}
+```
+
+运行结果：
+
+```
+2
+[10, 30]
+```
+
+
+
+```java
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class Test {
+	public static void main(String[] args) {
+		Collection c = new ArrayList();
+		c.add(1.1);
+		c.add(2.2);
+		c.add(3.3);
+		c.remove(2.2);
+		System.out.println(c.size());
+		System.out.println(c);
+	}
+}
+```
+
+运行结果：
+
+```
+2
+[1.1, 3.3]
+```
+
+
+
 ### clear
 
 ```java
@@ -192,7 +246,10 @@ ghi
 
 
 
-### iterator
+### Iterator
+
+相关链接：
+[Interface Iterator<E>](https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html)![](D:\Notes\Java\Java集合\img\Iterator All Methods.png)
 
 ```java
 boolean java.util.Iterator.hasNext();
@@ -229,6 +286,8 @@ public class Test {
 abc
 def
 ghi
+0
+[]
 ```
 
 
