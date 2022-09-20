@@ -621,3 +621,90 @@ public class Test {
 [def]
 ```
 
+
+
+## 转换
+
+### List → 数组：toArray
+
+```java
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Test {
+	public static void main(String[] args) {
+		List<String> l = new ArrayList<String>();
+		l.add("abc");
+		l.add("def");
+		l.add("ghi");
+		String arr[] = l.toArray(new String[l.size()]);
+		System.out.println(l);
+		System.out.println(Arrays.toString(arr));
+	}
+}
+```
+
+运行结果：
+
+```
+[abc, def, ghi]
+[abc, def, ghi]
+```
+
+
+
+### 数组 → List：asList（Arrays）
+
+转换后：受限（不能添加、删除元素）
+
+
+
+#### 基本数据类型的数组 → List
+
+```java
+import java.util.Arrays;
+import java.util.List;
+
+public class Test {
+	public static void main(String[] args) {
+		Integer arr[] = { 1, 2, 3 };
+		List<Integer> l = Arrays.asList(arr);
+		System.out.println(Arrays.toString(arr));
+		System.out.println(l);
+	}
+}
+```
+
+运行结果：
+
+```
+[1, 2, 3]
+[1, 2, 3]
+```
+
+
+
+#### 引用数据类型的数组 → List
+
+```java
+import java.util.Arrays;
+import java.util.List;
+
+public class Test {
+	public static void main(String[] args) {
+		String arr[] = { "abc", "def", "ghi" };
+		List<String> l = Arrays.asList(arr);
+		System.out.println(Arrays.toString(arr));
+		System.out.println(l);
+	}
+}
+```
+
+运行结果：
+
+```
+[abc, def, ghi]
+[abc, def, ghi]
+```
+
