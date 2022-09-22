@@ -92,6 +92,48 @@ Hello, World!
 
 
 
+### 写法三
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C<Integer> c1 = new C<>(1);
+		C<Double> c2 = new C<>(1.0);
+		C<String> c3 = new C<>("Hello, World!");
+
+		System.out.println(c1.getT());
+		System.out.println(c2.getT());
+		System.out.println(c3.getT());
+	}
+}
+
+class C<T> {
+	T t;
+
+	C(T t) {
+		this.t = t;
+	}
+
+	public void setT(T t) {
+		this.t = t;
+	}
+
+	public T getT() {
+		return t;
+	}
+}
+```
+
+运行结果：
+
+```
+1
+1.0
+Hello, World!
+```
+
+
+
 ## 泛型接口
 
 ### 方法一

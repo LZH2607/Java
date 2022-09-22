@@ -20,13 +20,15 @@ List：有序、有下标、元素可重复
 
 ### add
 
+#### 用法一
+
 ```java
 import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l = new ArrayList();
+		List<String> l = new ArrayList<>();
 		l.add("abc");
 		l.add("def");
 		l.add("ghi");
@@ -45,13 +47,15 @@ public class Test {
 
 
 
-```javascript
+#### 用法二
+
+```java
 import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l = new ArrayList();
+		List<String> l = new ArrayList();
 		l.add("abc");
 		l.add("def");
 		l.add(1, "ghi");
@@ -72,14 +76,16 @@ public class Test {
 
 ### addAll
 
+#### 用法一
+
 ```java
 import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l1 = new ArrayList();
-		List l2 = new ArrayList();
+		List<String> l1 = new ArrayList<>();
+		List<String> l2 = new ArrayList<>();
 		l1.add("abc");
 		l2.add("def");
 		l2.add("ghi");
@@ -99,14 +105,16 @@ public class Test {
 
 
 
+#### 用法二
+
 ```java
 import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l1 = new ArrayList();
-		List l2 = new ArrayList();
+		List<String> l1 = new ArrayList<>();
+		List<String> l2 = new ArrayList<>();
 		l1.add("abc");
 		l2.add("def");
 		l2.add("ghi");
@@ -130,13 +138,15 @@ public class Test {
 
 ### remove
 
+#### 用法一
+
 ```java
 import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l = new ArrayList();
+		List<String> l = new ArrayList<>();
 		l.add("abc");
 		l.add("def");
 		l.add("ghi");
@@ -156,13 +166,15 @@ public class Test {
 
 
 
+#### 用法二
+
 ```java
 import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l = new ArrayList();
+		List<String> l = new ArrayList<>();
 		l.add("abc");
 		l.add("def");
 		l.add("ghi");
@@ -192,7 +204,7 @@ import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l = new ArrayList();
+		List<Integer> l = new ArrayList<>();
 		l.add(10);
 		l.add(20);
 		l.add(30);
@@ -220,7 +232,7 @@ import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l = new ArrayList();
+		List<Integer> l = new ArrayList<>();
 		l.add(10);
 		l.add(20);
 		l.add(30);
@@ -248,8 +260,8 @@ import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l1 = new ArrayList();
-		List l2 = new ArrayList();
+		List<String> l1 = new ArrayList<>();
+		List<String> l2 = new ArrayList<>();
 		l1.add("abc");
 		l1.add("def");
 		l1.add("ghi");
@@ -279,7 +291,7 @@ import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l = new ArrayList();
+		List<String> l = new ArrayList<>();
 		l.add("abc");
 		l.add("def");
 		l.add("ghi");
@@ -309,13 +321,11 @@ import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l = new ArrayList();
+		List<String> l = new ArrayList<>();
 		l.add("abc");
 		l.add("def");
 		l.add("ghi");
-		Object o = l.get(0);
 		String s = (String) l.get(1);
-		System.out.println(o);
 		System.out.println(s);
 	}
 }
@@ -324,7 +334,6 @@ public class Test {
 运行结果：
 
 ```
-abc
 def
 ```
 
@@ -334,13 +343,15 @@ def
 
 ### for
 
+#### 方式一
+
 ```java
 import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l = new ArrayList();
+		List<String> l = new ArrayList<>();
 		l.add("abc");
 		l.add("def");
 		l.add("ghi");
@@ -361,18 +372,20 @@ ghi
 
 
 
+#### 方式二
+
 ```java
 import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l = new ArrayList();
+		List<String> l = new ArrayList<>();
 		l.add("abc");
 		l.add("def");
 		l.add("ghi");
-		for (Object o : l) {
-			System.out.println(o);
+		for (String s : l) {
+			System.out.println(s);
 		}
 	}
 }
@@ -397,11 +410,11 @@ import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l = new ArrayList();
+		List<String> l = new ArrayList<>();
 		l.add("abc");
 		l.add("def");
 		l.add("ghi");
-		Iterator it = l.iterator();
+		Iterator<String> it = l.iterator();
 		while (it.hasNext()) {
 			System.out.println(it.next());
 		}
@@ -432,11 +445,11 @@ import java.util.ListIterator;
 
 public class Test {
 	public static void main(String[] args) {
-		List l = new ArrayList();
+		List<String> l = new ArrayList<>();
 		l.add("abc");
 		l.add("def");
 		l.add("ghi");
-		ListIterator it = l.listIterator();
+		ListIterator<String> it = l.listIterator();
 		while (it.hasNext()) {
 			System.out.println(it.nextIndex() + " " + it.next());
 		}
@@ -470,7 +483,7 @@ import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l = new ArrayList();
+		List<String> l = new ArrayList<>();
 		l.add("abc");
 		l.add("def");
 		l.add("ghi");
@@ -495,8 +508,8 @@ import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l1 = new ArrayList();
-		List l2 = new ArrayList();
+		List<String> l1 = new ArrayList<>();
+		List<String> l2 = new ArrayList<>();
 		l1.add("abc");
 		l1.add("def");
 		l1.add("ghi");
@@ -523,7 +536,7 @@ import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l = new ArrayList();
+		List<String> l = new ArrayList<>();
 		l.add("abc");
 		l.add("def");
 		l.add("ghi");
@@ -548,7 +561,7 @@ import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l = new ArrayList();
+		List<String> l = new ArrayList<>();
 		l.add("abc");
 		l.add("def");
 		l.add("ghi");
@@ -573,8 +586,8 @@ import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l1 = new ArrayList();
-		List l2 = new ArrayList();
+		List<String> l1 = new ArrayList<>();
+		List<String> l2 = new ArrayList<>();
 		l1.add("abc");
 		l1.add("def");
 		l2.add("abc");
@@ -602,12 +615,12 @@ import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List l1 = new ArrayList();
+		List<String> l1 = new ArrayList<>();
 		l1.add("abc");
 		l1.add("def");
 		l1.add("ghi");
 		l1.add("jkl");
-		List l2 = l1.subList(1, 2);
+		List<String> l2 = l1.subList(1, 2);
 		System.out.println(l2.size());
 		System.out.println(l2);
 	}
@@ -634,7 +647,7 @@ import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
-		List<String> l = new ArrayList<String>();
+		List<String> l = new ArrayList<>();
 		l.add("abc");
 		l.add("def");
 		l.add("ghi");

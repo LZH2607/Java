@@ -138,6 +138,33 @@ public class Test {
 
 
 
+### values
+
+```java
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Test {
+	public static void main(String[] args) {
+		Map<String, Integer> m = new HashMap<String, Integer>();
+		m.put("Tom", 1);
+		m.put("Jack", 2);
+		m.put("Mike", 3);
+		Collection<Integer> c = m.values();
+		System.out.println(c);
+	}
+}
+```
+
+运行结果：
+
+```
+[3, 1, 2]
+```
+
+
+
 ## 遍历键值对
 
 ### for

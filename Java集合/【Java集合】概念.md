@@ -6,6 +6,12 @@
 
 
 
+相关视频：
+[千锋教育新版Java集合框架详解（从入门到上手）](https://www.bilibili.com/video/BV16K4y1x7Gi)
+[【韩顺平讲Java】Java集合专题 -ArrayList HashMap HashSet List Map TreeMap TreeSet等](https://www.bilibili.com/video/BV1YA411T76k)
+
+
+
 ## 集合
 
 集合：
@@ -17,37 +23,32 @@
 | 长度 |            固定            |    不固定    |
 | 存储 | 基本数据类型、引用数据类型 | 引用数据类型 |
 
+有序：添加的顺序 = 遍历的顺序
+无序：添加的顺序 ≠ 遍历的顺序
+
 
 
 ### 单列集合
 
-Iterable（接口）
-	Collection（接口）
-		List（接口）：有序、有下标、元素可重复
-			ArrayList（类）
-			LinkedList（类）
-			Vector（类）
-		Set（接口）：无序、无下标、元素不可重复
-			HashSet（类）
-			SortedSet（接口）
-				TreeSet（类）
-			LinkedHashSet
+Collection（接口）
+	List（接口）：有序、有下标、元素可重复
+		ArrayList（类）
+		LinkedList（类）
+		Vector（类）
+	Set（接口）：无序、无下标、元素不可重复
+		HashSet（类）
+		TreeSet（类）
 
 
 
 ### 双列集合
 
-Map
-	HashMap
-		LinkedHashMap
-	Hashtable
-		Properties
-	TreeMap
-
 Map（接口）
 	HashMap（类）
-	SortedMap（接口）
-		TreeMap（类）
+		LinkedHashMap（类）
+	TreeMap（类）
+	Hashtable（类）
+		Properties（类）
 
 
 
@@ -73,7 +74,7 @@ LinkedList：有序、有下标、元素可重复
 
 Set：无序、无下标、元素不可重复
 HashSet：无序、无下标、元素不可重复
-TreeSet：有序、无下标、元素不可重复（基于排序实现）
+TreeSet：无序、无下标、元素不可重复（基于排序实现）
 
 |          |             HashSet             |      |
 | :------: | :-----------------------------: | :--: |
