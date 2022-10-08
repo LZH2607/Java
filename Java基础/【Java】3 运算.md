@@ -143,7 +143,7 @@ public class Test {
 
 
 
-经典问题：
+问题：
 
 ```java
 public class Test {
@@ -288,7 +288,7 @@ true
 
 
 
-经典问题：
+问题：
 
 ```java
 public class Test {
@@ -313,7 +313,7 @@ public class Test {
 
 
 
-经典问题：
+问题：
 
 ```java
 public class Test {
@@ -338,7 +338,7 @@ public class Test {
 
 
 
-经典问题：
+问题：
 
 ```java
 public class Test {
@@ -363,7 +363,7 @@ public class Test {
 
 
 
-经典问题：
+问题：
 
 ```java
 public class Test {
@@ -388,7 +388,7 @@ public class Test {
 
 
 
-经典问题：
+问题：
 
 ```java
 public class Test {

@@ -40,10 +40,10 @@ public class Test {
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		int arr[] = new int[5];
-		System.out.println(arr.length);
-	}
+    public static void main(String[] args) {
+        int[] arr = new int[5];
+        System.out.println(arr.length);
+    }
 }
 ```
 
@@ -60,65 +60,59 @@ public class Test {
 ### 静态初始化
 
 ```
-数据类型 数组名[] = {元素1, 元素2, ···, 元素n};
+数据类型[] 数组名 = {元素1, 元素2, ···, 元素n};
 ```
 
 
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		int arr[] = { 0, 1, 2, 3, 4 };
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-	}
+    public static void main(String[] args) {
+        int[] arr = {0, 1, 2, 3, 4};
+        System.out.println(Arrays.toString(arr));
+    }
 }
 ```
 
 运行结果：
 
 ```
-0
-1
-2
-3
-4
+[0, 1, 2, 3, 4]
 ```
 
 
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		User userArr[] = { new User(1, "Tom"), new User(2, "Jack"), new User(3, "Mike") };
-		for (int i = 0; i < userArr.length; i++) {
-			userArr[i].printInfor();
-		}
-	}
+    public static void main(String[] args) {
+        User[] userArr = {new User(1, "Tom"), new User(2, "Jack"), new User(3, "Mike")};
+        System.out.println(Arrays.toString(userArr));
+    }
 }
 
 class User {
-	private int id;
-	private String name;
+    private int id;
+    private String name;
 
-	public User(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+    public User(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-	public void printInfor() {
-		System.out.println(id + " " + name);
-	}
+    public String toString() {
+        return "User{Id:" + id + ", Name:" + name + "}";
+    }
 }
 ```
 
 运行结果：
 
 ```
-1 Tom
-2 Jack
-3 Mike
+[User{Id:1, Name:Tom}, User{Id:2, Name:Jack}, User{Id:3, Name:Mike}]
 ```
 
 
@@ -128,96 +122,86 @@ class User {
 #### 方式1
 
 ```
-数据类型 数组名[] = new 数据类型[大小];
+数据类型[] 数组名 = new 数据类型[大小];
 ```
 
 
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		int arr[] = new int[5];
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-	}
+    public static void main(String[] args) {
+        int[] arr = new int[5];
+        System.out.println(Arrays.toString(arr));
+    }
 }
 ```
 
 运行结果：
 
 ```
-0
-0
-0
-0
-0
+[0, 0, 0, 0, 0]
 ```
 
 
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		int arr[] = new int[5];
-		arr[0] = 0;
-		arr[1] = 1;
-		arr[2] = 2;
-		arr[3] = 3;
-		arr[4] = 4;
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-	}
+    public static void main(String[] args) {
+        int[] arr = new int[5];
+        arr[0] = 0;
+        arr[1] = 1;
+        arr[2] = 2;
+        arr[3] = 3;
+        arr[4] = 4;
+        System.out.println(Arrays.toString(arr));
+    }
 }
 ```
 
 运行结果：
 
 ```
-0
-1
-2
-3
-4
+[0, 1, 2, 3, 4]
 ```
 
 
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		User userArr[] = new User[3];
-		userArr[0] = new User(1, "Tom");
-		userArr[1] = new User(2, "Jack");
-		userArr[2] = new User(3, "Mike");
-		for (int i = 0; i < userArr.length; i++) {
-			userArr[i].printInfor();
-		}
-	}
+    public static void main(String[] args) {
+        User[] userArr = new User[3];
+        userArr[0] = new User(1, "Tom");
+        userArr[1] = new User(2, "Jack");
+        userArr[2] = new User(3, "Mike");
+        System.out.println(Arrays.toString(userArr));
+    }
 }
 
 class User {
-	private int id;
-	private String name;
+    private int id;
+    private String name;
 
-	public User(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+    public User(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-	public void printInfor() {
-		System.out.println(id + " " + name);
-	}
+    public String toString() {
+        return "User{Id:" + id + ", Name:" + name + "}";
+    }
 }
 ```
 
 运行结果：
 
 ```
-1 Tom
-2 Jack
-3 Mike
+[User{Id:1, Name:Tom}, User{Id:2, Name:Jack}, User{Id:3, Name:Mike}]
 ```
 
 
@@ -225,100 +209,155 @@ class User {
 #### 方式2
 
 ```
-数据类型 数组名[];
+数据类型[] 数组名;
 数组名 = new 数据类型[大小];
 ```
 
 
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		int arr[];
-		arr = new int[5];
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-	}
+    public static void main(String[] args) {
+        int[] arr;
+        arr = new int[5];
+        System.out.println(Arrays.toString(arr));
+    }
 }
 ```
 
 运行结果：
 
 ```
-0
-0
-0
-0
-0
+[0, 0, 0, 0, 0]
 ```
 
 
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		int arr[];
-		arr = new int[5];
-		arr[0] = 0;
-		arr[1] = 1;
-		arr[2] = 2;
-		arr[3] = 3;
-		arr[4] = 4;
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-	}
+    public static void main(String[] args) {
+        int[] arr;
+        arr = new int[5];
+        arr[0] = 0;
+        arr[1] = 1;
+        arr[2] = 2;
+        arr[3] = 3;
+        arr[4] = 4;
+        System.out.println(Arrays.toString(arr));
+    }
 }
 ```
 
 运行结果：
 
 ```
-0
-1
-2
-3
-4
+[0, 1, 2, 3, 4]
 ```
 
 
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		User userArr[];
-		userArr = new User[3];
-		userArr[0] = new User(1, "Tom");
-		userArr[1] = new User(2, "Jack");
-		userArr[2] = new User(3, "Mike");
-		for (int i = 0; i < userArr.length; i++) {
-			userArr[i].printInfor();
-		}
-	}
+    public static void main(String[] args) {
+        User[] userArr;
+        userArr = new User[3];
+        userArr[0] = new User(1, "Tom");
+        userArr[1] = new User(2, "Jack");
+        userArr[2] = new User(3, "Mike");
+        System.out.println(Arrays.toString(userArr));
+    }
 }
 
 class User {
-	private int id;
-	private String name;
+    private int id;
+    private String name;
 
-	public User(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+    public User(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-	public void printInfor() {
-		System.out.println(id + " " + name);
-	}
+    public String toString() {
+        return "User{Id:" + id + ", Name:" + name + "}";
+    }
 }
 ```
 
 运行结果：
 
 ```
-1 Tom
-2 Jack
-3 Mike
+[User{Id:1, Name:Tom}, User{Id:2, Name:Jack}, User{Id:3, Name:Mike}]
+```
+
+
+
+## 打印
+
+### util.Arrays.toString
+
+```java
+import java.util.Arrays;
+
+public class Test {
+    public static void main(String[] args) {
+        int[] arr = {0, 1, 2, 3, 4};
+        System.out.println(Arrays.toString(arr));
+    }
+}
+```
+
+运行结果：
+
+```
+[0, 1, 2, 3, 4]
+```
+
+
+
+### 遍历
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        int[] arr1 = {1, 2, 3, 4, 5};
+        int[][] arr2 = {{11, 12, 13, 14}, {21, 22, 23, 24}, {21, 22, 23, 24}};
+        Print.print1DArray(arr1);
+        Print.print2DArray(arr2);
+    }
+}
+
+class Print {
+    static void print1DArray(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    static void print2DArray(int[][] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+运行结果：
+
+```
+1 2 3 4 5 
+11 12 13 14 
+21 22 23 24 
+21 22 23 24 
 ```
 
 
@@ -329,12 +368,12 @@ class User {
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		int arr[] = { 0, 1, 2, 3, 4 };
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-	}
+    public static void main(String[] args) {
+        int[] arr = {0, 1, 2, 3, 4};
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+    }
 }
 ```
 
@@ -352,35 +391,35 @@ public class Test {
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		User userArr[] = { new User(1, "Tom"), new User(2, "Jack"), new User(3, "Mike") };
-		for (int i = 0; i < userArr.length; i++) {
-			userArr[i].printInfor();
-		}
-	}
+    public static void main(String[] args) {
+        User[] userArr = {new User(1, "Tom"), new User(2, "Jack"), new User(3, "Mike")};
+        for (int i = 0; i < userArr.length; i++) {
+            System.out.println(userArr[i]);
+        }
+    }
 }
 
 class User {
-	private int id;
-	private String name;
+    private int id;
+    private String name;
 
-	public User(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+    public User(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-	public void printInfor() {
-		System.out.println(id + " " + name);
-	}
+    public String toString() {
+        return "User{Id:" + id + ", Name:" + name + "}";
+    }
 }
 ```
 
 运行结果：
 
 ```
-1 Tom
-2 Jack
-3 Mike
+User{Id:1, Name:Tom}
+User{Id:2, Name:Jack}
+User{Id:3, Name:Mike}
 ```
 
 
@@ -392,12 +431,12 @@ foreach循环：可以读取、不能修改
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		int arr[] = { 0, 1, 2, 3, 4 };
-		for (int i : arr) {
-			System.out.println(i);
-		}
-	}
+    public static void main(String[] args) {
+        int[] arr = {0, 1, 2, 3, 4};
+        for (int i : arr) {
+            System.out.println(i);
+        }
+    }
 }
 ```
 
@@ -415,35 +454,35 @@ public class Test {
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		User userArr[] = { new User(1, "Tom"), new User(2, "Jack"), new User(3, "Mike") };
-		for (User u : userArr) {
-			u.printInfor();
-		}
-	}
+    public static void main(String[] args) {
+        User[] userArr = {new User(1, "Tom"), new User(2, "Jack"), new User(3, "Mike")};
+        for (User user : userArr) {
+            System.out.println(user);
+        }
+    }
 }
 
 class User {
-	private int id;
-	private String name;
+    private int id;
+    private String name;
 
-	public User(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+    public User(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-	public void printInfor() {
-		System.out.println(id + " " + name);
-	}
+    public String toString() {
+        return "User{Id:" + id + ", Name:" + name + "}";
+    }
 }
 ```
 
 运行结果：
 
 ```
-1 Tom
-2 Jack
-3 Mike
+User{Id:1, Name:Tom}
+User{Id:2, Name:Jack}
+User{Id:3, Name:Mike}
 ```
 
 
@@ -451,24 +490,20 @@ class User {
 ## 自动类型转换
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		double arr[] = { 0, 1.1, 2, 3.3, 4 };
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-	}
+    public static void main(String[] args) {
+        double[] arr = {0, 1.1, 2, 3.3, 4};
+        System.out.println(Arrays.toString(arr));
+    }
 }
 ```
 
 运行结果：
 
 ```
-0.0
-1.1
-2.0
-3.3
-4.0
+[0.0, 1.1, 2.0, 3.3, 4.0]
 ```
 
 
@@ -489,26 +524,26 @@ public class Test {
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		byte b[] = new byte[1];
-		short s[] = new short[1];
-		int i[] = new int[1];
-		long l[] = new long[1];
-		float f[] = new float[1];
-		double d[] = new double[1];
-		char c[] = new char[1];
-		boolean bool[] = new boolean[1];
-		String str[] = new String[1];
-		System.out.println(b[0]);
-		System.out.println(s[0]);
-		System.out.println(i[0]);
-		System.out.println(l[0]);
-		System.out.println(f[0]);
-		System.out.println(d[0]);
-		System.out.println(c[0]);
-		System.out.println(bool[0]);
-		System.out.println(str[0]);
-	}
+    public static void main(String[] args) {
+        byte[] b = new byte[1];
+        short[] s = new short[1];
+        int[] i = new int[1];
+        long[] l = new long[1];
+        float[] f = new float[1];
+        double[] d = new double[1];
+        char[] c = new char[1];
+        boolean[] bool = new boolean[1];
+        String[] str = new String[1];
+        System.out.println(b[0]);
+        System.out.println(s[0]);
+        System.out.println(i[0]);
+        System.out.println(l[0]);
+        System.out.println(f[0]);
+        System.out.println(d[0]);
+        System.out.println(c[0]);
+        System.out.println(bool[0]);
+        System.out.println(str[0]);
+    }
 }
 ```
 
@@ -533,34 +568,28 @@ null
 引用传递/地址传递
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		int arr1[] = { 0, 1, 2, 3, 4 };
-		int arr2[] = arr1;
-		arr2[0] = -1;
-		for (int i = 0; i < arr1.length; i++) {
-			System.out.println(arr1[i]);
-		}
-		for (int i = 0; i < arr2.length; i++) {
-			System.out.println(arr2[i]);
-		}
-	}
+    public static void main(String[] args) {
+        int[] arr1 = {0, 1, 2, 3, 4};
+        int[] arr2 = arr1;
+        System.out.println(Arrays.toString(arr1));
+        System.out.println(Arrays.toString(arr2));
+        arr2[0] = -1;
+        System.out.println(Arrays.toString(arr1));
+        System.out.println(Arrays.toString(arr2));
+    }
 }
 ```
 
 运行结果：
 
 ```
--1
-1
-2
-3
-4
--1
-1
-2
-3
-4
+[0, 1, 2, 3, 4]
+[0, 1, 2, 3, 4]
+[-1, 1, 2, 3, 4]
+[-1, 1, 2, 3, 4]
 ```
 
 
@@ -568,36 +597,26 @@ public class Test {
 ## 拷贝
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		int arr1[] = { 0, 1, 2, 3, 4 };
-		int arr2[] = new int[arr1.length];
-		for (int i = 0; i < arr2.length; i++) {
-			arr2[i] = arr1[i];
-		}
-		for (int i = 0; i < arr1.length; i++) {
-			System.out.println(arr1[i]);
-		}
-		for (int i = 0; i < arr2.length; i++) {
-			System.out.println(arr2[i]);
-		}
-	}
+    public static void main(String[] args) {
+        int[] arr1 = {0, 1, 2, 3, 4};
+        int[] arr2 = new int[arr1.length];
+        for (int i = 0; i < arr2.length; i++) {
+            arr2[i] = arr1[i];
+        }
+        System.out.println(Arrays.toString(arr1));
+        System.out.println(Arrays.toString(arr2));
+    }
 }
 ```
 
 运行结果：
 
 ```
-0
-1
-2
-3
-4
-0
-1
-2
-3
-4
+[0, 1, 2, 3, 4]
+[0, 1, 2, 3, 4]
 ```
 
 
@@ -605,31 +624,26 @@ public class Test {
 ## 扩容
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		int arr[] = { 0, 1, 2, 3, 4 };
-		int temp[] = new int[arr.length + 1];
-		for (int i = 0; i < arr.length; i++) {
-			temp[i] = arr[i];
-		}
-		temp[temp.length - 1] = 5;
-		arr = temp;
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-	}
+    public static void main(String[] args) {
+        int[] arr = {0, 1, 2, 3, 4};
+        int[] temp = new int[arr.length + 1];
+        for (int i = 0; i < arr.length; i++) {
+            temp[i] = arr[i];
+        }
+        temp[temp.length - 1] = 5;
+        arr = temp;
+        System.out.println(Arrays.toString(arr));
+    }
 }
 ```
 
 运行结果：
 
 ```
-0
-1
-2
-3
-4
-5
+[0, 1, 2, 3, 4, 5]
 ```
 
 
@@ -640,18 +654,18 @@ public class Test {
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		int arr[] = { 24, 69, 80, 57, 13 };
-		int ele = 80;
-		int index = -1;
-		for (int i = 0; i < arr.length; i++) {
-			if (arr[i] == ele) {
-				index = i;
-				break;
-			}
-		}
-		System.out.println(index);
-	}
+    public static void main(String[] args) {
+        int[] arr = {24, 69, 80, 57, 13};
+        int target = 80;
+        int index = -1;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == target) {
+                index = i;
+                break;
+            }
+        }
+        System.out.println(index);
+    }
 }
 ```
 
@@ -659,13 +673,6 @@ public class Test {
 
 ```
 2
-```
-
-
-
-### 二分查找
-
-```
 ```
 
 
@@ -675,29 +682,25 @@ public class Test {
 ### 方法1
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		int arr[] = { 0, 1, 2, 3, 4 };
-		for (int i = 0, j = arr.length - 1; i < arr.length / 2; i++, j--) {
-			int temp = arr[i];
-			arr[i] = arr[j];
-			arr[j] = temp;
-		}
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-	}
+    public static void main(String[] args) {
+        int[] arr = {0, 1, 2, 3, 4};
+        for (int i = 0, j = arr.length - 1; i < arr.length / 2; i++, j--) {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+        System.out.println(Arrays.toString(arr));
+    }
 }
 ```
 
 运行结果：
 
 ```
-4
-3
-2
-1
-0
+[4, 3, 2, 1, 0]
 ```
 
 
@@ -705,29 +708,25 @@ public class Test {
 ### 方法2
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		int arr[] = { 0, 1, 2, 3, 4 };
-		int temp[] = new int[arr.length];
-		for (int i = arr.length - 1, j = 0; i >= 0; i--, j++) {
-			temp[j] = arr[i];
-		}
-		arr = temp;
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-	}
+    public static void main(String[] args) {
+        int[] arr = {0, 1, 2, 3, 4};
+        int[] temp = new int[arr.length];
+        for (int i = arr.length - 1, j = 0; i >= 0; i--, j++) {
+            temp[j] = arr[i];
+        }
+        arr = temp;
+        System.out.println(Arrays.toString(arr));
+    }
 }
 ```
 
 运行结果：
 
 ```
-4
-3
-2
-1
-0
+[4, 3, 2, 1, 0]
 ```
 
 
@@ -737,38 +736,66 @@ public class Test {
 ### 冒泡排序
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		int arr[] = { 24, 69, 80, 57, 13 };
-		for (int i = 0; i < arr.length - 1; i++) {
-			boolean flag = false;
-			for (int j = 0; j < arr.length - i - 1; j++) {
-				if (arr[j] > arr[j + 1]) {
-					int temp = arr[j];
-					arr[j] = arr[j + 1];
-					arr[j + 1] = temp;
-					flag = true;
-				}
-			}
-			if (!flag) {
-				break;
-			}
-		}
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-	}
+    public static void main(String[] args) {
+        int[] arr = {24, 69, 80, 57, 13};
+        System.out.println(Arrays.toString(arr));
+        Sort.bubbleSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+}
+
+class Sort {
+    static void bubbleSort(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            boolean flag = false;
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    flag = true;
+                }
+            }
+            if (!flag) {
+                break;
+            }
+        }
+    }
 }
 ```
 
 运行结果：
 
 ```
-13
-24
-57
-69
-80
+[24, 69, 80, 57, 13]
+[13, 24, 57, 69, 80]
+```
+
+
+
+### util.Arrays.sort
+
+```java
+import java.util.Arrays;
+
+public class Test {
+    public static void main(String[] args) {
+        int[] arr = {24, 69, 80, 57, 13};
+        System.out.println(Arrays.toString(arr));
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+}
+```
+
+运行结果：
+
+```
+[24, 69, 80, 57, 13]
+[13, 24, 57, 69, 80]
 ```
 
 
@@ -801,31 +828,30 @@ public class Test {
 ### 静态初始化
 
 ```
-数据类型 数组名[][] = {{元素1, 元素2, ···}, {元素1, 元素2, ···}, ···}
+数据类型[][] 数组名 = {{元素1, 元素2, ···}, {元素1, 元素2, ···}, ···}
 ```
 
 
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		int arr[][] = { { 0, 1, 2 }, { 10, 11, 12, 13 }, { 20, 21, 22, 23, 24 } };
-		for (int i = 0; i < arr.length; i++) {
-			for (int j = 0; j < arr[i].length; j++) {
-				System.out.print(arr[i][j] + " ");
-			}
-			System.out.println();
-		}
-	}
+    public static void main(String[] args) {
+        int[][] arr = {{0, 1, 2}, {10, 11, 12, 13}, {20, 21, 22, 23, 24}};
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(Arrays.toString(arr[i]));
+        }
+    }
 }
 ```
 
 运行结果：
 
 ```
-0 1 2 
-10 11 12 13 
-20 21 22 23 24 
+[0, 1, 2]
+[10, 11, 12, 13]
+[20, 21, 22, 23, 24]
 ```
 
 
@@ -833,116 +859,113 @@ public class Test {
 ### 动态初始化
 
 ```
-数据类型 数组名[][] = new 数据类型[大小][大小];
+数据类型[][] 数组名 = new 数据类型[大小][大小];
 ```
 
 
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		int arr[][] = new int[3][4];
-		arr[0][0] = 0;
-		arr[0][1] = 1;
-		arr[0][2] = 2;
-		arr[0][3] = 3;
-		arr[1][0] = 10;
-		arr[1][1] = 11;
-		arr[1][2] = 12;
-		arr[1][3] = 13;
-		arr[2][0] = 20;
-		arr[2][1] = 21;
-		arr[2][2] = 22;
-		arr[2][3] = 23;
-		for (int i = 0; i < arr.length; i++) {
-			for (int j = 0; j < arr[i].length; j++) {
-				System.out.print(arr[i][j] + " ");
-			}
-			System.out.println();
-		}
-	}
+    public static void main(String[] args) {
+        int[][] arr = new int[3][4];
+        arr[0][0] = 0;
+        arr[0][1] = 1;
+        arr[0][2] = 2;
+        arr[0][3] = 3;
+        arr[1][0] = 10;
+        arr[1][1] = 11;
+        arr[1][2] = 12;
+        arr[1][3] = 13;
+        arr[2][0] = 20;
+        arr[2][1] = 21;
+        arr[2][2] = 22;
+        arr[2][3] = 23;
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(Arrays.toString(arr[i]));
+        }
+    }
 }
 ```
 
 运行结果：
 
 ```
-0 1 2 3 
-10 11 12 13 
-20 21 22 23 
+[0, 1, 2, 3]
+[10, 11, 12, 13]
+[20, 21, 22, 23]
 ```
 
 
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		int arr[][];
-		arr = new int[3][4];
-		arr[0][0] = 0;
-		arr[0][1] = 1;
-		arr[0][2] = 2;
-		arr[0][3] = 3;
-		arr[1][0] = 10;
-		arr[1][1] = 11;
-		arr[1][2] = 12;
-		arr[1][3] = 13;
-		arr[2][0] = 20;
-		arr[2][1] = 21;
-		arr[2][2] = 22;
-		arr[2][3] = 23;
-		for (int i = 0; i < arr.length; i++) {
-			for (int j = 0; j < arr[i].length; j++) {
-				System.out.print(arr[i][j] + " ");
-			}
-			System.out.println();
-		}
-	}
+    public static void main(String[] args) {
+        int[][] arr;
+        arr = new int[3][4];
+        arr[0][0] = 0;
+        arr[0][1] = 1;
+        arr[0][2] = 2;
+        arr[0][3] = 3;
+        arr[1][0] = 10;
+        arr[1][1] = 11;
+        arr[1][2] = 12;
+        arr[1][3] = 13;
+        arr[2][0] = 20;
+        arr[2][1] = 21;
+        arr[2][2] = 22;
+        arr[2][3] = 23;
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(Arrays.toString(arr[i]));
+        }
+    }
 }
 ```
 
 运行结果：
 
 ```
-0 1 2 3 
-10 11 12 13 
-20 21 22 23 
+[0, 1, 2, 3]
+[10, 11, 12, 13]
+[20, 21, 22, 23]
 ```
 
 
 
 ```java
+import java.util.Arrays;
+
 public class Test {
-	public static void main(String[] args) {
-		int arr[][] = new int[3][];
-		arr[0] = new int[2];
-		arr[1] = new int[3];
-		arr[2] = new int[4];
-		arr[0][0] = 0;
-		arr[0][1] = 1;
-		arr[1][0] = 10;
-		arr[1][1] = 11;
-		arr[1][2] = 12;
-		arr[2][0] = 20;
-		arr[2][1] = 21;
-		arr[2][2] = 22;
-		arr[2][3] = 23;
-		for (int i = 0; i < arr.length; i++) {
-			for (int j = 0; j < arr[i].length; j++) {
-				System.out.print(arr[i][j] + " ");
-			}
-			System.out.println();
-		}
-	}
+    public static void main(String[] args) {
+        int[][] arr = new int[3][];
+        arr[0] = new int[2];
+        arr[1] = new int[3];
+        arr[2] = new int[4];
+        arr[0][0] = 0;
+        arr[0][1] = 1;
+        arr[1][0] = 10;
+        arr[1][1] = 11;
+        arr[1][2] = 12;
+        arr[2][0] = 20;
+        arr[2][1] = 21;
+        arr[2][2] = 22;
+        arr[2][3] = 23;
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(Arrays.toString(arr[i]));
+        }
+    }
 }
 ```
 
 运行结果：
 
 ```
-0 1 
-10 11 12 
-20 21 22 23 
+[0, 1]
+[10, 11, 12]
+[20, 21, 22, 23]
 ```
 
 
@@ -951,36 +974,36 @@ public class Test {
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		int arr[][] = { { 0, 1, 2, 3, 4 }, { 10, 11, 12, 13, 14 }, { 20, 21, 22, 23, 24 } };
-		for (int i = 0; i < arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-	}
+    public static void main(String[] args) {
+        int[][] arr = {{0, 1, 2, 3, 4}, {10, 11, 12, 13, 14}, {20, 21, 22, 23, 24}};
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+    }
 }
 ```
 
 运行结果：
 
 ```
-[I@515f550a
-[I@626b2d4a
-[I@5e91993f
+[I@1d44bcfa
+[I@266474c2
+[I@6f94fa3e
 ```
 
 
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		int arr[][] = { { 0, 1, 2, 3, 4 }, { 10, 11, 12, 13, 14 }, { 20, 21, 22, 23, 24 } };
-		for (int i = 0; i < arr.length; i++) {
-			for (int j = 0; j < arr[i].length; j++) {
-				System.out.print(arr[i][j] + " ");
-			}
-			System.out.println();
-		}
-	}
+    public static void main(String[] args) {
+        int[][] arr = {{0, 1, 2, 3, 4}, {10, 11, 12, 13, 14}, {20, 21, 22, 23, 24}};
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
 }
 ```
 
@@ -992,46 +1015,4 @@ public class Test {
 20 21 22 23 24 
 ```
 
-
-
-## 封装成类
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		int arr1[] = { 1, 2, 3, 4, 5 };
-		int arr2[][] = { { 11, 12, 13, 14 }, { 21, 22, 23, 24 }, { 21, 22, 23, 24 } };
-		PrintArray printArray = new PrintArray();
-		printArray.print1DArray(arr1);
-		printArray.print2DArray(arr2);
-	}
-}
-
-class PrintArray {
-	public void print1DArray(int arr[]) {
-		for (int i = 0; i < arr.length; i++) {
-			System.out.print(arr[i] + " ");
-		}
-		System.out.println();
-	}
-
-	public void print2DArray(int arr[][]) {
-		for (int i = 0; i < arr.length; i++) {
-			for (int j = 0; j < arr[i].length; j++) {
-				System.out.print(arr[i][j] + " ");
-			}
-			System.out.println();
-		}
-	}
-}
-```
-
-运行结果：
-
-```
-1 2 3 4 5 
-11 12 13 14 
-21 22 23 24 
-21 22 23 24 
-```
 
