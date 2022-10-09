@@ -1165,7 +1165,7 @@ public class Test {
         l.add("abc");
         l.add("def");
         l.add("ghi");
-        String arr[] = l.toArray(new String[l.size()]);
+        String[] arr = l.toArray(new String[l.size()]);
         System.out.println(l);
         System.out.println(Arrays.toString(arr));
     }
@@ -1191,7 +1191,7 @@ import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
-        String arr[] = {"abc", "def", "ghi"};
+        String[] arr = {"abc", "def", "ghi"};
         List<String> l = Arrays.asList(arr);
         System.out.println(Arrays.toString(arr));
         System.out.println(l);

@@ -1206,3 +1206,145 @@ public class Test {
 false
 ```
 
+
+
+### split
+
+```java
+import java.util.Arrays;
+
+public class Test {
+    public static void main(String[] args) {
+        String s = "/a/b//c/";
+        String[] arr1 = s.split("/");
+        String[] arr2 = s.split("/+");
+        String[] arr3 = s.split("(?<=/)");
+        String[] arr4 = s.split("((?<=/)|(?=/))");
+        System.out.println(Arrays.toString(arr1));
+        System.out.println(Arrays.toString(arr2));
+        System.out.println(Arrays.toString(arr3));
+        System.out.println(Arrays.toString(arr4));
+    }
+}
+```
+
+运行结果：
+
+```
+[, a, b, , c]
+[, a, b, c]
+[/, a/, b/, /, c/]
+[/, a, /, b, /, /, c, /]
+```
+
+
+
+```java
+import java.util.Arrays;
+
+public class Test {
+    public static void main(String[] args) {
+        String s = "+a-b*c/d+";
+        String[] arr1 = s.split("\\+|-|\\*|/");
+        String[] arr2 = s.split("(?<=\\+|-|\\*|/)");
+        String[] arr3 = s.split("((?<=\\+|-|\\*|/)|(?=\\+|-|\\*|/))");
+        System.out.println(Arrays.toString(arr1));
+        System.out.println(Arrays.toString(arr2));
+        System.out.println(Arrays.toString(arr3));
+    }
+}
+```
+
+运行结果：
+
+```
+[, a, b, c, d]
+[+, a-, b*, c/, d+]
+[+, a, -, b, *, c, /, d, +]
+```
+
+
+
+### replace
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        String s = "/a/b//c/";
+        String r1 = s.replace("/", "+");
+        String r2 = s.replace("/", "");
+        System.out.println(r1);
+        System.out.println(r2);
+    }
+}
+```
+
+运行结果：
+
+```
++a+b++c+
+abc
+```
+
+
+
+### replaceFirst
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        String s = "/a/b//c/";
+        String r = s.replaceFirst("/", "+");
+        System.out.println(r);
+    }
+}
+```
+
+运行结果：
+
+```
++a/b//c/
+```
+
+
+
+### toCharArray
+
+```java
+import java.util.Arrays;
+
+public class Test {
+    public static void main(String[] args) {
+        String s = "abc";
+        char[] c = s.toCharArray();
+        System.out.println(Arrays.toString(c));
+    }
+}
+```
+
+运行结果：
+
+```
+[a, b, c]
+```
+
+
+
+### char[] → String
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        char[] c = {'a', 'b', 'c'};
+        String s = new String(c);
+        System.out.println(s);
+    }
+}
+```
+
+运行结果：
+
+```
+abc
+```
+
