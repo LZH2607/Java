@@ -299,7 +299,7 @@ class User {
 
 ## 打印
 
-### util.Arrays.toString
+### Arrays.toString
 
 ```java
 import java.util.Arrays;
@@ -594,7 +594,106 @@ public class Test {
 
 
 
+## 填充
+
+### Arrays.fill
+
+```java
+import java.util.Arrays;
+
+public class Test {
+    public static void main(String[] args) {
+        int[] arr = new int[5];
+        Arrays.fill(arr, 1);
+        System.out.println(Arrays.toString(arr));
+    }
+}
+```
+
+运行结果：
+
+```
+[1, 1, 1, 1, 1]
+```
+
+
+
 ## 拷贝
+
+### System.arraycopy
+
+```java
+import java.util.Arrays;
+
+public class Test {
+    public static void main(String[] args) {
+        int[] arr1 = {0, 1, 2, 3, 4};
+        int[] arr2 = new int[arr1.length];
+        System.arraycopy(arr1, 0, arr2, 0, arr1.length);
+        System.out.println(Arrays.toString(arr1));
+        System.out.println(Arrays.toString(arr2));
+    }
+}
+```
+
+运行结果：
+
+```
+[0, 1, 2, 3, 4]
+[0, 1, 2, 3, 4]
+```
+
+
+
+### Arrays.copyOf
+
+```java
+import java.util.Arrays;
+
+public class Test {
+    public static void main(String[] args) {
+        int[] arr1 = {0, 1, 2, 3, 4};
+        int[] arr2 = Arrays.copyOf(arr1, arr1.length);
+        System.out.println(Arrays.toString(arr1));
+        System.out.println(Arrays.toString(arr2));
+    }
+}
+```
+
+运行结果：
+
+```
+[0, 1, 2, 3, 4]
+[0, 1, 2, 3, 4]
+```
+
+
+
+### Arrays.copyOfRange
+
+```java
+import java.util.Arrays;
+
+public class Test {
+    public static void main(String[] args) {
+        int[] arr1 = {0, 1, 2, 3, 4};
+        int[] arr2 = Arrays.copyOfRange(arr1, 1, arr1.length - 1);
+        System.out.println(Arrays.toString(arr1));
+        System.out.println(Arrays.toString(arr2));
+    }
+}
+```
+
+运行结果：
+
+```
+[0, 1, 2, 3, 4]
+[1, 2, 3]
+```
+
+
+
+### 遍历
 
 ```java
 import java.util.Arrays;
@@ -733,6 +832,30 @@ public class Test {
 
 ## 排序
 
+### Arrays.sort
+
+```java
+import java.util.Arrays;
+
+public class Test {
+    public static void main(String[] args) {
+        int[] arr = {24, 69, 80, 57, 13};
+        System.out.println(Arrays.toString(arr));
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+}
+```
+
+运行结果：
+
+```
+[24, 69, 80, 57, 13]
+[13, 24, 57, 69, 80]
+```
+
+
+
 ### 冒泡排序
 
 ```java
@@ -763,30 +886,6 @@ class Sort {
                 break;
             }
         }
-    }
-}
-```
-
-运行结果：
-
-```
-[24, 69, 80, 57, 13]
-[13, 24, 57, 69, 80]
-```
-
-
-
-### util.Arrays.sort
-
-```java
-import java.util.Arrays;
-
-public class Test {
-    public static void main(String[] args) {
-        int[] arr = {24, 69, 80, 57, 13};
-        System.out.println(Arrays.toString(arr));
-        Arrays.sort(arr);
-        System.out.println(Arrays.toString(arr));
     }
 }
 ```
@@ -1014,5 +1113,4 @@ public class Test {
 10 11 12 13 14 
 20 21 22 23 24 
 ```
-
 
