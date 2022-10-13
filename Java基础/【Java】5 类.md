@@ -835,26 +835,259 @@ f2
 
 ### 静态代码块
 
+|   代码块   |                         执行时间                         | 执行次数 |
+| :--------: | :------------------------------------------------------: | :------: |
+| 静态代码块 | 加载类（创建对象、创建子类对象、访问静态属性、静态方法） |   1次    |
+| 普通代码块 |                  创建对象、创建子类对象                  |   多次   |
+
 ```java
 public class Test {
-	static String s;
+    public static void main(String[] args) {
+        C c1 = new C();
+        C c2 = new C();
+    }
+}
 
-	static {
-		System.out.println("Running static block...");
-		s = "This is a static string.";
-	}
+class C {
+    static {
+        System.out.println("static block");
+    }
 
-	public static void main(String[] args) {
-		System.out.println(Test.s);
-	}
+    {
+        System.out.println("block");
+    }
 }
 ```
 
 运行结果：
 
 ```
-Running static block...
-This is a static string.
+static block
+block
+block
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c1 = new C2();
+        C2 c2 = new C2();
+    }
+}
+
+class C1 {
+    static {
+        System.out.println("static block");
+    }
+
+    {
+        System.out.println("block");
+    }
+}
+
+class C2 extends C1 {
+
+}
+```
+
+运行结果：
+
+```
+static block
+block
+block
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        System.out.println(C.i);
+        C.f();
+    }
+}
+
+class C {
+    static int i = 1;
+
+    static {
+        System.out.println("static block");
+    }
+
+    {
+        System.out.println("block");
+    }
+
+    static void f() {
+        System.out.println("f");
+    }
+}
+```
+
+运行结果：
+
+```
+static block
+1
+f
+```
+
+
+
+执行顺序（优先级）：
+	① 父类：初始化静态属性、静态代码块
+	② 子类：初始化静态属性、静态代码块
+	③ 父类：初始化成员属性、普通代码块
+	④ 父类：构造器
+	⑤ 子类：初始化成员属性、普通代码块
+	⑥ 子类：构造器
+
+相关视频：
+[【零基础 快速学Java】韩顺平 零基础30天学会Java 0387\_韩顺平Java\_代码块使用细节2](https://www.bilibili.com/video/BV1fh411y7R8?p=388)
+[【零基础 快速学Java】韩顺平 零基础30天学会Java 0388\_韩顺平Java\_代码块使用细节3](https://www.bilibili.com/video/BV1fh411y7R8?p=389)
+[【零基础 快速学Java】韩顺平 零基础30天学会Java 0389\_韩顺平Java\_代码块使用细节4](https://www.bilibili.com/video/BV1fh411y7R8?p=390)
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C3 c = new C3();
+    }
+}
+
+class C1 {
+    static int s1 = 1;
+    int i1 = 11;
+
+    static {
+        System.out.println("C1: static block");
+        System.out.println("C1.s1: " + s1);
+    }
+
+    {
+        System.out.println("C1: block");
+        System.out.println("C1.i1: " + i1);
+    }
+
+    C1() {
+        System.out.println("C1: constructor");
+    }
+}
+
+class C2 extends C1 {
+    static int s2 = 2;
+    int i2 = 12;
+
+    static {
+        System.out.println("C2: static block");
+        System.out.println("C2.s2: " + s2);
+    }
+
+    {
+        System.out.println("C2: block");
+        System.out.println("C2.i2: " + i2);
+    }
+
+    C2() {
+        // super();
+        System.out.println("C2: constructor");
+    }
+}
+
+class C3 extends C2 {
+    static int s3 = 3;
+    int i3 = 13;
+
+    static {
+        System.out.println("C3: static block");
+        System.out.println("C3.s3: " + s3);
+    }
+
+    {
+        System.out.println("C3: block");
+        System.out.println("C3.i3: " + i3);
+    }
+
+    C3() {
+        // super();
+        System.out.println("C3: constructor");
+    }
+}
+```
+
+运行结果：
+
+```
+C1: static block
+C1.s1: 1
+C2: static block
+C2.s2: 2
+C3: static block
+C3.s3: 3
+C1: block
+C1.i1: 11
+C1: constructor
+C2: block
+C2.i2: 12
+C2: constructor
+C3: block
+C3.i3: 13
+C3: constructor
+```
+
+
+
+|   代码块   |                可以访问                |
+| :--------: | :------------------------------------: |
+| 静态代码块 |           静态属性、静态方法           |
+| 普通代码块 | 静态属性、静态方法、成员属性、成员方法 |
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C();
+    }
+}
+
+class C {
+    static int i1 = 1;
+    int i2 = 2;
+
+    static void f1() {
+        System.out.println("f1");
+    }
+
+    void f2() {
+        System.out.println("f2");
+    }
+
+    static {
+        // 静态代码块只能访问静态属性、静态方法
+        System.out.println("i1: " + i1);
+        f1();
+    }
+
+    {
+        // 普通代码块可以访问静态属性、静态方法、成员属性、成员方法
+        System.out.println("i1: " + i1);
+        System.out.println("i2: " + i2);
+        f1();
+        f2();
+    }
+}
+```
+
+运行结果：
+
+```
+i1: 1
+f1
+i1: 1
+i2: 2
+f1
+f2
 ```
 
 
@@ -875,6 +1108,298 @@ public class Test {
 
 ```
 3.141592653589793
+```
+
+
+
+## final关键字
+
+final修饰类：阻止继承
+final修饰方法：阻止重写（可以重载）
+final修饰属性：常量
+
+
+
+### final修饰类
+
+final修饰类：阻止继承
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2();
+    }
+}
+
+final class C1 {
+
+}
+
+class C2 extends C1 {
+
+}
+```
+
+编译错误：
+
+```
+java: 无法从最终C1进行继承
+```
+
+
+
+### final修饰方法
+
+final修饰方法：阻止重写（可以重载）
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2();
+    }
+}
+
+class C1 {
+    final void f() {
+        System.out.println("C1.f");
+    }
+}
+
+class C2 extends C1 {
+    void f() {
+        System.out.println("C2.f");
+    }
+}
+```
+
+编译错误：
+
+```
+java: C2中的f(int)无法覆盖C1中的f(int)
+  被覆盖的方法为final
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C();
+        c.f(1);
+        c.f(1.1);
+    }
+}
+
+class C {
+    final void f(int i) {
+        System.out.println(i);
+    }
+
+    final void f(double d) {
+        System.out.println(d);
+    }
+}
+```
+
+运行结果：
+
+```
+1
+1.1
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C1 c1 = new C1();
+        C2 c2 = new C2();
+        c1.f(1);
+        c2.f(1.1);
+    }
+}
+
+class C1 {
+    final void f(int i) {
+        System.out.println(i);
+    }
+}
+
+class C2 extends C1 {
+    void f(double d) {
+        System.out.println(d);
+    }
+}
+```
+
+运行结果：
+
+```
+1
+1.1
+```
+
+
+
+### final修饰属性
+
+final修饰属性：常量
+
+
+
+#### final修饰静态属性
+
+赋值final修饰的静态属性：
+	① 在定义时
+	② 在静态代码块中
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        System.out.println(C.I);
+    }
+}
+
+class C {
+    static final int I = 1;
+}
+```
+
+运行结果：
+
+```
+1
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        System.out.println(C.I);
+    }
+}
+
+class C {
+    static final int I;
+
+    static {
+        I = 1;
+    }
+}
+```
+
+运行结果：
+
+```
+1
+```
+
+
+
+#### final修饰成员属性
+
+赋值final修饰的成员属性：
+	① 在定义时
+	② 在构造器中
+	③ 在普通代码块中
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C();
+        System.out.println(c.I);
+    }
+}
+
+class C {
+    final int I = 1;
+}
+```
+
+运行结果：
+
+```
+1
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C(1);
+        System.out.println(c.I);
+    }
+}
+
+class C {
+    final int I;
+
+    C(int i) {
+        this.I = i;
+    }
+}
+```
+
+运行结果：
+
+```
+1
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C();
+        System.out.println(c.I);
+    }
+}
+
+class C {
+    final int I;
+
+    {
+        I = 1;
+    }
+}
+```
+
+运行结果：
+
+```
+1
+```
+
+
+
+#### final修饰局部变量
+
+赋值final修饰的局部变量：在定义时
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C();
+        c.f();
+    }
+}
+
+class C {
+    void f() {
+        final int I = 1;
+        System.out.println(I);
+    }
+}
+```
+
+运行结果：
+
+```
+1
 ```
 
 

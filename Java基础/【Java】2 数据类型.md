@@ -20,31 +20,10 @@
 
 
 
-|        | 默认数据类型 |
+|  数据  | 默认数据类型 |
 | :----: | :----------: |
 |  整数  |     int      |
 | 浮点数 |    double    |
-
-
-
-## 常量
-
-final
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		final double PI = 3.14;
-		System.out.println(PI);
-	}
-}
-```
-
-运行结果：
-
-```
-3.14
-```
 
 
 
