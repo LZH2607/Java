@@ -778,7 +778,30 @@ public class Test {
 
 ## 反转
 
-### 方法1
+### Collections.reverse
+
+```java
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Test {
+    public static void main(String[] args) {
+        Integer[] arr = {0, 1, 2, 3, 4};
+        Collections.reverse(Arrays.asList(arr));
+        System.out.println(Arrays.toString(arr));
+    }
+}
+```
+
+运行结果：
+
+```
+[4, 3, 2, 1, 0]
+```
+
+
+
+### 手动反转（方法1）
 
 ```java
 import java.util.Arrays;
@@ -804,7 +827,7 @@ public class Test {
 
 
 
-### 方法2
+### 手动反转（方法2）
 
 ```java
 import java.util.Arrays;

@@ -983,7 +983,7 @@ public class Test {
 
 
 
-### 倒序
+### 倒序排序
 
 #### sort
 
@@ -995,9 +995,9 @@ import java.util.List;
 public class Test {
     public static void main(String[] args) {
         List<String> l = new ArrayList<>();
-        l.add("abc");
         l.add("def");
         l.add("ghi");
+        l.add("abc");
         l.sort(Comparator.reverseOrder());
         System.out.println(l.size());
         System.out.println(l);
@@ -1022,10 +1022,76 @@ import java.util.List;
 public class Test {
     public static void main(String[] args) {
         List<Integer> l = new ArrayList<>();
+        l.add(3);
         l.add(1);
         l.add(2);
-        l.add(3);
         l.sort(Comparator.reverseOrder());
+        System.out.println(l.size());
+        System.out.println(l);
+    }
+}
+```
+
+运行结果：
+
+```
+3
+[3, 2, 1]
+```
+
+
+
+#### Collections.sort
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class Test {
+    public static void main(String[] args) {
+        List<String> l = new ArrayList<>();
+        l.add("def");
+        l.add("ghi");
+        l.add("abc");
+        Collections.sort(l, new Comparator<String>() {
+            public int compare(String s1, String s2) {
+                return s2.compareTo(s1);
+            }
+        });
+        System.out.println(l.size());
+        System.out.println(l);
+    }
+}
+```
+
+运行结果：
+
+```
+3
+[ghi, def, abc]
+```
+
+
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class Test {
+    public static void main(String[] args) {
+        List<Integer> l = new ArrayList<>();
+        l.add(3);
+        l.add(1);
+        l.add(2);
+        Collections.sort(l, new Comparator<Integer>() {
+            public int compare(Integer i1, Integer i2) {
+                return i2 - i1;
+            }
+        });
         System.out.println(l.size());
         System.out.println(l);
     }
