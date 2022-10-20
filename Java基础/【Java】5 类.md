@@ -1250,7 +1250,7 @@ final修饰属性：常量
 
 #### final修饰静态属性
 
-赋值final修饰的静态属性：
+初始化final修饰的静态属性：
 	① 在定义时
 	② 在静态代码块中
 
@@ -1300,7 +1300,7 @@ class C {
 
 #### final修饰成员属性
 
-赋值final修饰的成员属性：
+初始化final修饰的成员属性：
 	① 在定义时
 	② 在构造器中
 	③ 在普通代码块中
@@ -1378,7 +1378,7 @@ class C {
 
 #### final修饰局部变量
 
-赋值final修饰的局部变量：在定义时
+初始化final修饰的局部变量：在定义时
 
 ```java
 public class Test {
@@ -3538,5 +3538,550 @@ java Test abc def ghi
 abc
 def
 ghi
+```
+
+
+
+## abstract关键字
+
+abstract修饰类：抽象类（不能用final修饰）
+abstract修饰方法：抽象方法（不能用private、final、static修饰）
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2(1);
+        System.out.println(c.i);
+        c.f1();
+        c.f2();
+    }
+}
+
+abstract class C1 {
+    int i;
+
+    abstract void f1();
+
+    void f2() {
+        System.out.println("f2");
+    }
+
+    C1(int i) {
+        this.i = i;
+    }
+}
+
+class C2 extends C1 {
+    C2(int i) {
+        super(i);
+    }
+
+    void f1() {
+        System.out.println("f1");
+    }
+}
+```
+
+运行结果：
+
+```
+1
+f1
+f2
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C1 c1 = new C1();
+        C2 c2 = new C2();
+        c1.f2();
+        c2.f2();
+    }
+}
+
+abstract class B {
+    abstract void f1();
+
+    void f2() {
+        f1();
+    }
+}
+
+class C1 extends B {
+    void f1() {
+        System.out.println("C1");
+    }
+}
+
+class C2 extends B {
+    void f1() {
+        System.out.println("C2");
+    }
+}
+```
+
+运行结果：
+
+```
+C1
+C2
+```
+
+
+
+## 接口
+
+### 示例
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C();
+        c.f();
+    }
+}
+
+interface I {
+    void f();
+}
+
+class C implements I {
+    public void f() {
+        System.out.println("f");
+    }
+}
+```
+
+运行结果：
+
+```
+f
+```
+
+
+
+### 方法
+
+接口中的方法都是public方法
+
+JDK 7.0及以前：接口中的方法都是抽象方法（可以省略abstract关键字）
+JDK 8.0及以后：接口中的方法可以具体实现
+	静态方法：使用static关键字修饰
+	默认方法：使用default关键字修饰
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C();
+        c.f();
+        I.s();
+        c.d();
+    }
+}
+
+interface I {
+    void f();
+
+    static void s() {
+        System.out.println("s");
+    }
+
+    default void d() {
+        System.out.println("d");
+    }
+}
+
+class C implements I {
+    public void f() {
+        System.out.println("f");
+    }
+}
+```
+
+运行结果：
+
+```
+f
+s
+d
+```
+
+
+
+### 属性
+
+接口中的属性都是public static final属性：
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C();
+        System.out.println(I.i);
+        System.out.println(C.i);
+        System.out.println(c.i);
+    }
+}
+
+interface I {
+    int i = 1;
+}
+
+class C implements I {
+
+}
+```
+
+运算结果：
+
+```
+1
+1
+1
+```
+
+
+
+### 实现接口
+
+用抽象类实现接口时，可以不实现接口的抽象方法：
+
+I.java：
+
+```java
+public interface I {
+    void f1();
+
+    void f2();
+}
+```
+
+C.java：
+
+```java
+public abstract class C implements I {
+    public void func() {
+        System.out.println("func");
+    }
+}
+```
+
+
+
+一个类可以同时实现多个接口：
+
+I1.java：
+
+```java
+public interface I1 {
+    void f1();
+}
+```
+
+I2.java：
+
+```java
+public interface I2 {
+    void f2();
+}
+```
+
+C.java：
+
+```java
+public class C implements I1, I2 {
+    public void f1() {
+        System.out.println("f1");
+    }
+
+    public void f2() {
+        System.out.println("f2");
+    }
+}
+```
+
+Test.java：
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		C c = new C();
+		c.f1();
+		c.f2();
+	}
+}
+```
+
+运行结果：
+
+```
+f1
+f2
+```
+
+
+
+### 继承接口
+
+一个接口可以继承多个接口：
+
+I1.java：
+
+```java
+public interface I1 {
+    void f1();
+}
+```
+
+I2.java：
+
+```java
+public interface I2 {
+    void f2();
+}
+```
+
+I3.java：
+
+```java
+public interface I3 extends I1, I2 {
+    void f3();
+}
+```
+
+C.java：
+
+```java
+public class C implements I3 {
+    public void f1() {
+        System.out.println("f1");
+    }
+
+    public void f2() {
+        System.out.println("f2");
+    }
+
+    public void f3() {
+        System.out.println("f3");
+    }
+}
+```
+
+Test.java：
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C();
+        c.f1();
+        c.f2();
+        c.f3();
+    }
+}
+```
+
+运行结果：
+
+```
+f1
+f2
+f3
+```
+
+
+
+### 继承类、实现接口
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2();
+        c.f1();
+        c.f2();
+        c.func();
+    }
+}
+
+interface I1 {
+    void f1();
+}
+
+interface I2 {
+    void f2();
+}
+
+class C1 {
+    void func() {
+        System.out.println("func");
+    }
+}
+
+class C2 extends C1 implements I1, I2 {
+    public void f1() {
+        System.out.println("f1");
+    }
+
+    public void f2() {
+        System.out.println("f2");
+    }
+}
+```
+
+运行结果：
+
+```
+f1
+f2
+func
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2();
+        c.func();
+    }
+}
+
+interface I {
+    int i = 0;
+
+    void f();
+}
+
+class C1 {
+    int i = 1;
+
+    void f() {
+        System.out.println("C1");
+    }
+}
+
+class C2 extends C1 implements I {
+    int i = 2;
+
+    public void f() {
+        System.out.println("C2");
+    }
+
+    void func() {
+        System.out.println(I.i);
+        System.out.println(super.i);
+        System.out.println(i);
+        super.f();
+        f();
+    }
+}
+```
+
+运行结果：
+
+```
+0
+1
+2
+C1
+C2
+```
+
+
+
+### 多态
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        I1 i1 = new C();
+        I2 i2 = new C();
+        i1.f();
+        i2.f();
+    }
+}
+
+interface I1 {
+    void f();
+}
+
+interface I2 extends I1 {
+
+}
+
+class C implements I2 {
+    public void f() {
+        System.out.println("f");
+    }
+}
+```
+
+运行结果：
+
+```
+f
+f
+```
+
+
+
+I.java：
+
+```java
+public interface I {
+    void f();
+}
+```
+
+C1.java：
+
+```java
+public class C1 implements I {
+    public void f() {
+        System.out.println("C1");
+    }
+}
+```
+
+C2.java：
+
+```java
+public class C2 implements I {
+    public void f() {
+        System.out.println("C2");
+    }
+}
+```
+
+C.java：
+
+```java
+public class C {
+    public void func(I i) {
+        i.f();
+    }
+}
+```
+
+Test.java：
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C1 c1 = new C1();
+        C2 c2 = new C2();
+        C c = new C();
+        c.func(c1);
+        c.func(c2);
+    }
+}
+```
+
+运行结果：
+
+```
+C1
+C2
 ```
 

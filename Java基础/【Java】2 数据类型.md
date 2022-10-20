@@ -648,6 +648,8 @@ k
 
 
 
+### 转义字符
+
 | 转义字符 | 含义 | Unicode |
 | :------: | :--: | :-----: |
 |    \b    | 退格 | \\u0008 |
@@ -657,6 +659,36 @@ k
 |    \\'    | 单引号 | \\u0027 |
 |    \\"    | 双引号 | \\u0022 |
 | \\\ | 反斜杠 | \\u005c |
+| \0 | 空字符 | \u0000 |
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        System.out.println("aaa\bbbb");  // \b
+        System.out.println("aaa\nbbb");  // \n
+        System.out.println("aaa\rbbb");  // \r
+        System.out.println("aaa\tbbb");  // \t
+        System.out.println("aaa\'bbb");  // \'
+        System.out.println("aaa\"bbb");  // \"
+        System.out.println("aaa\\bbb");  // \\
+        System.out.println("aaa\0bbb");  // \0
+    }
+}
+```
+
+运行结果：
+
+```
+aabbb
+aaa
+bbb
+bbb
+aaa	bbb
+aaa'bbb
+aaa"bbb
+aaa\bbb
+aaa bbb
+```
 
 
 
