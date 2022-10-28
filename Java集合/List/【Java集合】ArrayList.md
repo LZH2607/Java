@@ -415,7 +415,7 @@ public class Test {
 
 
 
-## 改变元素
+## 修改元素
 
 ### set
 
@@ -859,7 +859,7 @@ public class Test {
 
 ## 排序
 
-### 自然顺序
+### 自然顺序（升序排序）
 
 #### sort
 
@@ -983,7 +983,7 @@ public class Test {
 
 
 
-### 倒序排序
+### 降序排序
 
 #### sort
 
@@ -1103,6 +1103,37 @@ public class Test {
 ```
 3
 [3, 2, 1]
+```
+
+
+
+### 倒序排序
+
+#### Collections.reverse
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Test {
+    public static void main(String[] args) {
+        List<Integer> l = new ArrayList<>();
+        l.add(3);
+        l.add(1);
+        l.add(2);
+        Collections.reverse(l);
+        System.out.println(l.size());
+        System.out.println(l);
+    }
+}
+```
+
+运行结果：
+
+```
+3
+[2, 1, 3]
 ```
 
 
