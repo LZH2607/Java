@@ -1319,6 +1319,26 @@ public class Test {
 
 
 
+### replaceAll
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        String s = "/a/b//c/";
+        String r = s.replaceAll("/", "+");
+        System.out.println(r);
+    }
+}
+```
+
+运行结果：
+
+```
++a+b++c+
+```
+
+
+
 ### toCharArray
 
 ```java

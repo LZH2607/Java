@@ -12,6 +12,8 @@
 
 封装：高内聚、低耦合
 
+类的五大成员：属性、方法、构造器、代码块、内部类
+
 
 
 ### 简单示例
@@ -687,6 +689,485 @@ Sum of 1 variable: 1
 Sum of 2 variables: 3
 Sum of 3 variables: 6
 Sum of 4 variables: 10
+```
+
+
+
+## 访问修饰符
+
+访问修饰符：private、default、protected、public
+
+|              | private | default | protected | public |
+| :----------: | :-----: | :-----: | :-------: | :----: |
+|     同类     |    √    |    √    |     √     |   √    |
+|  同包的子类  |         |    √    |     √     |   √    |
+|  同文件的类  |         |    √    |     √     |   √    |
+|   同包的类   |         |    √    |     √     |   √    |
+| 不同包的子类 |         |         |     √     |   √    |
+|  不同包的类  |         |         |           |   √    |
+
+√：可以访问
+
+
+
+### 同类
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C(1, 2, 3, 4);
+        c.func();
+    }
+}
+
+class C {
+    private int i1;
+    int i2;
+    protected int i3;
+    public int i4;
+
+    private void f1() {
+        System.out.println("f1");
+    }
+
+    void f2() {
+        System.out.println("f2");
+    }
+
+    protected void f3() {
+        System.out.println("f3");
+    }
+
+    public void f4() {
+        System.out.println("f4");
+    }
+
+    public C(int i1, int i2, int i3, int i4) {
+        this.i1 = i1;
+        this.i2 = i2;
+        this.i3 = i3;
+        this.i4 = i4;
+    }
+
+    public void func() {
+        // 同类可以访问private、default、protected、public
+        System.out.println("i1: " + i1);
+        System.out.println("i2: " + i2);
+        System.out.println("i3: " + i3);
+        System.out.println("i4: " + i4);
+        f1();
+        f2();
+        f3();
+        f4();
+    }
+}
+```
+
+运行结果：
+
+```
+i1: 1
+i2: 2
+i3: 3
+i4: 4
+f1
+f2
+f3
+f4
+```
+
+
+
+### 同包的子类
+
+p.Test.java：
+
+```java
+package p;
+
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2(1, 2, 3, 4);
+        c.func();
+    }
+}
+```
+
+p.C1.java：
+
+```java
+package p;
+
+class C1 {
+    private int i1;
+    int i2;
+    protected int i3;
+    public int i4;
+
+    private void f1() {
+        System.out.println("f1");
+    }
+
+    void f2() {
+        System.out.println("f2");
+    }
+
+    protected void f3() {
+        System.out.println("f3");
+    }
+
+    public void f4() {
+        System.out.println("f4");
+    }
+
+    public C1(int i1, int i2, int i3, int i4) {
+        this.i1 = i1;
+        this.i2 = i2;
+        this.i3 = i3;
+        this.i4 = i4;
+    }
+}
+```
+
+p.C2.java：
+
+```java
+package p;
+
+class C2 extends C1 {
+    public C2(int i1, int i2, int i3, int i4) {
+        super(i1, i2, i3, i4);
+    }
+
+    public void func() {
+        // 同包的子类可以访问父类的default、protected、public
+        System.out.println("i2: " + i2);
+        System.out.println("i3: " + i3);
+        System.out.println("i4: " + i4);
+        f2();
+        f3();
+        f4();
+    }
+}
+```
+
+运行结果：
+
+```
+i2: 2
+i3: 3
+i4: 4
+f2
+f3
+f4
+```
+
+
+
+### 同文件的类
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        // 同文件的类可以访问default、protected、public
+        C c = new C(1, 2, 3, 4);
+        System.out.println("i2: " + c.i2);
+        System.out.println("i3: " + c.i3);
+        System.out.println("i4: " + c.i4);
+        c.f2();
+        c.f3();
+        c.f4();
+    }
+}
+
+class C {
+    private int i1;
+    int i2;
+    protected int i3;
+    public int i4;
+
+    private void f1() {
+        System.out.println("f1");
+    }
+
+    void f2() {
+        System.out.println("f2");
+    }
+
+    protected void f3() {
+        System.out.println("f3");
+    }
+
+    public void f4() {
+        System.out.println("f4");
+    }
+
+    public C(int i1, int i2, int i3, int i4) {
+        this.i1 = i1;
+        this.i2 = i2;
+        this.i3 = i3;
+        this.i4 = i4;
+    }
+}
+```
+
+运行结果：
+
+```
+i2: 2
+i3: 3
+i4: 4
+f2
+f3
+f4
+```
+
+
+
+### 同包的类
+
+p.Test.java：
+
+```java
+package p;
+
+public class Test {
+    public static void main(String[] args) {
+        A a = new A();
+        a.func();
+    }
+}
+```
+
+p.C.java：
+
+```java
+package p;
+
+class C {
+    private int i1;
+    int i2;
+    protected int i3;
+    public int i4;
+
+    private void f1() {
+        System.out.println("f1");
+    }
+
+    void f2() {
+        System.out.println("f2");
+    }
+
+    protected void f3() {
+        System.out.println("f3");
+    }
+
+    public void f4() {
+        System.out.println("f4");
+    }
+
+    public C(int i1, int i2, int i3, int i4) {
+        this.i1 = i1;
+        this.i2 = i2;
+        this.i3 = i3;
+        this.i4 = i4;
+    }
+}
+```
+
+p.A.java：
+
+```java
+package p;
+
+class A {
+    public void func() {
+        // 同包的类可以访问default、protected、public
+        C c = new C(1, 2, 3, 4);
+        System.out.println("i2: " + c.i2);
+        System.out.println("i3: " + c.i3);
+        System.out.println("i4: " + c.i4);
+        c.f2();
+        c.f3();
+        c.f4();
+    }
+}
+```
+
+运行结果：
+
+```
+i2: 2
+i3: 3
+i4: 4
+f2
+f3
+f4
+```
+
+
+
+### 不同包的子类
+
+p.Test.java：
+
+```java
+package p;
+
+import a.C2;
+
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2(1, 2, 3, 4);
+        c.func();
+    }
+}
+```
+
+p.C1.java：
+
+```java
+package p;
+
+public class C1 {
+    private int i1;
+    int i2;
+    protected int i3;
+    public int i4;
+
+    private void f1() {
+        System.out.println("f1");
+    }
+
+    void f2() {
+        System.out.println("f2");
+    }
+
+    protected void f3() {
+        System.out.println("f3");
+    }
+
+    public void f4() {
+        System.out.println("f4");
+    }
+
+    public C1(int i1, int i2, int i3, int i4) {
+        this.i1 = i1;
+        this.i2 = i2;
+        this.i3 = i3;
+        this.i4 = i4;
+    }
+}
+```
+
+a.C2.java：
+
+```java
+package a;
+
+import p.C1;
+
+public class C2 extends C1 {
+    public C2(int i1, int i2, int i3, int i4) {
+        super(i1, i2, i3, i4);
+    }
+
+    public void func() {
+        // 不同包的子类只能访问父类的protected、public
+        System.out.println("i3: " + i3);
+        System.out.println("i4: " + i4);
+        f3();
+        f4();
+    }
+}
+```
+
+运行结果：
+
+```
+i3: 3
+i4: 4
+f3
+f4
+```
+
+
+
+### 不同包的类
+
+p.Test.java
+
+```java
+package p;
+
+import a.A;
+
+public class Test {
+    public static void main(String[] args) {
+        A a = new A();
+        a.func();
+    }
+}
+```
+
+p.C.java
+
+```java
+package p;
+
+public class C {
+    private int i1;
+    int i2;
+    protected int i3;
+    public int i4;
+
+    private void f1() {
+        System.out.println("f1");
+    }
+
+    void f2() {
+        System.out.println("f2");
+    }
+
+    protected void f3() {
+        System.out.println("f3");
+    }
+
+    public void f4() {
+        System.out.println("f4");
+    }
+
+    public C(int i1, int i2, int i3, int i4) {
+        this.i1 = i1;
+        this.i2 = i2;
+        this.i3 = i3;
+        this.i4 = i4;
+    }
+}
+```
+
+a.A.java
+
+```java
+package a;
+
+import p.C;
+
+public class A {
+    public void func() {
+        // 不同包的类只能访问public
+        C c = new C(1, 2, 3, 4);
+        System.out.println("i4: " + c.i4);
+        c.f4();
+    }
+}
+```
+
+运行结果：
+
+```
+i4: 4
+f4
 ```
 
 
@@ -2251,485 +2732,6 @@ i2: 2
 
 
 
-## 访问修饰符
-
-访问修饰符：private、default、protected、public
-
-|              | private | default | protected | public |
-| :----------: | :-----: | :-----: | :-------: | :----: |
-|     同类     |    √    |    √    |     √     |   √    |
-|  同包的子类  |         |    √    |     √     |   √    |
-|  同文件的类  |         |    √    |     √     |   √    |
-|   同包的类   |         |    √    |     √     |   √    |
-| 不同包的子类 |         |         |     √     |   √    |
-|  不同包的类  |         |         |           |   √    |
-
-√：可以访问
-
-
-
-### 同类
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        C c = new C(1, 2, 3, 4);
-        c.func();
-    }
-}
-
-class C {
-    private int i1;
-    int i2;
-    protected int i3;
-    public int i4;
-
-    private void f1() {
-        System.out.println("f1");
-    }
-
-    void f2() {
-        System.out.println("f2");
-    }
-
-    protected void f3() {
-        System.out.println("f3");
-    }
-
-    public void f4() {
-        System.out.println("f4");
-    }
-
-    public C(int i1, int i2, int i3, int i4) {
-        this.i1 = i1;
-        this.i2 = i2;
-        this.i3 = i3;
-        this.i4 = i4;
-    }
-
-    public void func() {
-        // 同类可以访问private、default、protected、public
-        System.out.println("i1: " + i1);
-        System.out.println("i2: " + i2);
-        System.out.println("i3: " + i3);
-        System.out.println("i4: " + i4);
-        f1();
-        f2();
-        f3();
-        f4();
-    }
-}
-```
-
-运行结果：
-
-```
-i1: 1
-i2: 2
-i3: 3
-i4: 4
-f1
-f2
-f3
-f4
-```
-
-
-
-### 同包的子类
-
-p.Test.java：
-
-```java
-package p;
-
-public class Test {
-    public static void main(String[] args) {
-        C2 c = new C2(1, 2, 3, 4);
-        c.func();
-    }
-}
-```
-
-p.C1.java：
-
-```java
-package p;
-
-class C1 {
-    private int i1;
-    int i2;
-    protected int i3;
-    public int i4;
-
-    private void f1() {
-        System.out.println("f1");
-    }
-
-    void f2() {
-        System.out.println("f2");
-    }
-
-    protected void f3() {
-        System.out.println("f3");
-    }
-
-    public void f4() {
-        System.out.println("f4");
-    }
-
-    public C1(int i1, int i2, int i3, int i4) {
-        this.i1 = i1;
-        this.i2 = i2;
-        this.i3 = i3;
-        this.i4 = i4;
-    }
-}
-```
-
-p.C2.java：
-
-```java
-package p;
-
-class C2 extends C1 {
-    public C2(int i1, int i2, int i3, int i4) {
-        super(i1, i2, i3, i4);
-    }
-
-    public void func() {
-        // 同包的子类可以访问父类的default、protected、public
-        System.out.println("i2: " + i2);
-        System.out.println("i3: " + i3);
-        System.out.println("i4: " + i4);
-        f2();
-        f3();
-        f4();
-    }
-}
-```
-
-运行结果：
-
-```
-i2: 2
-i3: 3
-i4: 4
-f2
-f3
-f4
-```
-
-
-
-### 同文件的类
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        // 同文件的类可以访问default、protected、public
-        C c = new C(1, 2, 3, 4);
-        System.out.println("i2: " + c.i2);
-        System.out.println("i3: " + c.i3);
-        System.out.println("i4: " + c.i4);
-        c.f2();
-        c.f3();
-        c.f4();
-    }
-}
-
-class C {
-    private int i1;
-    int i2;
-    protected int i3;
-    public int i4;
-
-    private void f1() {
-        System.out.println("f1");
-    }
-
-    void f2() {
-        System.out.println("f2");
-    }
-
-    protected void f3() {
-        System.out.println("f3");
-    }
-
-    public void f4() {
-        System.out.println("f4");
-    }
-
-    public C(int i1, int i2, int i3, int i4) {
-        this.i1 = i1;
-        this.i2 = i2;
-        this.i3 = i3;
-        this.i4 = i4;
-    }
-}
-```
-
-运行结果：
-
-```
-i2: 2
-i3: 3
-i4: 4
-f2
-f3
-f4
-```
-
-
-
-### 同包的类
-
-p.Test.java：
-
-```java
-package p;
-
-public class Test {
-    public static void main(String[] args) {
-        A a = new A();
-        a.func();
-    }
-}
-```
-
-p.C.java：
-
-```java
-package p;
-
-class C {
-    private int i1;
-    int i2;
-    protected int i3;
-    public int i4;
-
-    private void f1() {
-        System.out.println("f1");
-    }
-
-    void f2() {
-        System.out.println("f2");
-    }
-
-    protected void f3() {
-        System.out.println("f3");
-    }
-
-    public void f4() {
-        System.out.println("f4");
-    }
-
-    public C(int i1, int i2, int i3, int i4) {
-        this.i1 = i1;
-        this.i2 = i2;
-        this.i3 = i3;
-        this.i4 = i4;
-    }
-}
-```
-
-p.A.java：
-
-```java
-package p;
-
-class A {
-    public void func() {
-        // 同包的类可以访问default、protected、public
-        C c = new C(1, 2, 3, 4);
-        System.out.println("i2: " + c.i2);
-        System.out.println("i3: " + c.i3);
-        System.out.println("i4: " + c.i4);
-        c.f2();
-        c.f3();
-        c.f4();
-    }
-}
-```
-
-运行结果：
-
-```
-i2: 2
-i3: 3
-i4: 4
-f2
-f3
-f4
-```
-
-
-
-### 不同包的子类
-
-p.Test.java：
-
-```java
-package p;
-
-import a.C2;
-
-public class Test {
-    public static void main(String[] args) {
-        C2 c = new C2(1, 2, 3, 4);
-        c.func();
-    }
-}
-```
-
-p.C1.java：
-
-```java
-package p;
-
-public class C1 {
-    private int i1;
-    int i2;
-    protected int i3;
-    public int i4;
-
-    private void f1() {
-        System.out.println("f1");
-    }
-
-    void f2() {
-        System.out.println("f2");
-    }
-
-    protected void f3() {
-        System.out.println("f3");
-    }
-
-    public void f4() {
-        System.out.println("f4");
-    }
-
-    public C1(int i1, int i2, int i3, int i4) {
-        this.i1 = i1;
-        this.i2 = i2;
-        this.i3 = i3;
-        this.i4 = i4;
-    }
-}
-```
-
-a.C2.java：
-
-```java
-package a;
-
-import p.C1;
-
-public class C2 extends C1 {
-    public C2(int i1, int i2, int i3, int i4) {
-        super(i1, i2, i3, i4);
-    }
-
-    public void func() {
-        // 不同包的子类只能访问父类的protected、public
-        System.out.println("i3: " + i3);
-        System.out.println("i4: " + i4);
-        f3();
-        f4();
-    }
-}
-```
-
-运行结果：
-
-```
-i3: 3
-i4: 4
-f3
-f4
-```
-
-
-
-### 不同包的类
-
-p.Test.java
-
-```java
-package p;
-
-import a.A;
-
-public class Test {
-    public static void main(String[] args) {
-        A a = new A();
-        a.func();
-    }
-}
-```
-
-p.C.java
-
-```java
-package p;
-
-public class C {
-    private int i1;
-    int i2;
-    protected int i3;
-    public int i4;
-
-    private void f1() {
-        System.out.println("f1");
-    }
-
-    void f2() {
-        System.out.println("f2");
-    }
-
-    protected void f3() {
-        System.out.println("f3");
-    }
-
-    public void f4() {
-        System.out.println("f4");
-    }
-
-    public C(int i1, int i2, int i3, int i4) {
-        this.i1 = i1;
-        this.i2 = i2;
-        this.i3 = i3;
-        this.i4 = i4;
-    }
-}
-```
-
-a.A.java
-
-```java
-package a;
-
-import p.C;
-
-public class A {
-    public void func() {
-        // 不同包的类只能访问public
-        C c = new C(1, 2, 3, 4);
-        System.out.println("i4: " + c.i4);
-        c.f4();
-    }
-}
-```
-
-运行结果：
-
-```
-i4: 4
-f4
-```
-
-
-
 ## 转型
 
 转型：编译类型 ≠/= 运行类型
@@ -4084,4 +4086,670 @@ public class Test {
 C1
 C2
 ```
+
+
+
+## 内部类
+
+内部类：
+	定义在外部类的局部位置：
+		局部内部类（有类名）
+		匿名内部类（无类名）
+	定义在外部类的成员位置：
+		成员内部类（无static修饰）
+		静态内部类（有static修饰）
+
+|   外部类   | private | default | protected | public |
+| :--------: | :-----: | :-----: | :-------: | :----: |
+| 局部内部类 |    √    |    √    |     √     |   √    |
+| 匿名内部类 |    √    |    √    |     √     |   √    |
+| 成员内部类 |         |         |           |        |
+| 静态内部类 |         |         |           |        |
+
+
+
+### 局部内部类
+
+#### 访问外部类的属性、方法
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C1 c = new C1(1, 2, 3, 4);
+        c.func();
+    }
+}
+
+class C1 {
+    private int i1;
+    int i2;
+    protected int i3;
+    public int i4;
+
+    C1(int i1, int i2, int i3, int i4) {
+        this.i1 = i1;
+        this.i2 = i2;
+        this.i3 = i3;
+        this.i4 = i4;
+    }
+
+    private void f1() {
+        System.out.println("f1");
+    }
+
+    void f2() {
+        System.out.println("f2");
+    }
+
+    protected void f3() {
+        System.out.println("f3");
+    }
+
+    public void f4() {
+        System.out.println("f4");
+    }
+
+    void func() {
+        class C2 {
+            void f() {
+                // 局部内部类可以访问外部类的private、default、protected、public
+                System.out.println(i1);
+                System.out.println(i2);
+                System.out.println(i3);
+                System.out.println(i4);
+                f1();
+                f2();
+                f3();
+                f4();
+            }
+        }
+        C2 c = new C2();
+        c.f();
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+f1
+f2
+f3
+f4
+```
+
+
+
+#### 访问外部类的重名属性、方法
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C1 c = new C1();
+        c.func();
+    }
+}
+
+class C1 {
+    int i = 1;
+
+    void f() {
+        System.out.println("C1.f");
+    }
+
+    void func() {
+        class C2 {
+            int i = 2;
+
+            void f() {
+                System.out.println("C2.f");
+            }
+
+            void fun() {
+                System.out.println(C1.this.i);
+                System.out.println(i);
+                C1.this.f();
+                f();
+            }
+        }
+        C2 c = new C2();
+        c.fun();
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+C1.f
+C2.f
+```
+
+
+
+### 匿名内部类
+
+#### 基于接口的匿名内部类
+
+##### 用法一
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C();
+        c.func();
+    }
+}
+
+interface I {
+    void f();
+}
+
+class C {
+    void func() {
+        I i = new I() {
+            @Override
+            public void f() {
+                System.out.println("f");
+            }
+        };
+        i.f();
+        System.out.println(i.getClass());
+    }
+}
+```
+
+运行结果：
+
+```
+f
+class C$1
+```
+
+
+
+###### 访问外部类的属性、方法
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C(1, 2, 3, 4);
+        c.func();
+    }
+}
+
+interface I {
+    void f();
+}
+
+class C {
+    private int i1;
+    int i2;
+    protected int i3;
+    public int i4;
+
+    C(int i1, int i2, int i3, int i4) {
+        this.i1 = i1;
+        this.i2 = i2;
+        this.i3 = i3;
+        this.i4 = i4;
+    }
+
+    private void f1() {
+        System.out.println("f1");
+    }
+
+    void f2() {
+        System.out.println("f2");
+    }
+
+    protected void f3() {
+        System.out.println("f3");
+    }
+
+    public void f4() {
+        System.out.println("f4");
+    }
+
+    void func() {
+        I i = new I() {
+            @Override
+            public void f() {
+                // 基于接口的匿名内部类可以访问外部类的private、default、protected、public
+                System.out.println(i1);
+                System.out.println(i2);
+                System.out.println(i3);
+                System.out.println(i4);
+                f1();
+                f2();
+                f3();
+                f4();
+            }
+        };
+        i.f();
+        System.out.println(i.getClass());
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+f1
+f2
+f3
+f4
+class C$1
+```
+
+
+
+##### 用法二
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C();
+        c.func(new I() {
+            @Override
+            public void f() {
+                System.out.println("f");
+            }
+        });
+    }
+}
+
+interface I {
+    void f();
+}
+
+class C {
+    void func(I i) {
+        i.f();
+        System.out.println(i.getClass());
+    }
+}
+```
+
+运行结果：
+
+```
+f
+class Test$1
+```
+
+
+
+###### 访问外部类的属性、方法
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C(1, 2, 3, 4);
+        c.func(new I() {
+            @Override
+            public void f() {
+                System.out.println(c.i2);
+                System.out.println(c.i3);
+                System.out.println(c.i4);
+                c.f2();
+                c.f3();
+                c.f4();
+            }
+        });
+    }
+}
+
+interface I {
+    void f();
+}
+
+class C {
+    private int i1;
+    int i2;
+    protected int i3;
+    public int i4;
+
+    C(int i1, int i2, int i3, int i4) {
+        this.i1 = i1;
+        this.i2 = i2;
+        this.i3 = i3;
+        this.i4 = i4;
+    }
+
+    private void f1() {
+        System.out.println("f1");
+    }
+
+    void f2() {
+        System.out.println("f2");
+    }
+
+    protected void f3() {
+        System.out.println("f3");
+    }
+
+    public void f4() {
+        System.out.println("f4");
+    }
+
+    void func(I i) {
+        i.f();
+        System.out.println(i.getClass());
+    }
+}
+```
+
+运行结果：
+
+```
+2
+3
+4
+f2
+f3
+f4
+class Test$1
+```
+
+
+
+#### 基于类的匿名内部类
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2();
+        c.func();
+    }
+}
+
+class C1 {
+
+}
+
+class C2 {
+    void func() {
+        C1 c1 = new C1() {
+
+        };
+        C1 c2 = new C1();
+        System.out.println(c1.getClass());
+        System.out.println(c2.getClass());
+    }
+}
+```
+
+运行结果：
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2();
+        c.func();
+    }
+}
+
+class C1 {
+
+}
+
+class C2 {
+    void func() {
+        C1 c1 = new C1();
+        C1 c2 = new C1() {
+
+        };
+        System.out.println(c1.getClass());
+        System.out.println(c2.getClass());
+    }
+}
+```
+
+运行结果：
+
+```
+class C1
+class C2$1
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2();
+        c.func();
+    }
+}
+
+class C1 {
+    void f() {
+        System.out.println("1");
+    }
+}
+
+class C2 {
+    void func() {
+        C1 c1 = new C1();
+        C1 c2 = new C1() {
+            @Override
+            void f() {
+                System.out.println("2");
+            }
+        };
+        c1.f();
+        c2.f();
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2();
+        c.func();
+    }
+}
+
+class C1 {
+    void f() {
+        System.out.println("1");
+    }
+}
+
+class C2 {
+    void func() {
+        new C1() {
+            @Override
+            void f() {
+                System.out.println("2");
+            }
+        }.f();
+    }
+}
+```
+
+运行结果：
+
+```
+2
+```
+
+
+
+匿名内部类可以访问外部类的静态属性、静态方法、成员属性、成员方法
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2();
+        c.func();
+    }
+}
+
+class C1 {
+
+}
+
+class C2 {
+    static int i1 = 1;
+    int i2 = 2;
+
+    static void f1() {
+        System.out.println("f1");
+    }
+
+    void f2() {
+        System.out.println("f2");
+    }
+
+    void func() {
+        new C1() {
+            void f() {  // 匿名内部类可以访问外部类的静态属性、静态方法、成员属性、成员方法
+                System.out.println(i1);
+                System.out.println(i2);
+                f1();
+                f2();
+            }
+        }.f();
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+f1
+f2
+```
+
+
+
+匿名内部类访问外部类的重名属性、方法：
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2();
+        c.func();
+    }
+}
+
+class C1 {
+
+}
+
+class C2 {
+    int i = 2;
+
+    void f() {
+        System.out.println("C2.f");
+    }
+
+    void func() {
+        new C1() {
+            int i = 1;
+
+            void f() {
+                System.out.println("C1.f");
+            }
+
+            void fun() {
+                System.out.println(i);
+                System.out.println(C2.this.i);
+                f();
+                C2.this.f();
+            }
+        }.fun();
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+C1.f
+C2.f
+```
+
+
+
+### 成员内部类
+
+成员内部类可以访问外部类的静态属性、静态方法、成员属性、成员方法
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C1 c = new C1();
+        c.func();
+    }
+}
+
+class C1 {
+    static int i1 = 1;
+    int i2 = 2;
+
+    static void f1() {
+        System.out.println("f1");
+    }
+
+    void f2() {
+        System.out.println("f2");
+    }
+
+    class C2 {
+        void f() {  // 成员内部类可以访问外部类的静态属性、静态方法、成员属性、成员方法
+            System.out.println(i1);
+            System.out.println(i2);
+            f1();
+            f2();
+        }
+    }
+
+    void func() {
+        C2 c = new C2();
+        c.f();
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+f1
+f2
+```
+
+
+
+### 静态内部类
+
+
 
