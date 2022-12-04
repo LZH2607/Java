@@ -4092,80 +4092,111 @@ C2
 ## 内部类
 
 内部类：
-	定义在外部类的局部位置：
-		局部内部类（有类名）
-		匿名内部类（无类名）
-	定义在外部类的成员位置：
-		成员内部类（无static修饰）
-		静态内部类（有static修饰）
+    定义在外部类的局部位置：
+        局部内部类（有类名）
+        匿名内部类（无类名）
+    定义在外部类的成员位置：
+        成员内部类（无static修饰）
+        静态内部类（有static修饰）
 
-|   外部类   | private | default | protected | public |
+|   外部类   | private | default | protected | public |
 | :--------: | :-----: | :-----: | :-------: | :----: |
-| 局部内部类 |    √    |    √    |     √     |   √    |
-| 匿名内部类 |    √    |    √    |     √     |   √    |
-| 成员内部类 |         |         |           |        |
-| 静态内部类 |         |         |           |        |
+| 局部内部类 |    √    |    √    |     √     |   √    |
+| 匿名内部类 |    √    |    √    |     √     |   √    |
+| 成员内部类 |    √    |    √    |     √     |   √    |
+| 静态内部类 |         |         |           |        |
 
 
 
 ### 局部内部类
 
+```java
+public class Test {
+    public static void main(String[] args) {
+        C1 c = new C1();
+        c.func();
+    }
+}
+
+class C1 {
+    void func() {
+        class C2 {
+            void f() {
+                System.out.println("f");
+            }
+        }
+        C2 c = new C2();
+        c.f();
+        System.out.println(c.getClass());
+    }
+}
+```
+
+运行结果：
+
+```
+f
+class C1$1C2
+```
+
+
+
 #### 访问外部类的属性、方法
 
 ```java
 public class Test {
-    public static void main(String[] args) {
-        C1 c = new C1(1, 2, 3, 4);
-        c.func();
-    }
+    public static void main(String[] args) {
+        C1 c = new C1(1, 2, 3, 4);
+        c.func();
+    }
 }
 
 class C1 {
-    private int i1;
-    int i2;
-    protected int i3;
-    public int i4;
+    private int i1;
+    int i2;
+    protected int i3;
+    public int i4;
 
-    C1(int i1, int i2, int i3, int i4) {
-        this.i1 = i1;
-        this.i2 = i2;
-        this.i3 = i3;
-        this.i4 = i4;
-    }
+    C1(int i1, int i2, int i3, int i4) {
+        this.i1 = i1;
+        this.i2 = i2;
+        this.i3 = i3;
+        this.i4 = i4;
+    }
 
-    private void f1() {
-        System.out.println("f1");
-    }
+    private void f1() {
+        System.out.println("f1");
+    }
 
-    void f2() {
-        System.out.println("f2");
-    }
+    void f2() {
+        System.out.println("f2");
+    }
 
-    protected void f3() {
-        System.out.println("f3");
-    }
+    protected void f3() {
+        System.out.println("f3");
+    }
 
-    public void f4() {
-        System.out.println("f4");
-    }
+    public void f4() {
+        System.out.println("f4");
+    }
 
-    void func() {
-        class C2 {
-            void f() {
-                // 局部内部类可以访问外部类的private、default、protected、public
-                System.out.println(i1);
-                System.out.println(i2);
-                System.out.println(i3);
-                System.out.println(i4);
-                f1();
-                f2();
-                f3();
-                f4();
-            }
-        }
-        C2 c = new C2();
-        c.f();
-    }
+    void func() {
+        class C2 {
+            void f() {
+                // 局部内部类可以访问外部类的private、default、protected、public
+                System.out.println(i1);
+                System.out.println(i2);
+                System.out.println(i3);
+                System.out.println(i4);
+                f1();
+                f2();
+                f3();
+                f4();
+            }
+        }
+        C2 c = new C2();
+        c.f();
+    }
 }
 ```
 
@@ -4188,37 +4219,37 @@ f4
 
 ```java
 public class Test {
-    public static void main(String[] args) {
-        C1 c = new C1();
-        c.func();
-    }
+    public static void main(String[] args) {
+        C1 c = new C1();
+        c.func();
+    }
 }
 
 class C1 {
-    int i = 1;
+    int i = 1;
 
-    void f() {
-        System.out.println("C1.f");
-    }
+    void f() {
+        System.out.println("C1.f");
+    }
 
-    void func() {
-        class C2 {
-            int i = 2;
+    void func() {
+        class C2 {
+            int i = 2;
 
-            void f() {
-                System.out.println("C2.f");
-            }
+            void f() {
+                System.out.println("C2.f");
+            }
 
-            void fun() {
-                System.out.println(C1.this.i);
-                System.out.println(i);
-                C1.this.f();
-                f();
-            }
-        }
-        C2 c = new C2();
-        c.fun();
-    }
+            void fun() {
+                System.out.println(C1.this.i);
+                System.out.println(i);
+                C1.this.f();
+                f();
+            }
+        }
+        C2 c = new C2();
+        c.fun();
+    }
 }
 ```
 
@@ -4241,27 +4272,29 @@ C2.f
 
 ```java
 public class Test {
-    public static void main(String[] args) {
-        C c = new C();
-        c.func();
-    }
+    public static void main(String[] args) {
+        C c = new C();
+        c.func();
+    }
 }
 
 interface I {
-    void f();
+    void f();
 }
 
 class C {
-    void func() {
-        I i = new I() {
-            @Override
-            public void f() {
-                System.out.println("f");
-            }
-        };
-        i.f();
-        System.out.println(i.getClass());
-    }
+    void func() {
+        // i的编译类型：interface I
+        // i的运行类型：class C$1
+        I i = new I() {
+            @Override
+            public void f() {
+                System.out.println("f");
+            }
+        };
+        i.f();
+        System.out.println(i.getClass());
+    }
 }
 ```
 
@@ -4278,63 +4311,62 @@ class C$1
 
 ```java
 public class Test {
-    public static void main(String[] args) {
-        C c = new C(1, 2, 3, 4);
-        c.func();
-    }
+    public static void main(String[] args) {
+        C c = new C(1, 2, 3, 4);
+        c.func();
+    }
 }
 
 interface I {
-    void f();
+    void f();
 }
 
 class C {
-    private int i1;
-    int i2;
-    protected int i3;
-    public int i4;
+    private int i1;
+    int i2;
+    protected int i3;
+    public int i4;
 
-    C(int i1, int i2, int i3, int i4) {
-        this.i1 = i1;
-        this.i2 = i2;
-        this.i3 = i3;
-        this.i4 = i4;
-    }
+    C(int i1, int i2, int i3, int i4) {
+        this.i1 = i1;
+        this.i2 = i2;
+        this.i3 = i3;
+        this.i4 = i4;
+    }
 
-    private void f1() {
-        System.out.println("f1");
-    }
+    private void f1() {
+        System.out.println("f1");
+    }
 
-    void f2() {
-        System.out.println("f2");
-    }
+    void f2() {
+        System.out.println("f2");
+    }
 
-    protected void f3() {
-        System.out.println("f3");
-    }
+    protected void f3() {
+        System.out.println("f3");
+    }
 
-    public void f4() {
-        System.out.println("f4");
-    }
+    public void f4() {
+        System.out.println("f4");
+    }
 
-    void func() {
-        I i = new I() {
-            @Override
-            public void f() {
-                // 基于接口的匿名内部类可以访问外部类的private、default、protected、public
-                System.out.println(i1);
-                System.out.println(i2);
-                System.out.println(i3);
-                System.out.println(i4);
-                f1();
-                f2();
-                f3();
-                f4();
-            }
-        };
-        i.f();
-        System.out.println(i.getClass());
-    }
+    void func() {
+        I i = new I() {
+            @Override
+            public void f() {
+                // 基于接口的匿名内部类可以访问外部类的private、default、protected、public
+                System.out.println(i1);
+                System.out.println(i2);
+                System.out.println(i3);
+                System.out.println(i4);
+                f1();
+                f2();
+                f3();
+                f4();
+            }
+        };
+        i.f();
+    }
 }
 ```
 
@@ -4349,7 +4381,62 @@ f1
 f2
 f3
 f4
-class C$1
+```
+
+
+
+###### 访问外部类的重名属性、方法
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C();
+        c.func();
+    }
+}
+
+interface I {
+    void f();
+
+    void fun();
+}
+
+class C {
+    int i = 2;
+
+    void f() {
+        System.out.println("C.f");
+    }
+
+    void func() {
+        I i = new I() {
+            int i = 1;
+
+            @Override
+            public void f() {
+                System.out.println("I.f");
+            }
+
+            @Override
+            public void fun() {
+                System.out.println(C.this.i);
+                System.out.println(i);
+                C.this.f();
+                f();
+            }
+        };
+        i.fun();
+    }
+}
+```
+
+运行结果：
+
+```
+2
+1
+C.f
+I.f
 ```
 
 
@@ -4358,26 +4445,26 @@ class C$1
 
 ```java
 public class Test {
-    public static void main(String[] args) {
-        C c = new C();
-        c.func(new I() {
-            @Override
-            public void f() {
-                System.out.println("f");
-            }
-        });
-    }
+    public static void main(String[] args) {
+        C c = new C();
+        c.func(new I() {
+            @Override
+            public void f() {
+                System.out.println("f");
+            }
+        });
+    }
 }
 
 interface I {
-    void f();
+    void f();
 }
 
 class C {
-    void func(I i) {
-        i.f();
-        System.out.println(i.getClass());
-    }
+    void func(I i) {
+        i.f();
+        System.out.println(i.getClass());
+    }
 }
 ```
 
@@ -4394,59 +4481,134 @@ class Test$1
 
 ```java
 public class Test {
-    public static void main(String[] args) {
-        C c = new C(1, 2, 3, 4);
-        c.func(new I() {
-            @Override
-            public void f() {
-                System.out.println(c.i2);
-                System.out.println(c.i3);
-                System.out.println(c.i4);
-                c.f2();
-                c.f3();
-                c.f4();
-            }
-        });
-    }
+    public static void main(String[] args) {
+        C2 c = new C2(1, 2, 3, 4);
+        c.func();
+    }
 }
 
 interface I {
-    void f();
+    void f();
 }
 
-class C {
-    private int i1;
-    int i2;
-    protected int i3;
-    public int i4;
+class C1 {
+    void fun(I i) {
+        i.f();
+    }
+}
 
-    C(int i1, int i2, int i3, int i4) {
-        this.i1 = i1;
-        this.i2 = i2;
-        this.i3 = i3;
-        this.i4 = i4;
-    }
+class C2 {
+    private int i1;
+    int i2;
+    protected int i3;
+    public int i4;
 
-    private void f1() {
-        System.out.println("f1");
-    }
+    C2(int i1, int i2, int i3, int i4) {
+        this.i1 = i1;
+        this.i2 = i2;
+        this.i3 = i3;
+        this.i4 = i4;
+    }
 
-    void f2() {
-        System.out.println("f2");
-    }
+    private void f1() {
+        System.out.println("f1");
+    }
 
-    protected void f3() {
-        System.out.println("f3");
-    }
+    void f2() {
+        System.out.println("f2");
+    }
 
-    public void f4() {
-        System.out.println("f4");
-    }
+    protected void f3() {
+        System.out.println("f3");
+    }
 
-    void func(I i) {
-        i.f();
-        System.out.println(i.getClass());
-    }
+    public void f4() {
+        System.out.println("f4");
+    }
+
+    void func() {
+        C1 c = new C1();
+        c.fun(new I() {
+            @Override
+            public void f() {
+                // 基于接口的匿名内部类可以访问外部类的private、default、protected、public
+                System.out.println(i1);
+                System.out.println(i2);
+                System.out.println(i3);
+                System.out.println(i4);
+                f1();
+                f2();
+                f3();
+                f4();
+            }
+        });
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+f1
+f2
+f3
+f4
+```
+
+
+
+###### 访问外部类的重名属性、方法
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2();
+        c.func();
+    }
+}
+
+interface I {
+    void f();
+
+    void fun();
+}
+
+class C1 {
+    void m(I i) {
+        i.fun();
+    }
+}
+
+class C2 {
+    int i = 2;
+
+    void f() {
+        System.out.println("C2.f");
+    }
+
+    void func() {
+        C1 c = new C1();
+        c.m(new I() {
+            int i = 1;
+
+            @Override
+            public void f() {
+                System.out.println("I.f");
+            }
+
+            @Override
+            public void fun() {
+                System.out.println(C2.this.i);
+                System.out.println(i);
+                C2.this.f();
+                f();
+            }
+        });
+    }
 }
 ```
 
@@ -4454,12 +4616,9 @@ class C {
 
 ```
 2
-3
-4
-f2
-f3
-f4
-class Test$1
+1
+C2.f
+I.f
 ```
 
 
@@ -4468,10 +4627,10 @@ class Test$1
 
 ```java
 public class Test {
-    public static void main(String[] args) {
-        C2 c = new C2();
-        c.func();
-    }
+    public static void main(String[] args) {
+        C2 c = new C2();
+        c.func();
+    }
 }
 
 class C1 {
@@ -4479,40 +4638,14 @@ class C1 {
 }
 
 class C2 {
-    void func() {
-        C1 c1 = new C1() {
+    void func() {
+        C1 c1 = new C1();
+        C1 c2 = new C1() {
 
-        };
-        C1 c2 = new C1();
-        System.out.println(c1.getClass());
-        System.out.println(c2.getClass());
-    }
-}
-```
-
-运行结果：
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        C2 c = new C2();
-        c.func();
-    }
-}
-
-class C1 {
-
-}
-
-class C2 {
-    void func() {
-        C1 c1 = new C1();
-        C1 c2 = new C1() {
-
-        };
-        System.out.println(c1.getClass());
-        System.out.println(c2.getClass());
-    }
+        };
+        System.out.println(c1.getClass());
+        System.out.println(c2.getClass());
+    }
 }
 ```
 
@@ -4525,32 +4658,34 @@ class C2$1
 
 
 
+##### 用法一
+
 ```java
 public class Test {
-    public static void main(String[] args) {
-        C2 c = new C2();
-        c.func();
-    }
+    public static void main(String[] args) {
+        C2 c = new C2();
+        c.func();
+    }
 }
 
 class C1 {
-    void f() {
-        System.out.println("1");
-    }
+    void f() {
+        System.out.println("1");
+    }
 }
 
 class C2 {
-    void func() {
-        C1 c1 = new C1();
-        C1 c2 = new C1() {
-            @Override
-            void f() {
-                System.out.println("2");
-            }
-        };
-        c1.f();
-        c2.f();
-    }
+    void func() {
+        C1 c1 = new C1();
+        C1 c2 = new C1() {
+            @Override
+            void f() {
+                System.out.println("2");
+            }
+        };
+        c1.f();
+        c2.f();
+    }
 }
 ```
 
@@ -4563,76 +4698,67 @@ class C2 {
 
 
 
-```java
-public class Test {
-    public static void main(String[] args) {
-        C2 c = new C2();
-        c.func();
-    }
-}
-
-class C1 {
-    void f() {
-        System.out.println("1");
-    }
-}
-
-class C2 {
-    void func() {
-        new C1() {
-            @Override
-            void f() {
-                System.out.println("2");
-            }
-        }.f();
-    }
-}
-```
-
-运行结果：
-
-```
-2
-```
-
-
-
-匿名内部类可以访问外部类的静态属性、静态方法、成员属性、成员方法
+###### 访问外部类的属性、方法
 
 ```java
 public class Test {
-    public static void main(String[] args) {
-        C2 c = new C2();
-        c.func();
-    }
+    public static void main(String[] args) {
+        C2 c = new C2(1, 2, 3, 4);
+        c.func();
+    }
 }
 
 class C1 {
+    void f() {
 
+    }
 }
 
 class C2 {
-    static int i1 = 1;
-    int i2 = 2;
+    private int i1;
+    int i2;
+    protected int i3;
+    private int i4;
 
-    static void f1() {
-        System.out.println("f1");
-    }
+    public C2(int i1, int i2, int i3, int i4) {
+        this.i1 = i1;
+        this.i2 = i2;
+        this.i3 = i3;
+        this.i4 = i4;
+    }
 
-    void f2() {
-        System.out.println("f2");
-    }
+    private void f1() {
+        System.out.println("f1");
+    }
 
-    void func() {
-        new C1() {
-            void f() {  // 匿名内部类可以访问外部类的静态属性、静态方法、成员属性、成员方法
-                System.out.println(i1);
-                System.out.println(i2);
-                f1();
-                f2();
-            }
-        }.f();
-    }
+    void f2() {
+        System.out.println("f2");
+    }
+
+    protected void f3() {
+        System.out.println("f3");
+    }
+
+    private void f4() {
+        System.out.println("f4");
+    }
+
+    void func() {
+        C1 c = new C1() {
+            @Override
+            void f() {
+                System.out.println(i1);
+                System.out.println(i2);
+                System.out.println(i3);
+                System.out.println(i4);
+                f1();
+                f2();
+                f3();
+                f4();
+            }
+        };
+        c.f();
+    }
 }
 ```
 
@@ -4641,20 +4767,193 @@ class C2 {
 ```
 1
 2
+3
+4
 f1
 f2
+f3
+f4
 ```
 
 
 
-匿名内部类访问外部类的重名属性、方法：
+###### 访问外部类的重名属性、方法
 
 ```java
 public class Test {
-    public static void main(String[] args) {
-        C2 c = new C2();
-        c.func();
-    }
+    public static void main(String[] args) {
+        C2 c = new C2();
+        c.func();
+    }
+}
+
+class C1 {
+    void fun() {
+
+    }
+}
+
+class C2 {
+    int i = 2;
+
+    void f() {
+        System.out.println("C2.f");
+    }
+
+    void func() {
+        C1 c = new C1() {
+            int i = 1;
+
+            void f() {
+                System.out.println("C1.f");
+            }
+
+            @Override
+            void fun() {
+                System.out.println(C2.this.i);
+                System.out.println(i);
+                C2.this.f();
+                f();
+            }
+        };
+        c.fun();
+    }
+}
+```
+
+运行结果：
+
+```
+2
+1
+C2.f
+C1.f
+```
+
+
+
+##### 用法二
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2();
+        c.func();
+    }
+}
+
+class C1 {
+    void f() {
+        System.out.println("1");
+    }
+}
+
+class C2 {
+    void func() {
+        new C1() {
+            @Override
+            void f() {
+                System.out.println("2");
+            }
+        }.f();
+    }
+}
+```
+
+运行结果：
+
+```
+2
+```
+
+
+
+###### 访问外部类的属性、方法
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2(1, 2, 3, 4);
+        c.func();
+    }
+}
+
+class C1 {
+    void f() {
+
+    }
+}
+
+class C2 {
+    private int i1;
+    int i2;
+    protected int i3;
+    private int i4;
+
+    public C2(int i1, int i2, int i3, int i4) {
+        this.i1 = i1;
+        this.i2 = i2;
+        this.i3 = i3;
+        this.i4 = i4;
+    }
+
+    private void f1() {
+        System.out.println("f1");
+    }
+
+    void f2() {
+        System.out.println("f2");
+    }
+
+    protected void f3() {
+        System.out.println("f3");
+    }
+
+    private void f4() {
+        System.out.println("f4");
+    }
+
+    void func() {
+        new C1() {
+            @Override
+            void f() {
+                System.out.println(i1);
+                System.out.println(i2);
+                System.out.println(i3);
+                System.out.println(i4);
+                f1();
+                f2();
+                f3();
+                f4();
+            }
+        }.f();
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+f1
+f2
+f3
+f4
+```
+
+
+
+###### 访问外部类的重名属性、方法
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2();
+        c.func();
+    }
 }
 
 class C1 {
@@ -4662,28 +4961,28 @@ class C1 {
 }
 
 class C2 {
-    int i = 2;
+    int i = 2;
 
-    void f() {
-        System.out.println("C2.f");
-    }
+    void f() {
+        System.out.println("C2.f");
+    }
 
-    void func() {
-        new C1() {
-            int i = 1;
+    void func() {
+        new C1() {
+            int i = 1;
 
-            void f() {
-                System.out.println("C1.f");
-            }
+            void f() {
+                System.out.println("C1.f");
+            }
 
-            void fun() {
-                System.out.println(i);
-                System.out.println(C2.this.i);
-                f();
-                C2.this.f();
-            }
-        }.fun();
-    }
+            void fun() {
+                System.out.println(i);
+                System.out.println(C2.this.i);
+                f();
+                C2.this.f();
+            }
+        }.fun();
+    }
 }
 ```
 
@@ -4700,41 +4999,98 @@ C2.f
 
 ### 成员内部类
 
-成员内部类可以访问外部类的静态属性、静态方法、成员属性、成员方法
-
 ```java
 public class Test {
-    public static void main(String[] args) {
-        C1 c = new C1();
-        c.func();
-    }
+    public static void main(String[] args) {
+        C1 c = new C1();
+        c.func();
+    }
 }
 
 class C1 {
-    static int i1 = 1;
-    int i2 = 2;
+    void f() {
+        System.out.println("C1.f");
+    }
 
-    static void f1() {
-        System.out.println("f1");
-    }
+    class C2 {
+        void f() {
+            System.out.println("C2.f");
+        }
+    }
 
-    void f2() {
-        System.out.println("f2");
-    }
+    void func() {
+        C2 c = new C2();
+        f();
+        c.f();
+    }
+}
+```
 
-    class C2 {
-        void f() {  // 成员内部类可以访问外部类的静态属性、静态方法、成员属性、成员方法
-            System.out.println(i1);
-            System.out.println(i2);
-            f1();
-            f2();
-        }
-    }
+运行结果：
 
-    void func() {
-        C2 c = new C2();
-        c.f();
-    }
+```
+C1.f
+C2.f
+```
+
+
+
+#### 访问外部类的属性、方法
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C1 c = new C1(1, 2, 3, 4);
+        c.func();
+    }
+}
+
+class C1 {
+    private int i1;
+    int i2;
+    protected int i3;
+    public int i4;
+
+    public C1(int i1, int i2, int i3, int i4) {
+        this.i1 = i1;
+        this.i2 = i2;
+        this.i3 = i3;
+        this.i4 = i4;
+    }
+
+    private void f1() {
+        System.out.println("f1");
+    }
+
+    void f2() {
+        System.out.println("f2");
+    }
+
+    protected void f3() {
+        System.out.println("f3");
+    }
+
+    public void f4() {
+        System.out.println("f4");
+    }
+
+    class C2 {
+        void f() {
+            System.out.println(i1);
+            System.out.println(i2);
+            System.out.println(i3);
+            System.out.println(i4);
+            f1();
+            f2();
+            f3();
+            f4();
+        }
+    }
+
+    void func() {
+        C2 c = new C2();
+        c.f();
+    }
 }
 ```
 
@@ -4743,13 +5099,65 @@ class C1 {
 ```
 1
 2
+3
+4
 f1
 f2
+f3
+f4
+```
+
+
+
+#### 访问外部类的重名属性、方法
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C1 c = new C1();
+        c.func();
+    }
+}
+
+class C1 {
+    int i = 1;
+
+    void f() {
+        System.out.println("C1.f");
+    }
+
+    class C2 {
+        int i = 2;
+
+        void f() {
+            System.out.println("C2.f");
+        }
+
+        void fun() {
+            System.out.println(C1.this.i);
+            System.out.println(i);
+            C1.this.f();
+            f();
+        }
+    }
+
+    void func() {
+        C2 c = new C2();
+        c.fun();
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+C1.f
+C2.f
 ```
 
 
 
 ### 静态内部类
-
-
 
