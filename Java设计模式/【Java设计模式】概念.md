@@ -13,43 +13,16 @@
 
 ## 设计模式
 
-软件设计模式 / 设计模式
+软件设计模式/设计模式
 
 1995年：
 	《设计模式：可复用面向对象软件的基础》（Design Patterns: Elements of Reusable Object-Oriented Software）
 	GoF（Gang of Four，四人组）：Erich Gamma、Richard Helm、Ralph Johnson、John Vlissides
 
-
-
-## 分类
-
-设计模式（23种）：
-	创建者模式（5种）：
-		单例模式
-		原型模式
-		工厂方法模式
-		抽象工厂模式
-		建造者模式
-	结构型模式（7种）：
-		代理模式
-		适配器模式
-		桥接模式
-		装饰模式
-		外观模式
-		享元模式
-		组合模式
-	行为型模式（11种）：
-		模板方法模式
-		策略模式
-		命令模式
-		职责链模式
-		状态模式
-		观察者模式
-		中介者模式
-		迭代器模式
-		访问者模式
-		备忘录模式
-		解释器模式
+设计模式（Design pattern）：23种
+	创建者模式（Creational pattern）：5种
+	结构型模式（Structural pattern）：7种
+	行为型模式（Behavioral pattern）：11种
 
 
 

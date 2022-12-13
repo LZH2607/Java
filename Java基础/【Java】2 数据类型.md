@@ -1339,6 +1339,42 @@ public class Test {
 
 
 
+```java
+public class Test {
+    public static void main(String[] args) {
+        String s = "ABC/abc/123";
+        String r = s.replaceAll("[A-Za-z0-9]", "+");
+        System.out.println(r);
+    }
+}
+```
+
+运行结果：
+
+```
++++/+++/+++
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        String s = "ABC/abc/123";
+        String r = s.replaceAll("[^A-Za-z0-9]", "+");
+        System.out.println(r);
+    }
+}
+```
+
+运行结果：
+
+```
+ABC+abc+123
+```
+
+
+
 ### toCharArray
 
 ```java
@@ -1377,5 +1413,45 @@ public class Test {
 
 ```
 abc
+```
+
+
+
+### toLowerCase
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        String s = "ABCdef";
+        String r = s.toLowerCase();
+        System.out.println(r);
+    }
+}
+```
+
+运行结果：
+
+```
+abcdef
+```
+
+
+
+### toUpperCase
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        String s = "ABCdef";
+        String r = s.toUpperCase();
+        System.out.println(r);
+    }
+}
+```
+
+运行结果：
+
+```
+ABCDEF
 ```
 

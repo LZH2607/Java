@@ -1,0 +1,201 @@
+# 【Java设计模式】创建者模式
+
+
+
+[toc]
+
+
+
+## 创建者模式
+
+创建者模式（Creational pattern）：5种
+	单例模式（Singleton pattern）
+	工厂方法模式
+	抽象工厂模式
+	原型模式
+	建造者模式
+
+
+
+## 单例模式
+
+角色：
+	单例类：创建一个实例
+	访问类：使用单例类
+
+单例模式：饿汉式、懒汉式
+
+|          | 饿汉式 |  懒汉式  |
+| :------: | :----: | :------: |
+| 创建实例 | 加载类 | 首次使用 |
+| 内存浪费 |   √    |    ×     |
+
+
+
+### 饿汉式
+
+#### 方式一：静态变量
+
+```java
+public class Singleton {
+    private static Singleton instance = new Singleton();
+
+    private Singleton() {
+    }
+
+    public static Singleton getInstance() {
+        return instance;
+    }
+}
+```
+
+
+
+#### 方式二：静态代码块
+
+```java
+public class Singleton {
+    private static Singleton instance;
+
+    static {
+        instance = new Singleton();
+    }
+
+    private Singleton() {
+    }
+
+    public static Singleton getInstance() {
+        return instance;
+    }
+}
+```
+
+
+
+#### 方式三：枚举方式（推荐）
+
+线程安全
+只装载一次
+唯一一种不会被破坏的单例模式的实现方式
+
+```java
+public enum Singleton {
+    INSTANCE;
+}
+```
+
+
+
+### 懒汉式
+
+#### 方式一（1）：无synchronized关键字（线程不安全）
+
+```java
+public class Singleton {
+    private static Singleton instance;
+
+    private Singleton() {
+    }
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+```
+
+
+
+#### 方式一（2）：有synchronized关键字（线程安全）
+
+```java
+public class Singleton {
+    private static Singleton instance;
+
+    private Singleton() {
+    }
+
+    public static synchronized Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+}
+```
+
+
+
+#### 方式二（1）：双重检查锁（线程安全、有空指针问题）
+
+```java
+public class Singleton {
+    private static Singleton instance;
+
+    private Singleton() {
+    }
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            synchronized (Singleton.class) {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+```
+
+空指针问题
+	原因：JVM（优化、指令重排序）
+	解决：volatile关键字
+
+
+
+#### 方式二（2）：双重检查锁（线程安全、无空指针问题）
+
+```java
+public class Singleton {
+    private static volatile Singleton instance;
+
+    private Singleton() {
+    }
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            synchronized (Singleton.class) {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+```
+
+
+
+#### 方式三：静态内部类（线程安全）
+
+```java
+public class Singleton {
+    private static class SingletonHolder {
+        private static final Singleton INSTANCE = new Singleton();
+    }
+
+    private Singleton() {
+    }
+
+    public static Singleton getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
+}
+```
+
+
+
