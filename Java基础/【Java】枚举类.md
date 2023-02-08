@@ -147,6 +147,41 @@ final class E extends java.lang.Enum<E> {
 
 ### 使用无参构造器
 
+```java
+public class Test {
+    public static void main(String[] args) {
+        E e1 = E.E1;
+        E e2 = E.E2;
+        E e3 = E.E3;
+        System.out.println(e1);
+        System.out.println(e2);
+        System.out.println(e3);
+    }
+}
+
+enum E {
+    E1(), E2(), E3();
+
+    private E() {
+    }
+
+    @Override
+    public String toString() {
+        return "E{}";
+    }
+}
+```
+
+运行结果：
+
+```
+E{}
+E{}
+E{}
+```
+
+
+
 可省略括号
 
 ```java
@@ -207,6 +242,30 @@ enum E {
 E1
 E2
 E3
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        Gender boy = Gender.BOY;
+        Gender girl = Gender.GIRL;
+        System.out.println(boy);
+        System.out.println(girl);
+    }
+}
+
+enum Gender {
+    BOY, GIRL;
+}
+```
+
+运行结果：
+
+```
+BOY
+GIRL
 ```
 
 

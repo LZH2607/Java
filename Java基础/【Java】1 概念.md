@@ -7,13 +7,13 @@
 Java文档：
 英文版：[Java™ Platform, Standard Edition 8](https://docs.oracle.com/javase/8/docs/api/)
 中文版：[Java™ Platform, Standard Edition 8](https://www.matools.com/api/java8)
-![](D:\Notes\Java\Java基础\img\Java类的组织形式.png)
+![](img/Java类的组织形式.png)
 
 相关视频：
 [【零基础 快速学Java】韩顺平 零基础30天学会Java](https://www.bilibili.com/video/BV1fh411y7R8)
 
 [Oracle Java SE Support Roadmap](https://www.oracle.com/java/technologies/java-se-support-roadmap.html)
-![](D:\Notes\Java\Java基础\img\Oracle Java SE Support Roadmap.png)
+![](img/Oracle Java SE Support Roadmap.png)
 
 发明者：James Gosling（Oak）
 Sun：Java 1（1995年）
