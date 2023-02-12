@@ -429,3 +429,181 @@ enum E {
 [E{S='E1', I=1}, E{S='E2', I=2}, E{S='E3', I=3}]
 ```
 
+
+
+### valueOf
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        E e1 = E.valueOf("E1");
+        E e2 = E.valueOf("E2");
+        E e3 = E.valueOf("E3");
+        System.out.println(e1);
+        System.out.println(e2);
+        System.out.println(e3);
+    }
+}
+
+enum E {
+    E1("E1", 1),
+    E2("E2", 2),
+    E3("E3", 3);
+
+    private final String S;
+    private final int I;
+
+    public String getS() {
+        return S;
+    }
+
+    public int getI() {
+        return I;
+    }
+
+    E(String s, int i) {
+        S = s;
+        I = i;
+    }
+
+    @Override
+    public String toString() {
+        return "E{" +
+                "S='" + S + '\'' +
+                ", I=" + I +
+                '}';
+    }
+}
+```
+
+运行结果：
+
+```
+E{S='E1', I=1}
+E{S='E2', I=2}
+E{S='E3', I=3}
+```
+
+
+
+### compareTo
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        E e1 = E.E1;
+        E e2 = E.E2;
+        E e3 = E.E3;
+        System.out.println(e1.compareTo(e2));
+        System.out.println(e1.compareTo(e3));
+        System.out.println(e2.compareTo(e3));
+    }
+}
+
+enum E {
+    E1("E1", 1),
+    E2("E2", 2),
+    E3("E3", 3);
+
+    private final String S;
+    private final int I;
+
+    public String getS() {
+        return S;
+    }
+
+    public int getI() {
+        return I;
+    }
+
+    E(String s, int i) {
+        S = s;
+        I = i;
+    }
+
+    @Override
+    public String toString() {
+        return "E{" +
+                "S='" + S + '\'' +
+                ", I=" + I +
+                '}';
+    }
+}
+```
+
+运行结果：
+
+```
+-1
+-2
+-1
+```
+
+
+
+### 实现接口
+
+用enum关键字实现的枚举类：
+	不能继承其他类（默认继承Enum类）
+	可以实现接口
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        E e1 = E.E1;
+        E e2 = E.E2;
+        E e3 = E.E3;
+        e1.f();
+        e2.f();
+        e3.f();
+    }
+}
+
+interface I {
+    void f();
+}
+
+enum E implements I {
+    E1("E1", 1),
+    E2("E2", 2),
+    E3("E3", 3);
+
+    private final String S;
+    private final int I;
+
+    public String getS() {
+        return S;
+    }
+
+    public int getI() {
+        return I;
+    }
+
+    E(String s, int i) {
+        S = s;
+        I = i;
+    }
+
+    @Override
+    public String toString() {
+        return "E{" +
+                "S='" + S + '\'' +
+                ", I=" + I +
+                '}';
+    }
+
+    @Override
+    public void f() {
+        System.out.println(S);
+    }
+}
+```
+
+运行结果：
+
+```
+E1
+E2
+E3
+```
+
