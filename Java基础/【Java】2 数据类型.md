@@ -27,6 +27,19 @@
 
 
 
+| 基本数据类型 |  包装类   |
+| :----------: | :-------: |
+|     byte     |   Byte    |
+|    short     |   Short   |
+|     int      |  Integer  |
+|     long     |   Long    |
+|    float     |   Float   |
+|    double    |  Double   |
+|     char     | Character |
+|   boolean    |  Boolean  |
+
+
+
 ## 整数型
 
 ### byte、short、int、long
