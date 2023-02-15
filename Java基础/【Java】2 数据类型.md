@@ -6,6 +6,8 @@
 
 
 
+## 数据类型
+
 数据类型
 	基本数据类型
 		数值型：
@@ -18,8 +20,6 @@
 		接口：interface
 		数组：[ ]
 
-
-
 |  数据  | 默认数据类型 |
 | :----: | :----------: |
 |  整数  |     int      |
@@ -27,22 +27,9 @@
 
 
 
-| 基本数据类型 |  包装类   |
-| :----------: | :-------: |
-|     byte     |   Byte    |
-|    short     |   Short   |
-|     int      |  Integer  |
-|     long     |   Long    |
-|    float     |   Float   |
-|    double    |  Double   |
-|     char     | Character |
-|   boolean    |  Boolean  |
+## 基本数据类型
 
-
-
-## 整数型
-
-### byte、short、int、long
+### 整数型
 
 byte：8位 / 1字节
 short：16位 / 2字节
@@ -103,6 +90,614 @@ public class Test {
 255
 255
 ```
+
+
+
+### 浮点型
+
+float：32位 / 4字节
+double：64位 / 8字节
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		float f = 3.14F;
+		double d = 3.14;
+		System.out.println(f);
+		System.out.println(d);
+	}
+}
+```
+
+运行结果：
+
+```
+3.14
+3.14
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		double d = 1D;
+		System.out.println(d);
+	}
+}
+```
+
+运行结果：
+
+```
+1.0
+```
+
+
+
+科学计数法
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		float f = 314e-2F;
+		double d = 314e-2;
+		System.out.println(f);
+		System.out.println(d);
+	}
+}
+```
+
+运行结果：
+
+```
+3.14
+3.14
+```
+
+
+
+浮点型的问题
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		float f = 0.1F;
+		double d = 1.0 / 10;
+		System.out.println(f);
+		System.out.println(d);
+		System.out.println(f == d);
+	}
+}
+```
+
+运行结果：
+
+```
+0.1
+0.1
+false
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		float f1 = 2.7F;
+		float f2 = 8.1F / 3;
+		double d1 = 2.7;
+		double d2 = 8.1 / 3;
+
+		System.out.println(f1);
+		System.out.println(f2);
+		System.out.println(f1 == f2);
+
+		System.out.println(d1);
+		System.out.println(d2);
+		System.out.println(d1 == d2);
+	}
+}
+```
+
+运行结果：
+
+```
+2.7
+2.7
+true
+2.7
+2.6999999999999997
+false
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		float f1 = 100000000F;
+		float f2 = f1 + 1;
+		System.out.println(f1);
+		System.out.println(f2);
+		System.out.println(f1 == f2);
+	}
+}
+```
+
+运行结果：
+
+```
+1.0E8
+1.0E8
+true
+```
+
+
+
+### 字符型
+
+char：16位 / 2字节
+
+Unicode：\u0000~\uffff（0~65535）
+
+用单引号表示字符
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		char c1 = 'a';
+		char c2 = '中';
+		char c3 = 97;
+		char c4 = 20013;
+		char c5 = '\u0061';
+		char c6 = '\u4e2d';
+		System.out.println(c1);
+		System.out.println(c2);
+		System.out.println(c3);
+		System.out.println(c4);
+		System.out.println(c5);
+		System.out.println(c6);
+	}
+}
+```
+
+运行结果：
+
+```
+a
+中
+a
+中
+a
+中
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		char c1 = 'a';
+		char c2 = '中';
+		System.out.println((int) c1);
+		System.out.println((int) c2);
+	}
+}
+```
+
+运行结果：
+
+```
+97
+20013
+```
+
+
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		char c1 = 'a';
+		char c2 = 'a' + 10;
+		System.out.println(c1);
+		System.out.println(c2);
+		System.out.println((int) c1);
+		System.out.println((int) c2);
+	}
+}
+```
+
+运行结果：
+
+```
+a
+k
+97
+107
+```
+
+
+
+| 转义字符 |  含义  | Unicode |
+| :------: | :----: | :-----: |
+|    \b    |  退格  | \\u0008 |
+|    \n    |  换行  | \\u000a |
+|    \r    |  回车  | \\u000d |
+|    \t    | 制表符 | \\u0009 |
+|   \\'    | 单引号 | \\u0027 |
+|   \\"    | 双引号 | \\u0022 |
+|   \\\    | 反斜杠 | \\u005c |
+|    \0    | 空字符 | \u0000  |
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        System.out.println("aaa\bbbb");  // \b
+        System.out.println("aaa\nbbb");  // \n
+        System.out.println("aaa\rbbb");  // \r
+        System.out.println("aaa\tbbb");  // \t
+        System.out.println("aaa\'bbb");  // \'
+        System.out.println("aaa\"bbb");  // \"
+        System.out.println("aaa\\bbb");  // \\
+        System.out.println("aaa\0bbb");  // \0
+    }
+}
+```
+
+运行结果：
+
+```
+aabbb
+aaa
+bbb
+bbb
+aaa	bbb
+aaa'bbb
+aaa"bbb
+aaa\bbb
+aaa bbb
+```
+
+
+
+### 布尔型
+
+boolean：4个字节 / 1个字节
+
+相关文章：[答疑 | boolean类型占几个字节？](https://zhuanlan.zhihu.com/p/138648453)
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		boolean b = true;
+		System.out.println(b);
+	}
+}
+```
+
+运行结果：
+
+```
+true
+```
+
+
+
+### 自动类型转换
+
+byte → short → int → long → float → double
+
+|     →      | byte | short | int  | long | float | double |
+| :--------: | :--: | :---: | :--: | :--: | :---: | :----: |
+|  **byte**  |  √   |   √   |  √   |  √   |   √   |   √    |
+| **short**  |      |   √   |  √   |  √   |   √   |   √    |
+|  **int**   |      |       |  √   |  √   |   √   |   √    |
+|  **long**  |      |       |      |  √   |   √   |   √    |
+| **float**  |      |       |      |      |   √   |   √    |
+| **double** |      |       |      |      |       |   √    |
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		byte b = 1;
+		short s = b;
+		int i = b;
+		long l = b;
+		float f = b;
+		double d = b;
+		System.out.println(b);
+		System.out.println(s);
+		System.out.println(i);
+		System.out.println(l);
+		System.out.println(f);
+		System.out.println(d);
+	}
+}
+```
+
+运行结果：
+
+```
+1
+1
+1
+1
+1.0
+1.0
+```
+
+
+
+char → int → long → float → double
+
+|     →      | byte | short | **char** | int  | long | float | double |
+| :--------: | :--: | :---: | :------: | :--: | :--: | :---: | :----: |
+|  **byte**  |  √   |   √   |          |  √   |  √   |   √   |   √    |
+| **short**  |      |   √   |          |  √   |  √   |   √   |   √    |
+|  **char**  |      |       |    √     |  √   |  √   |   √   |   √    |
+|  **int**   |      |       |          |  √   |  √   |   √   |   √    |
+|  **long**  |      |       |          |      |  √   |   √   |   √    |
+| **float**  |      |       |          |      |      |   √   |   √    |
+| **double** |      |       |          |      |      |       |   √    |
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        char c = 97;
+        int i = c;
+        long l = c;
+        float f = c;
+        double d = c;
+        System.out.println(c);
+        System.out.println(i);
+        System.out.println(l);
+        System.out.println(f);
+        System.out.println(d);
+    }
+}
+```
+
+运行结果：
+
+```
+a
+97
+97
+97.0
+97.0
+```
+
+
+
+### 常见误区：类型转换
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int i1 = 1000000000;
+		int i2 = 10;
+		int i3 = i1 * i2;
+		long l1 = i1 * i2;
+		long l2 = (long) i1 * i2;
+		System.out.println(i1);
+		System.out.println(i2);
+		System.out.println(i3);
+		System.out.println(l1);
+		System.out.println(l2);
+	}
+}
+```
+
+运行结果：
+
+```
+1000000000
+10
+1410065408
+1410065408
+10000000000
+```
+
+
+
+byte、short、char在计算时首先转换为int
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		byte b1 = 1;
+		byte b2 = 2;
+		byte b3 = b1 + b2;
+
+		short s1 = 3;
+		short s2 = 4;
+		short s3 = s1 + s2;
+
+		char c1 = 5;
+		char c2 = 6;
+		char c3 = c1 + c2;
+
+		System.out.println(b1);
+		System.out.println(b2);
+		System.out.println(b3);
+
+		System.out.println(s1);
+		System.out.println(s2);
+		System.out.println(s3);
+
+		System.out.println(c1);
+		System.out.println(c2);
+		System.out.println(c3);
+	}
+}
+```
+
+运行结果：
+
+```
+Test.java:5: error: incompatible types: possible lossy conversion from int to byte
+        byte b3 = b1 + b2;
+                     ^
+Test.java:9: error: incompatible types: possible lossy conversion from int to short
+        short s3 = s1 + s2;
+                      ^
+Test.java:13: error: incompatible types: possible lossy conversion from int to char
+        char c3 = c1 + c2;
+                     ^
+3 errors
+```
+
+
+
+### 强制类型转换
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		byte b = (byte) 2000; // 数据溢出
+		int i = (int) 1.9; // 精度损失
+		System.out.println(b);
+		System.out.println(i);
+	}
+}
+```
+
+运行结果：
+
+```
+-48
+1
+```
+
+
+
+强制类型转换只对最近的操作数有效：
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int i = (int) 8 * 1.8 + 6 * 1.6;
+		System.out.println(i);
+	}
+}
+```
+
+运行结果：
+
+```
+Test.java:3: error: incompatible types: possible lossy conversion from double to int
+        int i = (int) 8 * 1.8 + 6 * 1.6;
+                              ^
+1 error
+```
+
+使用括号：
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int i = (int) (8 * 1.8 + 6 * 1.6);
+		System.out.println(i);
+	}
+}
+```
+
+运行结果：
+
+```
+24
+```
+
+
+
+byte、short、char可以接收int常量，不能接收int变量：
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int i = 100;
+		byte b1 = 100;
+		byte b2 = i;
+		short s1 = 100;
+		short s2 = i;
+		char c1 = 100;
+		char c2 = i;
+		System.out.println(i);
+		System.out.println(b1);
+		System.out.println(b2);
+		System.out.println(s1);
+		System.out.println(s2);
+		System.out.println(c1);
+		System.out.println(c2);
+	}
+}
+```
+
+运行结果：
+
+```
+Test.java:5: error: incompatible types: possible lossy conversion from int to byte
+        byte b2 = i;
+                  ^
+Test.java:7: error: incompatible types: possible lossy conversion from int to short
+        short s2 = i;
+                   ^
+Test.java:9: error: incompatible types: possible lossy conversion from int to char
+        char c2 = i;
+                  ^
+3 errors
+```
+
+使用强制转换：
+
+```java
+public class Test {
+	public static void main(String[] args) {
+		int i = 100;
+		byte b1 = 100;
+		byte b2 = (byte) i;
+		short s1 = 100;
+		short s2 = (short) i;
+		char c1 = 100;
+		char c2 = (char) i;
+		System.out.println(i);
+		System.out.println(b1);
+		System.out.println(b2);
+		System.out.println(s1);
+		System.out.println(s2);
+		System.out.println(c1);
+		System.out.println(c2);
+	}
+}
+```
+
+运行结果：
+
+```
+100
+100
+100
+100
+100
+d
+d
+```
+
+
+
+## 包装类
+
+| 基本数据类型 |  包装类   |
+| :----------: | :-------: |
+|     byte     |   Byte    |
+|    short     |   Short   |
+|     int      |  Integer  |
+|     long     |   Long    |
+|    float     |   Float   |
+|    double    |  Double   |
+|     char     | Character |
+|   boolean    |  Boolean  |
 
 
 
@@ -258,133 +853,6 @@ public class Test {
 
 
 
-## 浮点型
-
-### float、double
-
-float：32位 / 4字节
-double：64位 / 8字节
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		float f = 3.14F;
-		double d = 3.14;
-		System.out.println(f);
-		System.out.println(d);
-	}
-}
-```
-
-运行结果：
-
-```
-3.14
-3.14
-```
-
-
-
-科学计数法
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		float f = 314e-2F;
-		double d = 314e-2;
-		System.out.println(f);
-		System.out.println(d);
-	}
-}
-```
-
-运行结果：
-
-```
-3.14
-3.14
-```
-
-
-
-浮点型的问题
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		float f = 0.1F;
-		double d = 1.0 / 10;
-		System.out.println(f);
-		System.out.println(d);
-		System.out.println(f == d);
-	}
-}
-```
-
-运行结果：
-
-```
-0.1
-0.1
-false
-```
-
-
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		float f1 = 2.7F;
-		float f2 = 8.1F / 3;
-		double d1 = 2.7;
-		double d2 = 8.1 / 3;
-
-		System.out.println(f1);
-		System.out.println(f2);
-		System.out.println(f1 == f2);
-
-		System.out.println(d1);
-		System.out.println(d2);
-		System.out.println(d1 == d2);
-	}
-}
-```
-
-运行结果：
-
-```
-2.7
-2.7
-true
-2.7
-2.6999999999999997
-false
-```
-
-
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		float f1 = 100000000F;
-		float f2 = f1 + 1;
-		System.out.println(f1);
-		System.out.println(f2);
-		System.out.println(f1 == f2);
-	}
-}
-```
-
-运行结果：
-
-```
-1.0E8
-1.0E8
-true
-```
-
-
-
 ### Float
 
 Float：32位 / 4字节
@@ -502,224 +970,16 @@ false
 
 
 
+### Character
+
+Character：
+
 ```java
-public class Test {
-	public static void main(String[] args) {
-		double d = 1D;
-		System.out.println(d);
-	}
-}
 ```
 
 运行结果：
 
 ```
-1.0
-```
-
-
-
-## BigInterger
-
-可进行任意精度的整数运算
-
-```java
-import java.math.*;
-
-public class Test {
-	public static void main(String[] args) {
-		BigInteger bi1 = BigInteger.valueOf(100000000);
-		BigInteger bi2 = bi1.add(BigInteger.valueOf(1));
-		System.out.println(bi1);
-		System.out.println(bi2);
-		System.out.println(bi1.compareTo(bi2));
-	}
-}
-```
-
-运行结果：
-
-```
-100000000
-100000001
--1
-```
-
-
-
-## BigDecimal
-
-可进行任意精度的浮点运算
-
-```java
-import java.math.*;
-
-public class Test {
-	public static void main(String[] args) {
-		BigDecimal bd1 = BigDecimal.valueOf(0.1);
-		BigDecimal bd2 = BigDecimal.valueOf(1).divide(BigDecimal.valueOf(10));
-		System.out.println(bd1);
-		System.out.println(bd2);
-		System.out.println(bd1.compareTo(bd2));
-	}
-}
-```
-
-运行结果：
-
-```
-0.1
-0.1
-0
-```
-
-
-
-## 字符型
-
-### char
-
-char：16位 / 2字节
-
-Unicode：\u0000~\uffff（0~65535）
-
-用单引号表示字符
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		char c1 = 'a';
-		char c2 = '中';
-		char c3 = 97;
-		char c4 = 20013;
-		char c5 = '\u0061';
-		char c6 = '\u4e2d';
-		System.out.println(c1);
-		System.out.println(c2);
-		System.out.println(c3);
-		System.out.println(c4);
-		System.out.println(c5);
-		System.out.println(c6);
-	}
-}
-```
-
-运行结果：
-
-```
-a
-中
-a
-中
-a
-中
-```
-
-
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		char c1 = 'a';
-		char c2 = '中';
-		System.out.println((int) c1);
-		System.out.println((int) c2);
-	}
-}
-```
-
-运行结果：
-
-```
-97
-20013
-```
-
-
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		char c1 = 'a';
-		char c2 = 'a' + 10;
-		System.out.println(c1);
-		System.out.println(c2);
-		System.out.println((int) c1);
-		System.out.println((int) c2);
-	}
-}
-```
-
-运行结果：
-
-```
-a
-k
-97
-107
-```
-
-
-
-### 转义字符
-
-| 转义字符 | 含义 | Unicode |
-| :------: | :--: | :-----: |
-|    \b    | 退格 | \\u0008 |
-|    \n    | 换行 | \\u000a |
-|    \r    | 回车 | \\u000d |
-|    \t    | 制表符 | \\u0009 |
-|    \\'    | 单引号 | \\u0027 |
-|    \\"    | 双引号 | \\u0022 |
-| \\\ | 反斜杠 | \\u005c |
-| \0 | 空字符 | \u0000 |
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        System.out.println("aaa\bbbb");  // \b
-        System.out.println("aaa\nbbb");  // \n
-        System.out.println("aaa\rbbb");  // \r
-        System.out.println("aaa\tbbb");  // \t
-        System.out.println("aaa\'bbb");  // \'
-        System.out.println("aaa\"bbb");  // \"
-        System.out.println("aaa\\bbb");  // \\
-        System.out.println("aaa\0bbb");  // \0
-    }
-}
-```
-
-运行结果：
-
-```
-aabbb
-aaa
-bbb
-bbb
-aaa	bbb
-aaa'bbb
-aaa"bbb
-aaa\bbb
-aaa bbb
-```
-
-
-
-## 布尔型
-
-### boolean
-
-boolean：4个字节 / 1个字节
-
-相关文章：[答疑 | boolean类型占几个字节？](https://zhuanlan.zhihu.com/p/138648453)
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		boolean b = true;
-		System.out.println(b);
-	}
-}
 ```
 
 
@@ -753,159 +1013,22 @@ true
 
 
 
-## 自动类型转换
+## BigInterger、BigDecimal
 
-byte → short → int → long → float → double
+### BigInterger
 
-|     →      | byte | short | int  | long | float | double |
-| :--------: | :--: | :---: | :--: | :--: | :---: | :----: |
-|  **byte**  |  √   |   √   |  √   |  √   |   √   |   √    |
-| **short**  |      |   √   |  √   |  √   |   √   |   √    |
-|  **int**   |      |       |  √   |  √   |   √   |   √    |
-|  **long**  |      |       |      |  √   |   √   |   √    |
-| **float**  |      |       |      |      |   √   |   √    |
-| **double** |      |       |      |      |       |   √    |
+可进行任意精度的整数运算
 
 ```java
+import java.math.*;
+
 public class Test {
 	public static void main(String[] args) {
-		byte b = 1;
-		short s = b;
-		int i = b;
-		long l = b;
-		float f = b;
-		double d = b;
-		System.out.println(b);
-		System.out.println(s);
-		System.out.println(i);
-		System.out.println(l);
-		System.out.println(f);
-		System.out.println(d);
-	}
-}
-```
-
-异常：
-
-```
-Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
-	Type mismatch: cannot convert from short to byte
-
-Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
-	Type mismatch: cannot convert from int to byte
-	Type mismatch: cannot convert from int to short
-
-Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
-	Type mismatch: cannot convert from long to byte
-	Type mismatch: cannot convert from long to short
-	Type mismatch: cannot convert from long to int
-
-Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
-	Type mismatch: cannot convert from float to byte
-	Type mismatch: cannot convert from float to short
-	Type mismatch: cannot convert from float to int
-	Type mismatch: cannot convert from float to long
-
-Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
-	Type mismatch: cannot convert from double to byte
-	Type mismatch: cannot convert from double to short
-	Type mismatch: cannot convert from double to int
-	Type mismatch: cannot convert from double to long
-	Type mismatch: cannot convert from double to float
-```
-
-
-
-char → int → long → float → double
-
-|     →      | byte | short | **char** | int  | long | float | double |
-| :--------: | :--: | :---: | :------: | :--: | :--: | :---: | :----: |
-|  **byte**  |  √   |   √   |          |  √   |  √   |   √   |   √    |
-| **short**  |      |   √   |          |  √   |  √   |   √   |   √    |
-|  **char**  |      |       |    √     |  √   |  √   |   √   |   √    |
-|  **int**   |      |       |          |  √   |  √   |   √   |   √    |
-|  **long**  |      |       |          |      |  √   |   √   |   √    |
-| **float**  |      |       |          |      |      |   √   |   √    |
-| **double** |      |       |          |      |      |       |   √    |
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		byte b = 1;
-		short s = b;
-		char c = b;
-		int i = b;
-		long l = b;
-		float f = b;
-		double d = b;
-		System.out.println(b);
-		System.out.println(s);
-		System.out.println(i);
-		System.out.println(l);
-		System.out.println(f);
-		System.out.println(d);
-	}
-}
-```
-
-异常：
-
-```
-Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
-	Type mismatch: cannot convert from byte to char
-
-Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
-	Type mismatch: cannot convert from short to byte
-	Type mismatch: cannot convert from short to char
-
-Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
-	Type mismatch: cannot convert from char to byte
-	Type mismatch: cannot convert from char to short
-
-Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
-	Type mismatch: cannot convert from int to byte
-	Type mismatch: cannot convert from int to short
-	Type mismatch: cannot convert from int to char
-
-Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
-	Type mismatch: cannot convert from long to byte
-	Type mismatch: cannot convert from long to short
-	Type mismatch: cannot convert from long to char
-	Type mismatch: cannot convert from long to int
-
-Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
-	Type mismatch: cannot convert from float to byte
-	Type mismatch: cannot convert from float to short
-	Type mismatch: cannot convert from float to char
-	Type mismatch: cannot convert from float to int
-	Type mismatch: cannot convert from float to long
-
-Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
-	Type mismatch: cannot convert from double to byte
-	Type mismatch: cannot convert from double to short
-	Type mismatch: cannot convert from double to char
-	Type mismatch: cannot convert from double to int
-	Type mismatch: cannot convert from double to long
-	Type mismatch: cannot convert from double to float
-```
-
-
-
-## 常见误区：类型转换
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		int i1 = 1000000000;
-		int i2 = 10;
-		int i3 = i1 * i2;
-		long l1 = i1 * i2;
-		long l2 = (long) i1 * i2;
-		System.out.println(i1);
-		System.out.println(i2);
-		System.out.println(i3);
-		System.out.println(l1);
-		System.out.println(l2);
+		BigInteger bi1 = BigInteger.valueOf(100000000);
+		BigInteger bi2 = bi1.add(BigInteger.valueOf(1));
+		System.out.println(bi1);
+		System.out.println(bi2);
+		System.out.println(bi1.compareTo(bi2));
 	}
 }
 ```
@@ -913,67 +1036,27 @@ public class Test {
 运行结果：
 
 ```
-1000000000
-10
-1410065408
-1410065408
-10000000000
+100000000
+100000001
+-1
 ```
 
 
 
-byte、short、char在计算时首先转换为int
+### BigDecimal
+
+可进行任意精度的浮点运算
 
 ```java
+import java.math.*;
+
 public class Test {
 	public static void main(String[] args) {
-		byte b1 = 1;
-		byte b2 = 2;
-		byte b3 = b1 + b2;
-
-		short s1 = 3;
-		short s2 = 4;
-		short s3 = s1 + s2;
-
-		char c1 = 5;
-		char c2 = 6;
-		char c3 = c1 + c2;
-
-		System.out.println(b1);
-		System.out.println(b2);
-		System.out.println(b3);
-
-		System.out.println(s1);
-		System.out.println(s2);
-		System.out.println(s3);
-
-		System.out.println(c1);
-		System.out.println(c2);
-		System.out.println(c3);
-	}
-}
-```
-
-异常：
-
-```
-Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
-	Type mismatch: cannot convert from int to byte
-	Type mismatch: cannot convert from int to short
-	Type mismatch: cannot convert from int to char
-```
-
-
-
-## 强制类型转换
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		byte b = (byte) 2000; // 数据溢出
-		int i = (int) 1.9; // 精度损失
-		System.out.println(b);
-		System.out.println(i);
+		BigDecimal bd1 = BigDecimal.valueOf(0.1);
+		BigDecimal bd2 = BigDecimal.valueOf(1).divide(BigDecimal.valueOf(10));
+		System.out.println(bd1);
+		System.out.println(bd2);
+		System.out.println(bd1.compareTo(bd2));
 	}
 }
 ```
@@ -981,114 +1064,9 @@ public class Test {
 运行结果：
 
 ```
--48
-1
-```
-
-
-
-强制类型转换只对最近的操作数有效：
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		int i = (int) 8 * 1.8 + 6 * 1.6;
-		System.out.println(i);
-	}
-}
-```
-
-异常：
-
-```
-Exception in thread "main" java.lang.Error: Unresolved compilation problem: 
-	Type mismatch: cannot convert from double to int
-```
-
-使用括号：
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		int i = (int) (8 * 1.8 + 6 * 1.6);
-		System.out.println(i);
-	}
-}
-```
-
-运行结果：
-
-```
-24
-```
-
-
-
-byte、short、char可以接收int常量，不能接收int变量：
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		int i = 100;
-		byte b1 = 100;
-		byte b2 = i;
-		short s1 = 100;
-		short s2 = i;
-		char c1 = 100;
-		char c2 = i;
-		System.out.println(i);
-		System.out.println(b1);
-		System.out.println(b2);
-		System.out.println(s1);
-		System.out.println(s2);
-		System.out.println(c1);
-		System.out.println(c2);
-	}
-}
-```
-
-异常：
-
-```
-Exception in thread "main" java.lang.Error: Unresolved compilation problems: 
-	Type mismatch: cannot convert from int to byte
-	Type mismatch: cannot convert from int to short
-	Type mismatch: cannot convert from int to char
-```
-
-使用强制转换：
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		int i = 100;
-		byte b1 = 100;
-		byte b2 = (byte) i;
-		short s1 = 100;
-		short s2 = (short) i;
-		char c1 = 100;
-		char c2 = (char) i;
-		System.out.println(i);
-		System.out.println(b1);
-		System.out.println(b2);
-		System.out.println(s1);
-		System.out.println(s2);
-		System.out.println(c1);
-		System.out.println(c2);
-	}
-}
-```
-
-运行结果：
-
-```
-100
-100
-100
-100
-100
-d
-d
+0.1
+0.1
+0
 ```
 
 
@@ -1467,4 +1445,6 @@ public class Test {
 ```
 ABCDEF
 ```
+
+
 
