@@ -701,25 +701,30 @@ d
 
 
 
-### Byte
+### 装箱、拆箱
 
-Byte：8位 / 1字节
+#### 自动装箱
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		Byte b1 = 1;
-		Byte b2 = 2;
-		String s = "-1";
-
-		System.out.println(b1);
-		System.out.println(Byte.SIZE);
-		System.out.println(Byte.MIN_VALUE);
-		System.out.println(Byte.MAX_VALUE);
-		System.out.println(Byte.compare(b1, b2));
-		System.out.println(Byte.valueOf(s));
-		System.out.println(Byte.parseByte(s));
-	}
+    public static void main(String[] args) {
+        Byte b = 1;
+        Short s = 2;
+        Integer i = 3;
+        Long l = 4L;
+        Float f = 0.1F;
+        Double d = 3.14;
+        Character c = 'a';
+        Boolean bool = true;
+        System.out.println(b);
+        System.out.println(s);
+        System.out.println(i);
+        System.out.println(l);
+        System.out.println(f);
+        System.out.println(d);
+        System.out.println(c);
+        System.out.println(bool);
+    }
 }
 ```
 
@@ -727,12 +732,226 @@ public class Test {
 
 ```
 1
+2
+3
+4
+0.1
+3.14
+a
+true
+```
+
+
+
+#### 手动装箱
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        Byte b = new Byte((byte) 1);
+        Short s = new Short((short) 2);
+        Integer i = new Integer(3);
+        Long l = new Long(4L);
+        Float f = new Float(0.1F);
+        Double d = new Double(3.14);
+        Character c = new Character('a');
+        Boolean bool = new Boolean(true);
+        System.out.println(b);
+        System.out.println(s);
+        System.out.println(i);
+        System.out.println(l);
+        System.out.println(f);
+        System.out.println(d);
+        System.out.println(c);
+        System.out.println(bool);
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+0.1
+3.14
+a
+true
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        Byte b = Byte.valueOf((byte) 1);
+        Short s = Short.valueOf((short) 2);
+        Integer i = Integer.valueOf(3);
+        Long l = Long.valueOf(4L);
+        Float f = Float.valueOf(0.1F);
+        Double d = Double.valueOf(3.14);
+        Character c = Character.valueOf('a');
+        Boolean bool = Boolean.valueOf(true);
+        System.out.println(b);
+        System.out.println(s);
+        System.out.println(i);
+        System.out.println(l);
+        System.out.println(f);
+        System.out.println(d);
+        System.out.println(c);
+        System.out.println(bool);
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+0.1
+3.14
+a
+true
+```
+
+
+
+#### 自动拆箱
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        Byte b1 = 1;
+        int b2 = b1;
+        Short s1 = 2;
+        short s2 = s1;
+        Integer i1 = 3;
+        int i2 = i1;
+        Long l1 = 4L;
+        long l2 = l1;
+        Float f1 = 0.1F;
+        float f2 = f1;
+        Double d1 = 3.14;
+        double d2 = d1;
+        Character c1 = 'a';
+        char c2 = c1;
+        Boolean bool1 = true;
+        boolean bool2 = bool1;
+        System.out.println(b2);
+        System.out.println(s2);
+        System.out.println(i2);
+        System.out.println(l2);
+        System.out.println(f2);
+        System.out.println(d2);
+        System.out.println(c2);
+        System.out.println(bool2);
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+0.1
+3.14
+a
+true
+```
+
+
+
+#### 手动拆箱
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        Byte b1 = 1;
+        int b2 = b1.byteValue();
+        Short s1 = 2;
+        short s2 = s1.shortValue();
+        Integer i1 = 3;
+        int i2 = i1.intValue();
+        Long l1 = 4L;
+        long l2 = l1.longValue();
+        Float f1 = 0.1F;
+        float f2 = f1.floatValue();
+        Double d1 = 3.14;
+        double d2 = d1.doubleValue();
+        Character c1 = 'a';
+        char c2 = c1.charValue();
+        Boolean bool1 = true;
+        boolean bool2 = bool1.booleanValue();
+        System.out.println(b2);
+        System.out.println(s2);
+        System.out.println(i2);
+        System.out.println(l2);
+        System.out.println(f2);
+        System.out.println(d2);
+        System.out.println(c2);
+        System.out.println(bool2);
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+0.1
+3.14
+a
+true
+```
+
+
+
+### Byte
+
+Byte：8位 / 1字节
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        System.out.println(Byte.TYPE);  // byte
+        System.out.println(Byte.SIZE);  // 8
+        System.out.println(Byte.MIN_VALUE);  // -128
+        System.out.println(Byte.MAX_VALUE);  // 127
+
+        byte b1 = 1;
+        byte b2 = 2;
+        System.out.println(Byte.compare(b1, b2));  // -1
+
+        String s = "3";
+        Byte b3 = Byte.valueOf(s);
+        byte b4 = Byte.parseByte(s);
+        System.out.println(b3);  // 3
+        System.out.println(b4);  // 3
+    }
+}
+```
+
+运行结果：
+
+```
+byte
 8
 -128
 127
 -1
--1
--1
+3
+3
 ```
 
 
@@ -743,32 +962,35 @@ Short：16位 / 2字节
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		Short s1 = 1;
-		Short s2 = 2;
-		String ss = "-1";
-		
-		System.out.println(s1);
-		System.out.println(Short.SIZE);
-		System.out.println(Short.MIN_VALUE);
-		System.out.println(Short.MAX_VALUE);
-		System.out.println(Short.compare(s1, s2));
-		System.out.println(Short.valueOf(ss));
-		System.out.println(Short.parseShort(ss));
-	}
+    public static void main(String[] args) {
+        System.out.println(Short.TYPE);  // short
+        System.out.println(Short.SIZE);  // 16
+        System.out.println(Short.MIN_VALUE);  // -32768
+        System.out.println(Short.MAX_VALUE);  // 32767
+
+        short s1 = 1;
+        short s2 = 2;
+        System.out.println(Short.compare(s1, s2));  // -1
+
+        String str = "3";
+        Short s3 = Short.valueOf(str);
+        short s4 = Short.parseShort(str);
+        System.out.println(s3);  // 3
+        System.out.println(s4);  // 3
+    }
 }
 ```
 
 运行结果：
 
 ```
-1
+short
 16
 -32768
 32767
 -1
--1
--1
+3
+3
 ```
 
 
@@ -779,36 +1001,39 @@ Integer：32位 / 4字节
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		Integer i1 = 1;
-		Integer i2 = 2;
-		String s = "-1";
+    public static void main(String[] args) {
+        System.out.println(Integer.TYPE);  // int
+        System.out.println(Integer.SIZE);  // 32
+        System.out.println(Integer.MIN_VALUE);  // -2147483648
+        System.out.println(Integer.MAX_VALUE);  // 2147483647
 
-		System.out.println(i1);
-		System.out.println(Integer.SIZE);
-		System.out.println(Integer.MIN_VALUE);
-		System.out.println(Integer.MAX_VALUE);
-		System.out.println(Integer.compare(i1, i2));
-		System.out.println(Integer.max(i1, i2));
-		System.out.println(Integer.min(i1, i2));
-		System.out.println(Integer.valueOf(s));
-		System.out.println(Integer.parseInt(s));
-	}
+        int i1 = 1;
+        int i2 = 2;
+        System.out.println(Integer.compare(i1, i2));  // -1
+        System.out.println(Integer.max(i1, i2));  // 2
+        System.out.println(Integer.min(i1, i2));  // 1
+
+        String s = "3";
+        Integer i3 = Integer.valueOf(s);
+        int i4 = Integer.parseInt(s);
+        System.out.println(i3);  // 3
+        System.out.println(i4);  // 3
+    }
 }
 ```
 
 运行结果：
 
 ```
-1
+int
 32
 -2147483648
 2147483647
 -1
 2
 1
--1
--1
+3
+3
 ```
 
 
@@ -819,36 +1044,39 @@ Long：64位 / 8字节
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		Long l1 = 1L;
-		Long l2 = 2L;
-		String s = "-1";
-		
-		System.out.println(l1);
-		System.out.println(Long.SIZE);
-		System.out.println(Long.MIN_VALUE);
-		System.out.println(Long.MAX_VALUE);
-		System.out.println(Long.compare(l1, l2));
-		System.out.println(Long.max(l1, l2));
-		System.out.println(Long.min(l1, l2));
-		System.out.println(Long.valueOf(s));
-		System.out.println(Long.parseLong(s));
-	}
+    public static void main(String[] args) {
+        System.out.println(Long.TYPE);  // long
+        System.out.println(Long.SIZE);  // 64
+        System.out.println(Long.MIN_VALUE);  // -9223372036854775808
+        System.out.println(Long.MAX_VALUE);  // 9223372036854775807
+
+        long l1 = 1L;
+        long l2 = 2L;
+        System.out.println(Long.compare(l1, l2));  // -1
+        System.out.println(Long.max(l1, l2));  // 2
+        System.out.println(Long.min(l1, l2));  // 1
+
+        String s = "3";
+        Long l3 = Long.valueOf(s);
+        long l4 = Long.parseLong(s);
+        System.out.println(l3);  // 3
+        System.out.println(l4);  // 3
+    }
 }
 ```
 
 运行结果：
 
 ```
-1
+long
 64
 -9223372036854775808
 9223372036854775807
 -1
 2
 1
--1
--1
+3
+3
 ```
 
 
@@ -860,40 +1088,43 @@ Float：32位 / 4字节
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		Float f1 = 3.14F;
-		Float f2 = 2.72F;
-		String s = "-0.1";
-		
-		System.out.println(f1);
-		System.out.println(Float.SIZE);
-		System.out.println(Float.MIN_EXPONENT);
-		System.out.println(Float.MIN_NORMAL);
-		System.out.println(Float.MIN_VALUE);
-		System.out.println(Float.MAX_EXPONENT);
-		System.out.println(Float.MAX_VALUE);
-		System.out.println(Float.NEGATIVE_INFINITY);
-		System.out.println(Float.POSITIVE_INFINITY);
-		System.out.println(Float.NaN);
-		System.out.println(Float.isFinite(f1));
-		System.out.println(Float.isInfinite(f1));
-		System.out.println(Float.isNaN(f1));
-		System.out.println(Float.compare(f1, f2));
-		System.out.println(Float.max(f1, f2));
-		System.out.println(Float.min(f1, f2));
-		System.out.println(Float.valueOf(s));
-		System.out.println(Float.parseFloat(s));
-	}
+    public static void main(String[] args) {
+        System.out.println(Float.TYPE);  // float
+        System.out.println(Float.SIZE);  // 32
+        System.out.println(Float.MIN_EXPONENT);  // -126
+        System.out.println(Float.MIN_NORMAL);  // 1.1754944E-38
+        System.out.println(Float.MIN_VALUE);  // 1.4E-45
+        System.out.println(Float.MAX_EXPONENT);  // 127
+        System.out.println(Float.MAX_VALUE);  // 3.4028235E38
+        System.out.println(Float.NEGATIVE_INFINITY);  // -Infinity
+        System.out.println(Float.POSITIVE_INFINITY);  // Infinity
+        System.out.println(Float.NaN);  // NaN
+
+        Float f1 = 3.14F;
+        Float f2 = 2.72F;
+        System.out.println(Float.isFinite(f1));  // true
+        System.out.println(Float.isInfinite(f1));  // false
+        System.out.println(Float.isNaN(f1));  // false
+        System.out.println(Float.compare(f1, f2));  // 1
+        System.out.println(Float.max(f1, f2));  // 3.14
+        System.out.println(Float.min(f1, f2));  // 2.72
+
+        String s = "0.1";
+        Float f3 = Float.valueOf(s);
+        float f4 = Float.parseFloat(s);
+        System.out.println(f3);  // 0.1
+        System.out.println(f4);  // 0.1
+    }
 }
 ```
 
 运行结果：
 
 ```
-3.14
+float
 32
 -126
-1.17549435E-38
+1.1754944E-38
 1.4E-45
 127
 3.4028235E38
@@ -906,8 +1137,8 @@ false
 1
 3.14
 2.72
--0.1
--0.1
+0.1
+0.1
 ```
 
 
@@ -918,37 +1149,40 @@ Double：64位 / 8字节
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		Double d1 = 3.14;
-		Double d2 = 2.72;
-		String s = "-0.1";
-		
-		System.out.println(d1);
-		System.out.println(Double.SIZE);
-		System.out.println(Double.MIN_EXPONENT);
-		System.out.println(Double.MIN_NORMAL);
-		System.out.println(Double.MIN_VALUE);
-		System.out.println(Double.MAX_EXPONENT);
-		System.out.println(Double.MAX_VALUE);
-		System.out.println(Double.NEGATIVE_INFINITY);
-		System.out.println(Double.POSITIVE_INFINITY);
-		System.out.println(Double.NaN);
-		System.out.println(Double.isFinite(d1));
-		System.out.println(Double.isInfinite(d1));
-		System.out.println(Double.isNaN(d1));
-		System.out.println(Double.compare(d1, d2));
-		System.out.println(Double.max(d1, d2));
-		System.out.println(Double.min(d1, d2));
-		System.out.println(Double.valueOf(s));
-		System.out.println(Double.parseDouble(s));
-	}
+    public static void main(String[] args) {
+        System.out.println(Double.TYPE);  // double
+        System.out.println(Double.SIZE);  // 64
+        System.out.println(Double.MIN_EXPONENT);  // -1022
+        System.out.println(Double.MIN_NORMAL);  // 2.2250738585072014E-308
+        System.out.println(Double.MIN_VALUE);  // 4.9E-324
+        System.out.println(Double.MAX_EXPONENT);  // 1023
+        System.out.println(Double.MAX_VALUE);  // 1.7976931348623157E308
+        System.out.println(Double.NEGATIVE_INFINITY);  // -Infinity
+        System.out.println(Double.POSITIVE_INFINITY);  // Infinity
+        System.out.println(Double.NaN);  // NaN
+
+        Double d1 = 3.14;
+        Double d2 = 2.72;
+        System.out.println(Double.isFinite(d1));  // true
+        System.out.println(Double.isInfinite(d1));  // false
+        System.out.println(Double.isNaN(d1));  // false
+        System.out.println(Double.compare(d1, d2));  // 1
+        System.out.println(Double.max(d1, d2));  // 3.14
+        System.out.println(Double.min(d1, d2));  // 2.72
+
+        String s = "0.1";
+        Double d3 = Double.valueOf(s);
+        double d4 = Double.parseDouble(s);
+        System.out.println(d3);  // 0.1
+        System.out.println(d4);  // 0.1
+    }
 }
 ```
 
 运行结果：
 
 ```
-3.14
+double
 64
 -1022
 2.2250738585072014E-308
@@ -964,22 +1198,51 @@ false
 1
 3.14
 2.72
--0.1
--0.1
+0.1
+0.1
 ```
 
 
 
 ### Character
 
-Character：
+Character：16位 / 2字节
 
 ```java
+public class Test {
+    public static void main(String[] args) {
+        System.out.println(Character.TYPE);  // char
+        System.out.println(Character.SIZE);  // 16
+        System.out.println((int) Character.MIN_VALUE);  // 0
+        System.out.println((int) Character.MAX_VALUE);  // 65535
+
+        Character c1 = 'a';
+        Character c2 = 'b';
+        System.out.println(Character.isDigit(c1));  // false
+        System.out.println(Character.isLetter(c1));  // true
+        System.out.println(Character.isLowerCase(c1));  // true
+        System.out.println(Character.isUpperCase(c1));  // false
+        System.out.println(Character.isLetterOrDigit(c1));  // true
+        System.out.println(Character.isWhitespace(c1));  // false
+        System.out.println(Character.compare(c1, c2));  // -1
+    }
+}
 ```
 
 运行结果：
 
 ```
+char
+16
+0
+65535
+false
+true
+true
+false
+true
+false
+-1
 ```
 
 
@@ -988,27 +1251,55 @@ Character：
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		Boolean b = true;
-		String s = "true";
+    public static void main(String[] args) {
+        System.out.println(Boolean.TYPE);  // boolean
+        System.out.println(Boolean.TRUE);  // true
+        System.out.println(Boolean.FALSE);  // false
 
-		System.out.println(b);
-		System.out.println(Boolean.TRUE);
-		System.out.println(Boolean.FALSE);
-		System.out.println(Boolean.TYPE);
-		System.out.println(Boolean.parseBoolean(s));
-	}
+        String s = "true";
+        Boolean b1 = Boolean.valueOf(s);
+        boolean b2 = Boolean.parseBoolean(s);
+        System.out.println(b1);  // true
+        System.out.println(b2);  // true
+    }
 }
 ```
 
 运行结果：
 
 ```
-true
-true
-false
 boolean
 true
+false
+true
+true
+```
+
+
+
+### 问题
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        Object o1 = true ? new Integer(0) : new Double(1.0);
+        Object o2;
+        if (true) {
+            o2 = new Integer("0");
+        } else {
+            o2 = new Double(1.0);
+        }
+        System.out.println(o1);
+        System.out.println(o2);
+    }
+}
+```
+
+运行结果：
+
+```
+0.0
+0
 ```
 
 
