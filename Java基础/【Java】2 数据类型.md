@@ -932,12 +932,6 @@ public class Test {
         byte b1 = 1;
         byte b2 = 2;
         System.out.println(Byte.compare(b1, b2));  // -1
-
-        String s = "3";
-        Byte b3 = Byte.valueOf(s);
-        byte b4 = Byte.parseByte(s);
-        System.out.println(b3);  // 3
-        System.out.println(b4);  // 3
     }
 }
 ```
@@ -950,8 +944,6 @@ byte
 -128
 127
 -1
-3
-3
 ```
 
 
@@ -971,12 +963,6 @@ public class Test {
         short s1 = 1;
         short s2 = 2;
         System.out.println(Short.compare(s1, s2));  // -1
-
-        String str = "3";
-        Short s3 = Short.valueOf(str);
-        short s4 = Short.parseShort(str);
-        System.out.println(s3);  // 3
-        System.out.println(s4);  // 3
     }
 }
 ```
@@ -989,8 +975,6 @@ short
 -32768
 32767
 -1
-3
-3
 ```
 
 
@@ -1012,12 +996,6 @@ public class Test {
         System.out.println(Integer.compare(i1, i2));  // -1
         System.out.println(Integer.max(i1, i2));  // 2
         System.out.println(Integer.min(i1, i2));  // 1
-
-        String s = "3";
-        Integer i3 = Integer.valueOf(s);
-        int i4 = Integer.parseInt(s);
-        System.out.println(i3);  // 3
-        System.out.println(i4);  // 3
     }
 }
 ```
@@ -1032,8 +1010,6 @@ int
 -1
 2
 1
-3
-3
 ```
 
 
@@ -1055,12 +1031,6 @@ public class Test {
         System.out.println(Long.compare(l1, l2));  // -1
         System.out.println(Long.max(l1, l2));  // 2
         System.out.println(Long.min(l1, l2));  // 1
-
-        String s = "3";
-        Long l3 = Long.valueOf(s);
-        long l4 = Long.parseLong(s);
-        System.out.println(l3);  // 3
-        System.out.println(l4);  // 3
     }
 }
 ```
@@ -1075,8 +1045,6 @@ long
 -1
 2
 1
-3
-3
 ```
 
 
@@ -1108,12 +1076,6 @@ public class Test {
         System.out.println(Float.compare(f1, f2));  // 1
         System.out.println(Float.max(f1, f2));  // 3.14
         System.out.println(Float.min(f1, f2));  // 2.72
-
-        String s = "0.1";
-        Float f3 = Float.valueOf(s);
-        float f4 = Float.parseFloat(s);
-        System.out.println(f3);  // 0.1
-        System.out.println(f4);  // 0.1
     }
 }
 ```
@@ -1137,8 +1099,6 @@ false
 1
 3.14
 2.72
-0.1
-0.1
 ```
 
 
@@ -1169,12 +1129,6 @@ public class Test {
         System.out.println(Double.compare(d1, d2));  // 1
         System.out.println(Double.max(d1, d2));  // 3.14
         System.out.println(Double.min(d1, d2));  // 2.72
-
-        String s = "0.1";
-        Double d3 = Double.valueOf(s);
-        double d4 = Double.parseDouble(s);
-        System.out.println(d3);  // 0.1
-        System.out.println(d4);  // 0.1
     }
 }
 ```
@@ -1198,8 +1152,6 @@ false
 1
 3.14
 2.72
-0.1
-0.1
 ```
 
 
@@ -1255,12 +1207,6 @@ public class Test {
         System.out.println(Boolean.TYPE);  // boolean
         System.out.println(Boolean.TRUE);  // true
         System.out.println(Boolean.FALSE);  // false
-
-        String s = "true";
-        Boolean b1 = Boolean.valueOf(s);
-        boolean b2 = Boolean.parseBoolean(s);
-        System.out.println(b1);  // true
-        System.out.println(b2);  // true
     }
 }
 ```
@@ -1271,7 +1217,241 @@ public class Test {
 boolean
 true
 false
+```
+
+
+
+### 包装类 → String
+
+#### 方法一
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        Byte b = 1;
+        Short s = 2;
+        Integer i = 3;
+        Long l = 4L;
+        Float f = 0.1F;
+        Double d = 3.14;
+        Character c = 'a';
+        Boolean bool = true;
+        String str1 = b.toString();
+        String str2 = s.toString();
+        String str3 = i.toString();
+        String str4 = l.toString();
+        String str5 = f.toString();
+        String str6 = d.toString();
+        String str7 = c.toString();
+        String str8 = bool.toString();
+        System.out.println(str1);
+        System.out.println(str2);
+        System.out.println(str3);
+        System.out.println(str4);
+        System.out.println(str5);
+        System.out.println(str6);
+        System.out.println(str7);
+        System.out.println(str8);
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+0.1
+3.14
+a
 true
+```
+
+
+
+#### 方法二
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        Byte b = 1;
+        Short s = 2;
+        Integer i = 3;
+        Long l = 4L;
+        Float f = 0.1F;
+        Double d = 3.14;
+        Character c = 'a';
+        Boolean bool = true;
+        String str1 = String.valueOf(b);
+        String str2 = String.valueOf(s);
+        String str3 = String.valueOf(i);
+        String str4 = String.valueOf(l);
+        String str5 = String.valueOf(f);
+        String str6 = String.valueOf(d);
+        String str7 = String.valueOf(c);
+        String str8 = String.valueOf(bool);
+        System.out.println(str1);
+        System.out.println(str2);
+        System.out.println(str3);
+        System.out.println(str4);
+        System.out.println(str5);
+        System.out.println(str6);
+        System.out.println(str7);
+        System.out.println(str8);
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+0.1
+3.14
+a
+true
+```
+
+
+
+#### 方法三
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        Byte b = 1;
+        Short s = 2;
+        Integer i = 3;
+        Long l = 4L;
+        Float f = 0.1F;
+        Double d = 3.14;
+        Character c = 'a';
+        Boolean bool = true;
+        String str1 = "" + b;
+        String str2 = "" + s;
+        String str3 = "" + i;
+        String str4 = "" + l;
+        String str5 = "" + f;
+        String str6 = "" + d;
+        String str7 = "" + c;
+        String str8 = "" + bool;
+        System.out.println(str1);
+        System.out.println(str2);
+        System.out.println(str3);
+        System.out.println(str4);
+        System.out.println(str5);
+        System.out.println(str6);
+        System.out.println(str7);
+        System.out.println(str8);
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+0.1
+3.14
+a
+true
+```
+
+
+
+### String → 包装类
+
+#### 方法一
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        String str1 = "1";
+        String str2 = "2";
+        String str3 = "3";
+        String str4 = "4";
+        String str5 = "0.1";
+        String str6 = "3.14";
+        String str7 = "true";
+        Byte b = Byte.valueOf(str1);
+        Short s = Short.valueOf(str2);
+        Integer i = Integer.valueOf(str3);
+        Long l = Long.valueOf(str4);
+        Float f = Float.valueOf(str5);
+        Double d = Double.valueOf(str6);
+        Boolean bool = Boolean.valueOf(str7);
+        System.out.println(b);
+        System.out.println(s);
+        System.out.println(i);
+        System.out.println(l);
+        System.out.println(f);
+        System.out.println(d);
+        System.out.println(bool);
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+0.1
+3.14
+true
+```
+
+
+
+#### 方法二
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        String str1 = "1";
+        String str2 = "2";
+        String str3 = "3";
+        String str4 = "4";
+        String str5 = "0.1";
+        String str6 = "3.14";
+        String str7 = "true";
+        Byte b = new Byte(str1);
+        Short s = new Short(str2);
+        Integer i = new Integer(str3);
+        Long l = new Long(str4);
+        Float f = new Float(str5);
+        Double d = new Double(str6);
+        Boolean bool = new Boolean(str7);
+        System.out.println(b);
+        System.out.println(s);
+        System.out.println(i);
+        System.out.println(l);
+        System.out.println(f);
+        System.out.println(d);
+        System.out.println(bool);
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+0.1
+3.14
 true
 ```
 
