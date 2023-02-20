@@ -1170,12 +1170,14 @@ public class Test {
 
         Character c1 = 'a';
         Character c2 = 'b';
+        System.out.println(Character.isWhitespace(c1));  // false
         System.out.println(Character.isDigit(c1));  // false
         System.out.println(Character.isLetter(c1));  // true
+        System.out.println(Character.isLetterOrDigit(c1));  // true
         System.out.println(Character.isLowerCase(c1));  // true
         System.out.println(Character.isUpperCase(c1));  // false
-        System.out.println(Character.isLetterOrDigit(c1));  // true
-        System.out.println(Character.isWhitespace(c1));  // false
+        System.out.println(Character.toLowerCase(c1));  // a
+        System.out.println(Character.toUpperCase(c1));  // A
         System.out.println(Character.compare(c1, c2));  // -1
     }
 }
@@ -1189,11 +1191,13 @@ char
 0
 65535
 false
+false
+true
 true
 true
 false
-true
-false
+a
+A
 -1
 ```
 
@@ -1484,6 +1488,70 @@ public class Test {
 
 
 
+```java
+public class Test {
+    public static void main(String[] args) {
+        Integer i1 = new Integer(1);
+        Integer i2 = new Integer(1);
+        System.out.println(i1 == i2);
+
+        Integer i3 = 1;
+        Integer i4 = 1;
+        System.out.println(i3 == i4);
+
+        Integer i5 = 128;
+        Integer i6 = 128;
+        System.out.println(i5 == i6);
+    }
+}
+```
+
+运行结果：
+
+```
+false
+true
+false
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        Integer i1 = 128;
+        int i2 = 128;
+        System.out.println(i1 == i2);
+    }
+}
+```
+
+运行结果：
+
+```
+true
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        Integer i1 = 1;
+        Integer i2 = new Integer(1);
+        System.out.println(i1 == i2);
+    }
+}
+```
+
+运行结果：
+
+```
+false
+```
+
+
+
 ## BigInterger、BigDecimal
 
 ### BigInterger
@@ -1548,6 +1616,58 @@ public class Test {
 
 ```java
 public class Test {
+    public static void main(String[] args) {
+        String s1 = "abc";
+        String s2 = new String("abc");
+        System.out.println(s1 == s2);  // false
+        System.out.println(s1.equals(s2));  // true
+        System.out.println(s1 == s1.intern());  // true
+        System.out.println(s2 == s2.intern());  // false
+        System.out.println(s1.intern() == s2.intern());  // true
+    }
+}
+```
+
+运行结果：
+
+```
+false
+true
+true
+false
+true
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        String s1 = "abc";
+        String s2 = "def";
+        String s3 = "abcdef";
+        String s4 = s1 + s2;
+        System.out.println(s3 == s4);  // false
+        System.out.println(s3.equals(s4));  // true
+        System.out.println(s3 == s4.intern());  // true
+        System.out.println(s4 == s4.intern());  // false
+    }
+}
+```
+
+运行结果：
+
+```
+false
+true
+true
+false
+```
+
+
+
+```java
+public class Test {
 	public static void main(String[] args) {
 		String s1 = "abc";
 		String s2 = "ab";
@@ -1590,34 +1710,34 @@ true
 
 ```java
 public class Test {
-	public static void main(String[] args) {
-		byte b = 1;
-		short s = 1;
-		int i = 1;
-		long l = 1;
-		float f = 1.0F;
-		double d = 1.0;
-		char c = 'a';
-		boolean bool = true;
+    public static void main(String[] args) {
+        byte b = 1;
+        short s = 2;
+        int i = 3;
+        long l = 4;
+        float f = 1.0F;
+        double d = 3.14;
+        char c = 'a';
+        boolean bool = true;
 
-		String s1 = b + "";
-		String s2 = s + "";
-		String s3 = i + "";
-		String s4 = l + "";
-		String s5 = f + "";
-		String s6 = d + "";
-		String s7 = c + "";
-		String s8 = bool + "";
+        String s1 = "" + b;
+        String s2 = "" + s;
+        String s3 = "" + i;
+        String s4 = "" + l;
+        String s5 = "" + f;
+        String s6 = "" + d;
+        String s7 = "" + c;
+        String s8 = "" + bool;
 
-		System.out.println(s1);
-		System.out.println(s2);
-		System.out.println(s3);
-		System.out.println(s4);
-		System.out.println(s5);
-		System.out.println(s6);
-		System.out.println(s7);
-		System.out.println(s8);
-	}
+        System.out.println(s1);
+        System.out.println(s2);
+        System.out.println(s3);
+        System.out.println(s4);
+        System.out.println(s5);
+        System.out.println(s6);
+        System.out.println(s7);
+        System.out.println(s8);
+    }
 }
 ```
 
@@ -1625,11 +1745,11 @@ public class Test {
 
 ```
 1
-1
-1
-1
+2
+3
+4
 1.0
-1.0
+3.14
 a
 true
 ```
@@ -1918,4 +2038,42 @@ ABCDEF
 ```
 
 
+
+### 问题
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C();
+        c.f(c.s, c.arr);
+        System.out.println(c.s);
+        System.out.println(c.arr);
+    }
+}
+
+class C {
+    String s = new String("abc");
+    char[] arr = {'a', 'b', 'c'};
+
+    void f(String s, char[] arr) {
+        s = "def";
+        arr[0] = 'd';
+    }
+}
+```
+
+运行结果：
+
+```
+abc
+dbc
+```
+
+
+
+## StringBuilder
+
+
+
+## StringBuffer
 
