@@ -3732,7 +3732,6 @@ interface I {
 }
 
 class C implements I {
-
 }
 ```
 
@@ -4085,6 +4084,135 @@ public class Test {
 ```
 C1
 C2
+```
+
+
+
+## 抽象类
+
+抽象方法不能用private、static、final修饰
+
+
+
+### 示例
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C() {
+            @Override
+            void f() {
+                System.out.println("f");
+            }
+        };
+        c.f();
+    }
+}
+
+abstract class C {
+    abstract void f();
+}
+```
+
+运行结果：
+
+```
+f
+```
+
+
+
+抽象类中可以没有抽象方法：
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C c = new C() {
+        };
+        c.f();
+    }
+}
+
+abstract class C {
+    void f() {
+        System.out.println("f");
+    }
+}
+```
+
+运行结果：
+
+```
+f
+```
+
+
+
+### 继承抽象类
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C2 c = new C2();
+        c.f();
+    }
+}
+
+abstract class C1 {
+    abstract void f();
+}
+
+class C2 extends C1 {
+    @Override
+    void f() {
+        System.out.println("f");
+    }
+}
+```
+
+运行结果：
+
+```
+f
+```
+
+
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        C3 c = new C3();
+        c.f1();
+        c.f2();
+    }
+}
+
+abstract class C1 {
+    abstract void f1();
+}
+
+abstract class C2 extends C1 {
+    abstract void f2();
+}
+
+class C3 extends C2 {
+    @Override
+    void f1() {
+        System.out.println("f1");
+    }
+
+    @Override
+    void f2() {
+        System.out.println("f2");
+    }
+}
+```
+
+运行结果：
+
+```
+f1
+f2
 ```
 
 
@@ -5583,5 +5711,4 @@ class C1 {
 ```
 f
 ```
-
 

@@ -10,7 +10,7 @@
 
 相关链接：
 [Class Collections](https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html)
-![](D:\Notes\Java\Java集合\img\Collections All Methods.png)
+![](img/Collections All Methods.png)
 
 
 

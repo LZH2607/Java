@@ -18,7 +18,7 @@
 	引用数据类型
 		类：class
 		接口：interface
-		数组：[ ]
+		数组：[]
 
 |  数据  | 默认数据类型 |
 | :----: | :----------: |
@@ -363,9 +363,7 @@ aaa bbb
 
 ### 布尔型
 
-boolean：4个字节 / 1个字节
-
-相关文章：[答疑 | boolean类型占几个字节？](https://zhuanlan.zhihu.com/p/138648453)
+boolean：
 
 ```java
 public class Test {
@@ -686,6 +684,160 @@ d
 
 
 
+
+
+### 基本数据类型 → String
+
+#### 方式一
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        byte b = 1;
+        short s = 2;
+        int i = 3;
+        long l = 4;
+        float f = 1.0F;
+        double d = 3.14;
+        char c = 'a';
+        boolean bool = true;
+
+        String str1 = String.valueOf(b);
+        String str2 = String.valueOf(s);
+        String str3 = String.valueOf(i);
+        String str4 = String.valueOf(l);
+        String str5 = String.valueOf(f);
+        String str6 = String.valueOf(d);
+        String str7 = String.valueOf(c);
+        String str8 = String.valueOf(bool);
+
+        System.out.println(str1);
+        System.out.println(str2);
+        System.out.println(str3);
+        System.out.println(str4);
+        System.out.println(str5);
+        System.out.println(str6);
+        System.out.println(str7);
+        System.out.println(str8);
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+1.0
+3.14
+a
+true
+```
+
+
+
+#### 方式二
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        byte b = 1;
+        short s = 2;
+        int i = 3;
+        long l = 4;
+        float f = 1.0F;
+        double d = 3.14;
+        char c = 'a';
+        boolean bool = true;
+
+        String str1 = "" + b;
+        String str2 = "" + s;
+        String str3 = "" + i;
+        String str4 = "" + l;
+        String str5 = "" + f;
+        String str6 = "" + d;
+        String str7 = "" + c;
+        String str8 = "" + bool;
+
+        System.out.println(str1);
+        System.out.println(str2);
+        System.out.println(str3);
+        System.out.println(str4);
+        System.out.println(str5);
+        System.out.println(str6);
+        System.out.println(str7);
+        System.out.println(str8);
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+1.0
+3.14
+a
+true
+```
+
+
+
+### String → 基本数据类型
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        String str1 = "1";
+        String str2 = "2";
+        String str3 = "3";
+        String str4 = "4";
+        String str5 = "0.1";
+        String str6 = "3.14";
+        String str7 = "a";
+        String str8 = "true";
+
+        byte b = Byte.parseByte(str1);
+        short s = Short.parseShort(str2);
+        int i = Integer.parseInt(str3);
+        long l = Long.parseLong(str4);
+        float f = Float.parseFloat(str5);
+        double d = Double.parseDouble(str6);
+        char c = str7.charAt(0);
+        boolean bool = Boolean.parseBoolean(str8);
+
+        System.out.println(b);
+        System.out.println(s);
+        System.out.println(i);
+        System.out.println(l);
+        System.out.println(f);
+        System.out.println(d);
+        System.out.println(c);
+        System.out.println(bool);
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+0.1
+3.14
+a
+true
+```
+
+
+
 ## 包装类
 
 | 基本数据类型 |  包装类   |
@@ -745,6 +897,8 @@ true
 
 #### 手动装箱
 
+##### 方式一
+
 ```java
 public class Test {
     public static void main(String[] args) {
@@ -756,6 +910,7 @@ public class Test {
         Double d = new Double(3.14);
         Character c = new Character('a');
         Boolean bool = new Boolean(true);
+        
         System.out.println(b);
         System.out.println(s);
         System.out.println(i);
@@ -783,6 +938,8 @@ true
 
 
 
+##### 方式二
+
 ```java
 public class Test {
     public static void main(String[] args) {
@@ -794,6 +951,7 @@ public class Test {
         Double d = Double.valueOf(3.14);
         Character c = Character.valueOf('a');
         Boolean bool = Boolean.valueOf(true);
+        
         System.out.println(b);
         System.out.println(s);
         System.out.println(i);
@@ -827,21 +985,29 @@ true
 public class Test {
     public static void main(String[] args) {
         Byte b1 = 1;
-        int b2 = b1;
+        byte b2 = b1;
+
         Short s1 = 2;
         short s2 = s1;
+
         Integer i1 = 3;
         int i2 = i1;
+
         Long l1 = 4L;
         long l2 = l1;
+
         Float f1 = 0.1F;
         float f2 = f1;
+
         Double d1 = 3.14;
         double d2 = d1;
+
         Character c1 = 'a';
         char c2 = c1;
+
         Boolean bool1 = true;
         boolean bool2 = bool1;
+
         System.out.println(b2);
         System.out.println(s2);
         System.out.println(i2);
@@ -875,21 +1041,29 @@ true
 public class Test {
     public static void main(String[] args) {
         Byte b1 = 1;
-        int b2 = b1.byteValue();
+        byte b2 = b1.byteValue();
+
         Short s1 = 2;
         short s2 = s1.shortValue();
+
         Integer i1 = 3;
         int i2 = i1.intValue();
+
         Long l1 = 4L;
         long l2 = l1.longValue();
+
         Float f1 = 0.1F;
         float f2 = f1.floatValue();
+
         Double d1 = 3.14;
         double d2 = d1.doubleValue();
+
         Character c1 = 'a';
         char c2 = c1.charValue();
+
         Boolean bool1 = true;
         boolean bool2 = bool1.booleanValue();
+
         System.out.println(b2);
         System.out.println(s2);
         System.out.println(i2);
@@ -1240,6 +1414,7 @@ public class Test {
         Double d = 3.14;
         Character c = 'a';
         Boolean bool = true;
+
         String str1 = b.toString();
         String str2 = s.toString();
         String str3 = i.toString();
@@ -1248,6 +1423,7 @@ public class Test {
         String str6 = d.toString();
         String str7 = c.toString();
         String str8 = bool.toString();
+
         System.out.println(str1);
         System.out.println(str2);
         System.out.println(str3);
@@ -1288,6 +1464,7 @@ public class Test {
         Double d = 3.14;
         Character c = 'a';
         Boolean bool = true;
+
         String str1 = String.valueOf(b);
         String str2 = String.valueOf(s);
         String str3 = String.valueOf(i);
@@ -1296,6 +1473,7 @@ public class Test {
         String str6 = String.valueOf(d);
         String str7 = String.valueOf(c);
         String str8 = String.valueOf(bool);
+
         System.out.println(str1);
         System.out.println(str2);
         System.out.println(str3);
@@ -1336,6 +1514,7 @@ public class Test {
         Double d = 3.14;
         Character c = 'a';
         Boolean bool = true;
+
         String str1 = "" + b;
         String str2 = "" + s;
         String str3 = "" + i;
@@ -1344,6 +1523,7 @@ public class Test {
         String str6 = "" + d;
         String str7 = "" + c;
         String str8 = "" + bool;
+
         System.out.println(str1);
         System.out.println(str2);
         System.out.println(str3);
@@ -1385,6 +1565,7 @@ public class Test {
         String str5 = "0.1";
         String str6 = "3.14";
         String str7 = "true";
+        
         Byte b = Byte.valueOf(str1);
         Short s = Short.valueOf(str2);
         Integer i = Integer.valueOf(str3);
@@ -1392,6 +1573,7 @@ public class Test {
         Float f = Float.valueOf(str5);
         Double d = Double.valueOf(str6);
         Boolean bool = Boolean.valueOf(str7);
+        
         System.out.println(b);
         System.out.println(s);
         System.out.println(i);
@@ -1429,6 +1611,7 @@ public class Test {
         String str5 = "0.1";
         String str6 = "3.14";
         String str7 = "true";
+        
         Byte b = new Byte(str1);
         Short s = new Short(str2);
         Integer i = new Integer(str3);
@@ -1436,6 +1619,7 @@ public class Test {
         Float f = new Float(str5);
         Double d = new Double(str6);
         Boolean bool = new Boolean(str7);
+        
         System.out.println(b);
         System.out.println(s);
         System.out.println(i);
@@ -1607,473 +1791,4 @@ public class Test {
 0.1
 0
 ```
-
-
-
-## 字符串
-
-### String
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        String s1 = "abc";
-        String s2 = new String("abc");
-        System.out.println(s1 == s2);  // false
-        System.out.println(s1.equals(s2));  // true
-        System.out.println(s1 == s1.intern());  // true
-        System.out.println(s2 == s2.intern());  // false
-        System.out.println(s1.intern() == s2.intern());  // true
-    }
-}
-```
-
-运行结果：
-
-```
-false
-true
-true
-false
-true
-```
-
-
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        String s1 = "abc";
-        String s2 = "def";
-        String s3 = "abcdef";
-        String s4 = s1 + s2;
-        System.out.println(s3 == s4);  // false
-        System.out.println(s3.equals(s4));  // true
-        System.out.println(s3 == s4.intern());  // true
-        System.out.println(s4 == s4.intern());  // false
-    }
-}
-```
-
-运行结果：
-
-```
-false
-true
-true
-false
-```
-
-
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		String s1 = "abc";
-		String s2 = "ab";
-		char c = 'a';
-
-		System.out.println(s1.length());
-		System.out.println(s1.charAt(0));
-		System.out.println(s1 + s2);
-		System.out.println(s1.concat(s2));
-		System.out.println(String.format("%s %s", s1, s2));
-		System.out.println(s1.equals(s2));
-		System.out.println(s1.contains(s2));
-		System.out.println(s1.indexOf(s2));
-		System.out.println(s1.indexOf(c));
-		System.out.println(s1.lastIndexOf(s2));
-		System.out.println(s1.lastIndexOf(c));
-	}
-}
-```
-
-运行结果：
-
-```
-3
-a
-abcab
-abcab
-abc ab
-false
-true
-0
-0
-0
-0
-```
-
-
-
-### 基本数据类型 → String
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        byte b = 1;
-        short s = 2;
-        int i = 3;
-        long l = 4;
-        float f = 1.0F;
-        double d = 3.14;
-        char c = 'a';
-        boolean bool = true;
-
-        String s1 = "" + b;
-        String s2 = "" + s;
-        String s3 = "" + i;
-        String s4 = "" + l;
-        String s5 = "" + f;
-        String s6 = "" + d;
-        String s7 = "" + c;
-        String s8 = "" + bool;
-
-        System.out.println(s1);
-        System.out.println(s2);
-        System.out.println(s3);
-        System.out.println(s4);
-        System.out.println(s5);
-        System.out.println(s6);
-        System.out.println(s7);
-        System.out.println(s8);
-    }
-}
-```
-
-运行结果：
-
-```
-1
-2
-3
-4
-1.0
-3.14
-a
-true
-```
-
-
-
-### String → 基本数据类型
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		String str = "1";
-
-		byte b = Byte.parseByte(str);
-		short s = Short.parseShort(str);
-		int i = Integer.parseInt(str);
-		long l = Long.parseLong(str);
-		float f = Float.parseFloat(str);
-		double d = Double.parseDouble(str);
-		char c = str.charAt(0);
-		boolean bool = Boolean.parseBoolean(str);
-
-		System.out.println(str);
-		System.out.println(b);
-		System.out.println(s);
-		System.out.println(i);
-		System.out.println(l);
-		System.out.println(f);
-		System.out.println(d);
-		System.out.println(c);
-		System.out.println(bool);
-	}
-}
-```
-
-运行结果：
-
-```
-1
-1
-1
-1
-1
-1.0
-1.0
-1
-false
-```
-
-
-
-### split
-
-```java
-import java.util.Arrays;
-
-public class Test {
-    public static void main(String[] args) {
-        String s = "/a/b//c/";
-        String[] arr1 = s.split("/");
-        String[] arr2 = s.split("/+");
-        String[] arr3 = s.split("(?<=/)");
-        String[] arr4 = s.split("((?<=/)|(?=/))");
-        System.out.println(Arrays.toString(arr1));
-        System.out.println(Arrays.toString(arr2));
-        System.out.println(Arrays.toString(arr3));
-        System.out.println(Arrays.toString(arr4));
-    }
-}
-```
-
-运行结果：
-
-```
-[, a, b, , c]
-[, a, b, c]
-[/, a/, b/, /, c/]
-[/, a, /, b, /, /, c, /]
-```
-
-
-
-```java
-import java.util.Arrays;
-
-public class Test {
-    public static void main(String[] args) {
-        String s = "+a-b*c/d+";
-        String[] arr1 = s.split("\\+|-|\\*|/");
-        String[] arr2 = s.split("(?<=\\+|-|\\*|/)");
-        String[] arr3 = s.split("((?<=\\+|-|\\*|/)|(?=\\+|-|\\*|/))");
-        System.out.println(Arrays.toString(arr1));
-        System.out.println(Arrays.toString(arr2));
-        System.out.println(Arrays.toString(arr3));
-    }
-}
-```
-
-运行结果：
-
-```
-[, a, b, c, d]
-[+, a-, b*, c/, d+]
-[+, a, -, b, *, c, /, d, +]
-```
-
-
-
-### replace
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        String s = "/a/b//c/";
-        String r1 = s.replace("/", "+");
-        String r2 = s.replace("/", "");
-        System.out.println(r1);
-        System.out.println(r2);
-    }
-}
-```
-
-运行结果：
-
-```
-+a+b++c+
-abc
-```
-
-
-
-### replaceFirst
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        String s = "/a/b//c/";
-        String r = s.replaceFirst("/", "+");
-        System.out.println(r);
-    }
-}
-```
-
-运行结果：
-
-```
-+a/b//c/
-```
-
-
-
-### replaceAll
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        String s = "/a/b//c/";
-        String r = s.replaceAll("/", "+");
-        System.out.println(r);
-    }
-}
-```
-
-运行结果：
-
-```
-+a+b++c+
-```
-
-
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        String s = "ABC/abc/123";
-        String r = s.replaceAll("[A-Za-z0-9]", "+");
-        System.out.println(r);
-    }
-}
-```
-
-运行结果：
-
-```
-+++/+++/+++
-```
-
-
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        String s = "ABC/abc/123";
-        String r = s.replaceAll("[^A-Za-z0-9]", "+");
-        System.out.println(r);
-    }
-}
-```
-
-运行结果：
-
-```
-ABC+abc+123
-```
-
-
-
-### toCharArray
-
-```java
-import java.util.Arrays;
-
-public class Test {
-    public static void main(String[] args) {
-        String s = "abc";
-        char[] c = s.toCharArray();
-        System.out.println(Arrays.toString(c));
-    }
-}
-```
-
-运行结果：
-
-```
-[a, b, c]
-```
-
-
-
-### char[] → String
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        char[] c = {'a', 'b', 'c'};
-        String s = new String(c);
-        System.out.println(s);
-    }
-}
-```
-
-运行结果：
-
-```
-abc
-```
-
-
-
-### toLowerCase
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        String s = "ABCdef";
-        String r = s.toLowerCase();
-        System.out.println(r);
-    }
-}
-```
-
-运行结果：
-
-```
-abcdef
-```
-
-
-
-### toUpperCase
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        String s = "ABCdef";
-        String r = s.toUpperCase();
-        System.out.println(r);
-    }
-}
-```
-
-运行结果：
-
-```
-ABCDEF
-```
-
-
-
-### 问题
-
-```java
-public class Test {
-    public static void main(String[] args) {
-        C c = new C();
-        c.f(c.s, c.arr);
-        System.out.println(c.s);
-        System.out.println(c.arr);
-    }
-}
-
-class C {
-    String s = new String("abc");
-    char[] arr = {'a', 'b', 'c'};
-
-    void f(String s, char[] arr) {
-        s = "def";
-        arr[0] = 'd';
-    }
-}
-```
-
-运行结果：
-
-```
-abc
-dbc
-```
-
-
-
-## StringBuilder
-
-
-
-## StringBuffer
 
