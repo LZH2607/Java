@@ -14,9 +14,13 @@ jconsole
 
 
 
-## Thread、Runnable
+## 创建线程
 
-使用Thread、Runnable均可
+创建线程：
+	Thread
+	Runnable
+	Callable
+	线程池
 
 
 
@@ -94,134 +98,9 @@ Thread-0.T1.run: 9
 
 
 
-```java
-public class Demo {
-    public static void main(String[] args) {
-        T2 t = new T2();
-        t.start();
-    }
-}
-
-class T1 extends Thread {
-    @Override
-    public void run() {
-        String threadName = Thread.currentThread().getName();
-        int cnt = 0;
-        while (cnt < 10) {
-            System.out.println(threadName + ".T1.run: " + cnt);
-            cnt++;
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-}
-
-class T2 extends Thread {
-    @Override
-    public void run() {
-        T1 t = new T1();
-        t.start();
-        String threadName = Thread.currentThread().getName();
-        int cnt = 0;
-        while (cnt < 10) {
-            System.out.println(threadName + ".T2.run: " + cnt);
-            cnt++;
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-}
-```
-
-运行结果：
-
-```
-Thread-0.T2.run: 0
-Thread-1.T1.run: 0
-Thread-1.T1.run: 1
-Thread-0.T2.run: 1
-Thread-0.T2.run: 2
-Thread-1.T1.run: 2
-Thread-0.T2.run: 3
-Thread-1.T1.run: 3
-Thread-1.T1.run: 4
-Thread-0.T2.run: 4
-Thread-0.T2.run: 5
-Thread-1.T1.run: 5
-Thread-0.T2.run: 6
-Thread-1.T1.run: 6
-Thread-0.T2.run: 7
-Thread-1.T1.run: 7
-Thread-0.T2.run: 8
-Thread-1.T1.run: 8
-Thread-0.T2.run: 9
-Thread-1.T1.run: 9
-```
-
-
-
-```java
-public class Demo {
-    public static void main(String[] args) {
-        T t1 = new T();
-        T t2 = new T();
-        t1.start();
-        t2.start();
-    }
-}
-
-class T extends Thread {
-    @Override
-    public void run() {
-        String threadName = Thread.currentThread().getName();
-        int cnt = 0;
-        while (cnt < 10) {
-            System.out.println(threadName + ": " + cnt);
-            cnt++;
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-}
-```
-
-运行结果：
-
-```
-Thread-1: 0
-Thread-0: 0
-Thread-0: 1
-Thread-1: 1
-Thread-0: 2
-Thread-1: 2
-Thread-1: 3
-Thread-0: 3
-Thread-0: 4
-Thread-1: 4
-Thread-1: 5
-Thread-0: 5
-Thread-1: 6
-Thread-0: 6
-Thread-1: 7
-Thread-0: 7
-Thread-1: 8
-Thread-0: 8
-Thread-0: 9
-Thread-1: 9
-```
-
-
-
 ### Runnable
+
+#### 写法一
 
 ```java
 public class Demo {
@@ -298,49 +177,38 @@ Thread-1.R2.run: 9
 
 
 
+#### 写法二
+
 ```java
 public class Demo {
     public static void main(String[] args) {
-        R2 r = new R2();
-        Thread thread = new Thread(r);
-        thread.start();
-    }
-}
-
-class R1 implements Runnable {
-    @Override
-    public void run() {
-        String threadName = Thread.currentThread().getName();
-        int cnt = 0;
-        while (cnt < 10) {
-            System.out.println(threadName + ".R1.run: " + cnt);
-            cnt++;
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
+        new Thread(() -> {
+            String threadName = Thread.currentThread().getName();
+            int cnt = 0;
+            while (cnt < 10) {
+                System.out.println(threadName + ": " + cnt);
+                cnt++;
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
+                }
             }
-        }
-    }
-}
+        }, "thread1").start();
 
-class R2 implements Runnable {
-    @Override
-    public void run() {
-        R1 r = new R1();
-        Thread thread = new Thread(r);
-        thread.start();
-        String threadName = Thread.currentThread().getName();
-        int cnt = 0;
-        while (cnt < 10) {
-            System.out.println(threadName + ".R2.run: " + cnt);
-            cnt++;
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
+        new Thread(() -> {
+            String threadName = Thread.currentThread().getName();
+            int cnt = 0;
+            while (cnt < 10) {
+                System.out.println(threadName + ": " + cnt);
+                cnt++;
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
+                }
             }
-        }
+        }, "thread2").start();
     }
 }
 ```
@@ -348,49 +216,58 @@ class R2 implements Runnable {
 运行结果：
 
 ```
-Thread-0.R2.run: 0
-Thread-1.R1.run: 0
-Thread-1.R1.run: 1
-Thread-0.R2.run: 1
-Thread-0.R2.run: 2
-Thread-1.R1.run: 2
-Thread-1.R1.run: 3
-Thread-0.R2.run: 3
-Thread-0.R2.run: 4
-Thread-1.R1.run: 4
-Thread-1.R1.run: 5
-Thread-0.R2.run: 5
-Thread-1.R1.run: 6
-Thread-0.R2.run: 6
-Thread-0.R2.run: 7
-Thread-1.R1.run: 7
-Thread-0.R2.run: 8
-Thread-1.R1.run: 8
-Thread-0.R2.run: 9
-Thread-1.R1.run: 9
+thread1: 0
+thread2: 0
+thread2: 1
+thread1: 1
+thread2: 2
+thread1: 2
+thread2: 3
+thread1: 3
+thread2: 4
+thread1: 4
+thread2: 5
+thread1: 5
+thread2: 6
+thread1: 6
+thread2: 7
+thread1: 7
+thread2: 8
+thread1: 8
+thread2: 9
+thread1: 9
 ```
 
 
 
+### Callable
+
+#### 写法一
+
 ```java
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
+
 public class Demo {
     public static void main(String[] args) {
-        R r1 = new R();
-        R r2 = new R();
-        Thread thread1 = new Thread(r1);
-        Thread thread2 = new Thread(r2);
-        thread1.start();
-        thread2.start();
+        C1 c1 = new C1();
+        C2 c2 = new C2();
+        FutureTask<Integer> futureTask1 = new FutureTask<>(c1);
+        FutureTask<Integer> futureTask2 = new FutureTask<>(c2);
+        Thread t1 = new Thread(futureTask1);
+        Thread t2 = new Thread(futureTask2);
+        t1.start();
+        t2.start();
     }
 }
 
-class R implements Runnable {
+class C1 implements Callable {
     @Override
-    public void run() {
+    public Integer call() {
         String threadName = Thread.currentThread().getName();
         int cnt = 0;
         while (cnt < 10) {
-            System.out.println(threadName + ": " + cnt);
+            System.out.println(threadName + ".C1.run: " + cnt);
             cnt++;
             try {
                 Thread.sleep(1000);
@@ -398,6 +275,95 @@ class R implements Runnable {
                 System.out.println(e.getMessage());
             }
         }
+        return 0;
+    }
+}
+
+class C2 implements Callable {
+    @Override
+    public Integer call() {
+        String threadName = Thread.currentThread().getName();
+        int cnt = 0;
+        while (cnt < 10) {
+            System.out.println(threadName + ".C2.run: " + cnt);
+            cnt++;
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return 0;
+    }
+}
+```
+
+运行结果：
+
+```
+Thread-0.C1.run: 0
+Thread-1.C2.run: 0
+Thread-1.C2.run: 1
+Thread-0.C1.run: 1
+Thread-0.C1.run: 2
+Thread-1.C2.run: 2
+Thread-1.C2.run: 3
+Thread-0.C1.run: 3
+Thread-0.C1.run: 4
+Thread-1.C2.run: 4
+Thread-0.C1.run: 5
+Thread-1.C2.run: 5
+Thread-0.C1.run: 6
+Thread-1.C2.run: 6
+Thread-1.C2.run: 7
+Thread-0.C1.run: 7
+Thread-0.C1.run: 8
+Thread-1.C2.run: 8
+Thread-0.C1.run: 9
+Thread-1.C2.run: 9
+```
+
+
+
+#### 写法二
+
+```java
+import java.util.concurrent.FutureTask;
+
+public class Demo {
+    public static void main(String[] args) {
+        FutureTask<Integer> futureTask1 = new FutureTask<>(() -> {
+            String threadName = Thread.currentThread().getName();
+            int cnt = 0;
+            while (cnt < 10) {
+                System.out.println(threadName + ": " + cnt);
+                cnt++;
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            return 0;
+        });
+
+        FutureTask<Integer> futureTask2 = new FutureTask<>(() -> {
+            String threadName = Thread.currentThread().getName();
+            int cnt = 0;
+            while (cnt < 10) {
+                System.out.println(threadName + ": " + cnt);
+                cnt++;
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            return 0;
+        });
+
+        new Thread(futureTask1, "thread1").start();
+        new Thread(futureTask2, "thread2").start();
     }
 }
 ```
@@ -411,18 +377,18 @@ Thread-1: 1
 Thread-0: 1
 Thread-1: 2
 Thread-0: 2
-Thread-1: 3
 Thread-0: 3
-Thread-0: 4
+Thread-1: 3
 Thread-1: 4
-Thread-0: 5
+Thread-0: 4
 Thread-1: 5
+Thread-0: 5
 Thread-1: 6
 Thread-0: 6
-Thread-0: 7
 Thread-1: 7
-Thread-1: 8
+Thread-0: 7
 Thread-0: 8
+Thread-1: 8
 Thread-1: 9
 Thread-0: 9
 ```
@@ -997,36 +963,40 @@ TERMINATED
 
 
 
-## 同步互斥
-
-### 示例
+## synchronized
 
 ```java
 public class Demo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         T t1 = new T();
         T t2 = new T();
         T t3 = new T();
         t1.start();
         t2.start();
         t3.start();
+        Thread.sleep(1000);
+        System.out.println(C.resource);
+        System.out.println(C.cnt);
+    }
+}
+
+class C {
+    static int resource = 10000;
+    static int cnt = 0;
+
+    static void f() {
+        if (resource > 0) {
+            resource--;
+            cnt++;
+        }
     }
 }
 
 class T extends Thread {
-    static int resource = 10;
-
     @Override
     public void run() {
-        String threadName = Thread.currentThread().getName();
-        while (resource > 0) {
-            resource--;
-            System.out.println(threadName + ": " + resource);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
-            }
+        while (C.resource > 0) {
+            C.f();
         }
     }
 }
@@ -1035,19 +1005,167 @@ class T extends Thread {
 运行结果：
 
 ```
-Thread-0: 9
-Thread-1: 7
-Thread-2: 7
-Thread-0: 6
-Thread-1: 5
-Thread-2: 4
-Thread-1: 3
-Thread-2: 2
-Thread-0: 3
-Thread-0: 1
-Thread-2: 0
-Thread-1: 1
+0
+10005
 ```
 
 
+
+### 同步方法
+
+|   同步方法   |    锁     |
+| :----------: | :-------: |
+| 普通同步方法 | 实例对象  |
+| 静态同步方法 | 类的Class |
+
+
+
+```java
+public class Demo {
+    public static void main(String[] args) throws InterruptedException {
+        T t1 = new T();
+        T t2 = new T();
+        T t3 = new T();
+        t1.start();
+        t2.start();
+        t3.start();
+        Thread.sleep(1000);
+        System.out.println(C.resource);
+        System.out.println(C.cnt);
+    }
+}
+
+class C {
+    static int resource = 10000;
+    static int cnt = 0;
+
+    synchronized static void f() {
+        if (resource > 0) {
+            resource--;
+            cnt++;
+        }
+    }
+}
+
+class T extends Thread {
+    @Override
+    public void run() {
+        while (C.resource > 0) {
+            C.f();
+        }
+    }
+}
+```
+
+运行结果：
+
+```
+0
+10000
+```
+
+
+
+### 同步代码块
+
+```java
+public class Demo {
+    public static void main(String[] args) throws InterruptedException {
+        T t1 = new T();
+        T t2 = new T();
+        T t3 = new T();
+        t1.start();
+        t2.start();
+        t3.start();
+        Thread.sleep(1000);
+        System.out.println(C.resource);
+        System.out.println(C.cnt);
+    }
+}
+
+class C {
+    static int resource = 10000;
+    static int cnt = 0;
+
+    static void f() {
+        synchronized (C.class) {
+            if (resource > 0) {
+                resource--;
+                cnt++;
+            }
+        }
+    }
+}
+
+class T extends Thread {
+    @Override
+    public void run() {
+        while (C.resource > 0) {
+            C.f();
+        }
+    }
+}
+```
+
+运行结果：
+
+```
+0
+10000
+```
+
+
+
+```java
+public class Demo {
+    public static void main(String[] args) throws InterruptedException {
+        C c = new C();
+        T t1 = new T(c);
+        T t2 = new T(c);
+        T t3 = new T(c);
+        t1.start();
+        t2.start();
+        t3.start();
+        Thread.sleep(1000);
+        System.out.println(c.resource);
+        System.out.println(c.cnt);
+    }
+}
+
+class C {
+    int resource = 10000;
+    int cnt = 0;
+
+    void f() {
+        synchronized (this) {
+            if (resource > 0) {
+                resource--;
+                cnt++;
+            }
+        }
+    }
+}
+
+class T extends Thread {
+    C c;
+
+    T(C c) {
+        this.c = c;
+    }
+
+    @Override
+    public void run() {
+        while (c.resource > 0) {
+            c.f();
+        }
+    }
+}
+```
+
+运行结果：
+
+```
+0
+10000
+```
 
