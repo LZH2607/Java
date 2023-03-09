@@ -6,10 +6,16 @@
 
 
 
+相关视频：
+[【尚硅谷】大厂必备技术之JUC并发编程](https://www.bilibili.com/video/BV1Kw411Z7dF/)
+
+
+
 ## Lock
 
 Lock
 	ReentrantLock
+	ReentrantReadWriteLock
 
 
 
@@ -82,7 +88,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Demo {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         C c = new C();
 
         new Thread(() -> {
@@ -108,8 +114,7 @@ class C {
         try {
             if (resource > 0) {
                 resource--;
-                String threadName = Thread.currentThread().getName();
-                System.out.println(threadName + ": " + resource);
+                System.out.println(Thread.currentThread().getName() + ": " + resource);
             }
         } finally {
             lock.unlock();
@@ -130,7 +135,7 @@ thread1: 4
 thread1: 3
 thread1: 2
 thread1: 1
-thread2: 0
+thread1: 0
 ```
 
 
@@ -142,7 +147,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Demo {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         C c = new C();
 
         new Thread(() -> {
@@ -168,8 +173,7 @@ class C {
         try {
             if (resource > 0) {
                 resource--;
-                String threadName = Thread.currentThread().getName();
-                System.out.println(threadName + ": " + resource);
+                System.out.println(Thread.currentThread().getName() + ": " + resource);
             }
         } finally {
             lock.unlock();
@@ -191,6 +195,84 @@ thread1: 3
 thread2: 2
 thread1: 1
 thread2: 0
+```
+
+
+
+### ReentrantReadWriteLock
+
+读读共享
+读写互斥
+写写互斥
+
+```java
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+public class Demo {
+    public static void main(String[] args) {
+        C c = new C();
+
+        for (int i = 1; i <= 5; i++) {
+            int resource = i;
+            new Thread(() -> {
+                c.write(resource);
+            }).start();
+
+            new Thread(() -> {
+                c.read();
+            }).start();
+        }
+    }
+}
+
+class C {
+    int resource = 0;
+    ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+    Lock readLock = readWriteLock.readLock();
+    Lock writeLock = readWriteLock.writeLock();
+
+    void read() {
+        readLock.lock();
+        try {
+            System.out.println(Thread.currentThread().getName() + ".read: " + resource);
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            readLock.unlock();
+        }
+    }
+
+    void write(int resource) {
+        writeLock.lock();
+        try {
+            this.resource = resource;
+            System.out.println(Thread.currentThread().getName() + ".write:  " + this.resource);
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            writeLock.unlock();
+        }
+    }
+}
+```
+
+运行结果：
+
+```
+Thread-0.write:  1
+Thread-2.write:  2
+Thread-3.read: 2
+Thread-6.write:  4
+Thread-1.read: 4
+Thread-7.read: 4
+Thread-4.write:  3
+Thread-5.read: 3
+Thread-8.write:  5
+Thread-9.read: 5
 ```
 
 
@@ -234,8 +316,7 @@ class C {
             this.wait();
         }
         resource++;
-        String threadName = Thread.currentThread().getName();
-        System.out.println(threadName + ": " + resource);
+        System.out.println(Thread.currentThread().getName() + ": " + resource);
         this.notifyAll();
     }
 
@@ -244,8 +325,7 @@ class C {
             this.wait();
         }
         resource--;
-        String threadName = Thread.currentThread().getName();
-        System.out.println(threadName + ": " + resource);
+        System.out.println(Thread.currentThread().getName() + ": " + resource);
         this.notifyAll();
     }
 }
@@ -335,8 +415,7 @@ class C {
             this.wait();
         }
         resource++;
-        String threadName = Thread.currentThread().getName();
-        System.out.println(threadName + ": " + resource);
+        System.out.println(Thread.currentThread().getName() + ": " + resource);
         this.notifyAll();
     }
 
@@ -345,8 +424,7 @@ class C {
             this.wait();
         }
         resource--;
-        String threadName = Thread.currentThread().getName();
-        System.out.println(threadName + ": " + resource);
+        System.out.println(Thread.currentThread().getName() + ": " + resource);
         this.notifyAll();
     }
 }
@@ -456,8 +534,7 @@ class C {
             this.wait();
         }
         resource++;
-        String threadName = Thread.currentThread().getName();
-        System.out.println(threadName + ": " + resource);
+        System.out.println(Thread.currentThread().getName() + ": " + resource);
         this.notifyAll();
     }
 
@@ -466,8 +543,7 @@ class C {
             this.wait();
         }
         resource--;
-        String threadName = Thread.currentThread().getName();
-        System.out.println(threadName + ": " + resource);
+        System.out.println(Thread.currentThread().getName() + ": " + resource);
         this.notifyAll();
     }
 }
@@ -565,8 +641,7 @@ class C {
                 condition.await();
             }
             resource++;
-            String threadName = Thread.currentThread().getName();
-            System.out.println(threadName + ": " + resource);
+            System.out.println(Thread.currentThread().getName() + ": " + resource);
             condition.signalAll();
         } finally {
             lock.unlock();
@@ -581,8 +656,7 @@ class C {
                 condition.await();
             }
             resource--;
-            String threadName = Thread.currentThread().getName();
-            System.out.println(threadName + ": " + resource);
+            System.out.println(Thread.currentThread().getName() + ": " + resource);
             condition.signalAll();
         } finally {
             lock.unlock();
@@ -766,7 +840,7 @@ public class Demo {
     static final Object object1 = new Object();
     static final Object object2 = new Object();
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         new Thread(() -> {
             String threadName = Thread.currentThread().getName();
             synchronized (object1) {
@@ -819,7 +893,7 @@ public class Demo {
     static Lock lock1 = new ReentrantLock();
     static Lock lock2 = new ReentrantLock();
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         new Thread(() -> {
             String threadName = Thread.currentThread().getName();
             lock1.lock();
@@ -1320,4 +1394,572 @@ public class Demo {
 ```
 
 
+
+## 辅助类
+
+辅助类：
+	CountDownLatch
+	CyclicBarrier
+	Semaphore
+
+
+
+### CountDownLatch
+
+```java
+import java.util.concurrent.CountDownLatch;
+
+public class Demo {
+    public static void main(String[] args) throws InterruptedException {
+        CountDownLatch countDownLatch = new CountDownLatch(6);
+        for (int i = 1; i <= 6; i++) {
+            new Thread(() -> {
+                System.out.println(Thread.currentThread().getName() + ".run");
+                countDownLatch.countDown();
+            }).start();
+        }
+        countDownLatch.await();
+        System.out.println("main");
+    }
+}
+```
+
+运行结果：
+
+```
+Thread-3.run
+Thread-0.run
+Thread-2.run
+Thread-5.run
+Thread-1.run
+Thread-4.run
+main
+```
+
+
+
+### CyclicBarrier
+
+```java
+import java.util.concurrent.CyclicBarrier;
+
+public class Demo {
+    public static void main(String[] args) {
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(6, () -> {
+            System.out.println("CyclicBarrier.run");
+        });
+        for (int i = 1; i <= 24; i++) {
+            new Thread(() -> {
+                System.out.println(Thread.currentThread().getName() + ".run");
+                try {
+                    cyclicBarrier.await();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }).start();
+        }
+    }
+}
+```
+
+运行结果：
+
+```
+Thread-4.run
+Thread-10.run
+Thread-7.run
+Thread-5.run
+Thread-13.run
+Thread-20.run
+Thread-2.run
+Thread-8.run
+Thread-16.run
+Thread-9.run
+Thread-12.run
+Thread-6.run
+Thread-14.run
+Thread-21.run
+Thread-15.run
+CyclicBarrier.run
+Thread-0.run
+Thread-18.run
+CyclicBarrier.run
+Thread-3.run
+Thread-19.run
+CyclicBarrier.run
+Thread-17.run
+Thread-11.run
+Thread-1.run
+Thread-22.run
+Thread-23.run
+CyclicBarrier.run
+```
+
+
+
+### Semaphore
+
+```java
+import java.util.concurrent.Semaphore;
+
+public class Demo {
+    public static void main(String[] args) {
+        Semaphore semaphore = new Semaphore(3);
+        for (int i = 1; i <= 6; i++) {
+            new Thread(() -> {
+                String threadName = Thread.currentThread().getName();
+                try {
+                    semaphore.acquire();
+                    System.out.println(threadName + ": acquire");
+                } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
+                } finally {
+                    semaphore.release();
+                    System.out.println(threadName + ": release");
+                }
+            }).start();
+        }
+    }
+}
+```
+
+运行结果：
+
+```
+Thread-2: acquire
+Thread-0: acquire
+Thread-1: acquire
+Thread-1: release
+Thread-4: acquire
+Thread-4: release
+Thread-2: release
+Thread-5: acquire
+Thread-0: release
+Thread-3: acquire
+Thread-3: release
+Thread-5: release
+```
+
+
+
+## 阻塞队列
+
+BlockingQueue：
+	ArrayBlockingQueue
+	LinkedBlockingQueue
+	DelayQueue
+	PriorityBlockingQueue
+	SynchronousQueue
+	LinkedTransferQueue
+	LinkedBlockingDeque
+
+
+
+### 常用方法
+
+|  方法  | 抛出异常 | 不抛出异常 | 阻塞等待 | 超时返回 |
+| :----: | :------: | :--------: | :------: | :------: |
+|  插入  |   add    |   offer    |   put    |  offer   |
+|  删除  |  remove  |    poll    |   take   |   poll   |
+| 头元素 | element  |    peek    |    无    |    无    |
+
+
+
+#### add
+
+```java
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+
+public class Demo {
+    public static void main(String[] args) {
+        BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(3);
+
+        System.out.println(blockingQueue.add("abc"));
+        System.out.println(blockingQueue);
+
+        System.out.println(blockingQueue.add("def"));
+        System.out.println(blockingQueue);
+
+        System.out.println(blockingQueue.add("ghi"));
+        System.out.println(blockingQueue);
+
+        System.out.println(blockingQueue.add("jkl"));
+        System.out.println(blockingQueue);
+    }
+}
+```
+
+运行结果：
+
+```
+true
+[abc]
+true
+[abc, def]
+true
+[abc, def, ghi]
+Exception in thread "main" java.lang.IllegalStateException: Queue full
+	at java.base/java.util.AbstractQueue.add(AbstractQueue.java:98)
+	at java.base/java.util.concurrent.ArrayBlockingQueue.add(ArrayBlockingQueue.java:329)
+	at Demo.main(Demo.java:17)
+
+Process finished with exit code 1
+```
+
+
+
+#### offer
+
+```java
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+
+public class Demo {
+    public static void main(String[] args) {
+        BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(3);
+
+        System.out.println(blockingQueue.offer("abc"));
+        System.out.println(blockingQueue);
+
+        System.out.println(blockingQueue.offer("def"));
+        System.out.println(blockingQueue);
+
+        System.out.println(blockingQueue.offer("ghi"));
+        System.out.println(blockingQueue);
+
+        System.out.println(blockingQueue.offer("jkl"));
+        System.out.println(blockingQueue);
+    }
+}
+```
+
+运行结果：
+
+```
+true
+[abc]
+true
+[abc, def]
+true
+[abc, def, ghi]
+false
+[abc, def, ghi]
+
+Process finished with exit code 0
+```
+
+
+
+```java
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
+
+public class Demo {
+    public static void main(String[] args) throws InterruptedException {
+        BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(3);
+
+        System.out.println(blockingQueue.offer("abc", 1, TimeUnit.SECONDS));
+        System.out.println(blockingQueue);
+
+        System.out.println(blockingQueue.offer("def", 1, TimeUnit.SECONDS));
+        System.out.println(blockingQueue);
+
+        System.out.println(blockingQueue.offer("ghi", 1, TimeUnit.SECONDS));
+        System.out.println(blockingQueue);
+
+        System.out.println(blockingQueue.offer("jkl", 1, TimeUnit.SECONDS));
+        System.out.println(blockingQueue);
+    }
+}
+```
+
+运行结果：
+
+```
+true
+[abc]
+true
+[abc, def]
+true
+[abc, def, ghi]
+false
+[abc, def, ghi]
+
+Process finished with exit code 0
+```
+
+
+
+#### put
+
+```java
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+
+public class Demo {
+    public static void main(String[] args) throws InterruptedException {
+        BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(3);
+
+        blockingQueue.put("abc");
+        System.out.println(blockingQueue);
+
+        blockingQueue.put("def");
+        System.out.println(blockingQueue);
+
+        blockingQueue.put("ghi");
+        System.out.println(blockingQueue);
+
+        blockingQueue.put("jkl");
+        System.out.println(blockingQueue);
+    }
+}
+```
+
+运行结果（未结束）：
+
+```
+[abc]
+[abc, def]
+[abc, def, ghi]
+```
+
+
+
+#### remove
+
+```java
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+
+public class Demo {
+    public static void main(String[] args) {
+        BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(3);
+
+        System.out.println(blockingQueue.add("abc"));
+        System.out.println(blockingQueue);
+
+        System.out.println(blockingQueue.remove());
+        System.out.println(blockingQueue);
+
+        System.out.println(blockingQueue.remove());
+        System.out.println(blockingQueue);
+    }
+}
+```
+
+运行结果：
+
+```
+true
+[abc]
+abc
+[]
+Exception in thread "main" java.util.NoSuchElementException
+	at java.base/java.util.AbstractQueue.remove(AbstractQueue.java:117)
+	at Demo.main(Demo.java:14)
+
+Process finished with exit code 1
+```
+
+
+
+#### poll
+
+```java
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+
+public class Demo {
+    public static void main(String[] args) {
+        BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(3);
+
+        System.out.println(blockingQueue.offer("abc"));
+        System.out.println(blockingQueue);
+
+        System.out.println(blockingQueue.poll());
+        System.out.println(blockingQueue);
+
+        System.out.println(blockingQueue.poll());
+        System.out.println(blockingQueue);
+    }
+}
+```
+
+运行结果：
+
+```
+true
+[abc]
+abc
+[]
+null
+[]
+
+Process finished with exit code 0
+```
+
+
+
+```java
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
+
+public class Demo {
+    public static void main(String[] args) throws InterruptedException {
+        BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(3);
+
+        System.out.println(blockingQueue.offer("abc", 1, TimeUnit.SECONDS));
+        System.out.println(blockingQueue);
+
+        System.out.println(blockingQueue.poll(1, TimeUnit.SECONDS));
+        System.out.println(blockingQueue);
+
+        System.out.println(blockingQueue.poll(1, TimeUnit.SECONDS));
+        System.out.println(blockingQueue);
+    }
+}
+```
+
+运行结果：
+
+```
+true
+[abc]
+abc
+[]
+null
+[]
+
+Process finished with exit code 0
+```
+
+
+
+#### take
+
+```java
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+
+public class Demo {
+    public static void main(String[] args) throws InterruptedException {
+        BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(3);
+
+        blockingQueue.put("abc");
+        System.out.println(blockingQueue);
+
+        blockingQueue.take();
+        System.out.println(blockingQueue);
+
+        blockingQueue.take();
+        System.out.println(blockingQueue);
+    }
+}
+```
+
+运行结果（未返回）：
+
+```
+[abc]
+[]
+```
+
+
+
+#### element
+
+```java
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+
+public class Demo {
+    public static void main(String[] args) {
+        BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(3);
+
+        blockingQueue.add("abc");
+        System.out.println(blockingQueue);
+        System.out.println(blockingQueue.element());
+
+        blockingQueue.add("def");
+        System.out.println(blockingQueue);
+        System.out.println(blockingQueue.element());
+
+        blockingQueue.remove();
+        System.out.println(blockingQueue);
+        System.out.println(blockingQueue.element());
+
+        blockingQueue.remove();
+        System.out.println(blockingQueue);
+        System.out.println(blockingQueue.element());
+    }
+}
+```
+
+运行结果：
+
+```
+[abc]
+abc
+[abc, def]
+abc
+[def]
+def
+[]
+Exception in thread "main" java.util.NoSuchElementException
+	at java.base/java.util.AbstractQueue.element(AbstractQueue.java:136)
+	at Demo.main(Demo.java:22)
+```
+
+
+
+#### peek
+
+```java
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+
+public class Demo {
+    public static void main(String[] args) {
+        BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(3);
+
+        blockingQueue.add("abc");
+        System.out.println(blockingQueue);
+        System.out.println(blockingQueue.peek());
+
+        blockingQueue.add("def");
+        System.out.println(blockingQueue);
+        System.out.println(blockingQueue.peek());
+
+        blockingQueue.remove();
+        System.out.println(blockingQueue);
+        System.out.println(blockingQueue.peek());
+
+        blockingQueue.remove();
+        System.out.println(blockingQueue);
+        System.out.println(blockingQueue.peek());
+    }
+}
+```
+
+运行结果：
+
+```
+[abc]
+abc
+[abc, def]
+abc
+[def]
+def
+[]
+null
+
+Process finished with exit code 0
+```
+
+
+
+## 线程池
 
