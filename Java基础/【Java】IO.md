@@ -164,8 +164,6 @@ true
 
 ### 获取文件信息
 
-（部分）
-
 ```java
 import java.io.File;
 

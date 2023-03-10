@@ -77,6 +77,8 @@ class C {
 ```
 0
 10000
+
+Process finished with exit code 0
 ```
 
 
@@ -136,6 +138,8 @@ thread1: 3
 thread1: 2
 thread1: 1
 thread1: 0
+
+Process finished with exit code 0
 ```
 
 
@@ -195,6 +199,8 @@ thread1: 3
 thread2: 2
 thread1: 1
 thread2: 0
+
+Process finished with exit code 0
 ```
 
 
@@ -264,15 +270,17 @@ class C {
 
 ```
 Thread-0.write:  1
+Thread-3.read: 1
+Thread-1.read: 1
 Thread-2.write:  2
-Thread-3.read: 2
-Thread-6.write:  4
-Thread-1.read: 4
-Thread-7.read: 4
 Thread-4.write:  3
 Thread-5.read: 3
+Thread-6.write:  4
+Thread-7.read: 4
 Thread-8.write:  5
 Thread-9.read: 5
+
+Process finished with exit code 0
 ```
 
 
@@ -354,6 +362,8 @@ Thread-0: 1
 Thread-1: 0
 Thread-0: 1
 Thread-1: 0
+
+Process finished with exit code 0
 ```
 
 
@@ -473,6 +483,8 @@ thread1: 1
 thread4: 0
 thread1: 1
 thread4: 0
+
+Process finished with exit code 0
 ```
 
 
@@ -592,6 +604,8 @@ thread1: 1
 thread4: 0
 thread1: 1
 thread4: 0
+
+Process finished with exit code 0
 ```
 
 
@@ -688,6 +702,8 @@ Thread-0: 1
 Thread-1: 0
 Thread-0: 1
 Thread-1: 0
+
+Process finished with exit code 0
 ```
 
 
@@ -821,6 +837,8 @@ f3
 f1
 f2
 f3
+
+Process finished with exit code 0
 ```
 
 
@@ -1029,16 +1047,18 @@ public class Demo {
 运行结果：
 
 ```
-[38e]
-[38e, 56b]
-[38e, 56b, 0a3, b04]
-[38e, 56b, 0a3]
-[38e, 56b, 0a3, b04, 00e, cad]
-[38e, 56b, 0a3, b04, 00e]
-[38e, 56b, 0a3, b04, 00e, cad, b3e]
-[38e, 56b, 0a3, b04, 00e, cad, b3e, 66e]
-[38e, 56b, 0a3, b04, 00e, cad, b3e, 66e, 228]
-[38e, 56b, 0a3, b04, 00e, cad, b3e, 66e, 228, 530]
+[a75]
+[a75, 61d, a94]
+[a75, 61d]
+[a75, 61d, a94, b98]
+[a75, 61d, a94, b98, 451]
+[a75, 61d, a94, b98, 451, 725]
+[a75, 61d, a94, b98, 451, 725, 0e6]
+[a75, 61d, a94, b98, 451, 725, 0e6, af9]
+[a75, 61d, a94, b98, 451, 725, 0e6, af9, f5c]
+[a75, 61d, a94, b98, 451, 725, 0e6, af9, f5c, 4d1]
+
+Process finished with exit code 0
 ```
 
 
@@ -1067,16 +1087,18 @@ public class Demo {
 运行结果：
 
 ```
-[76d]
-[76d, 343, 2ad, 524]
-[76d, 343]
-[76d, 343, 2ad]
-[76d, 343, 2ad, 524, e82, ae5]
-[76d, 343, 2ad, 524, e82]
-[76d, 343, 2ad, 524, e82, ae5, d65]
-[76d, 343, 2ad, 524, e82, ae5, d65, d32]
-[76d, 343, 2ad, 524, e82, ae5, d65, d32, dc9]
-[76d, 343, 2ad, 524, e82, ae5, d65, d32, dc9, 6f6]
+[bb1]
+[bb1, a51, e64, 350]
+[bb1, a51, e64, 350, 14d]
+[bb1, a51, e64, 350, 14d, 375]
+[bb1, a51, e64, 350, 14d, 375, 6ad]
+[bb1, a51]
+[bb1, a51, e64]
+[bb1, a51, e64, 350, 14d, 375, 6ad, 4b6]
+[bb1, a51, e64, 350, 14d, 375, 6ad, 4b6, 09b, a5d]
+[bb1, a51, e64, 350, 14d, 375, 6ad, 4b6, 09b]
+
+Process finished with exit code 0
 ```
 
 
@@ -1106,16 +1128,18 @@ public class Demo {
 运行结果：
 
 ```
-[36a]
-[36a, ba7, 3a8]
-[36a, ba7, 3a8, 8dd]
-[36a, ba7]
-[36a, ba7, 3a8, 8dd, 496]
-[36a, ba7, 3a8, 8dd, 496, fcf]
-[36a, ba7, 3a8, 8dd, 496, fcf, 288]
-[36a, ba7, 3a8, 8dd, 496, fcf, 288, f1c]
-[36a, ba7, 3a8, 8dd, 496, fcf, 288, f1c, 5a9]
-[36a, ba7, 3a8, 8dd, 496, fcf, 288, f1c, 5a9, ea4]
+[f3b]
+[f3b, e11, eae]
+[f3b, e11]
+[f3b, e11, eae, d2f]
+[f3b, e11, eae, d2f, 5a0]
+[f3b, e11, eae, d2f, 5a0, 086]
+[f3b, e11, eae, d2f, 5a0, 086, f20]
+[f3b, e11, eae, d2f, 5a0, 086, f20, c65]
+[f3b, e11, eae, d2f, 5a0, 086, f20, c65, d84]
+[f3b, e11, eae, d2f, 5a0, 086, f20, c65, d84, d06]
+
+Process finished with exit code 0
 ```
 
 
@@ -1144,16 +1168,18 @@ public class Demo {
 运行结果：
 
 ```
-[a98]
-[a98, cb0, 378]
-[a98, cb0]
-[a98, cb0, 378, da8, 362]
-[a98, cb0, 378, da8]
-[a98, cb0, 378, da8, 362, 0c3]
-[a98, cb0, 378, da8, 362, 0c3, 0b8]
-[a98, cb0, 378, da8, 362, 0c3, 0b8, 8d8]
-[a98, cb0, 378, da8, 362, 0c3, 0b8, 8d8, b51]
-[a98, cb0, 378, da8, 362, 0c3, 0b8, 8d8, b51, 6c2]
+[50c]
+[50c, fbf, db8]
+[50c, fbf]
+[50c, fbf, db8, c76]
+[50c, fbf, db8, c76, 5cc]
+[50c, fbf, db8, c76, 5cc, d7a]
+[50c, fbf, db8, c76, 5cc, d7a, b67]
+[50c, fbf, db8, c76, 5cc, d7a, b67, 71b]
+[50c, fbf, db8, c76, 5cc, d7a, b67, 71b, c2f]
+[50c, fbf, db8, c76, 5cc, d7a, b67, 71b, c2f, ba2]
+
+Process finished with exit code 0
 ```
 
 
@@ -1184,16 +1210,18 @@ public class Demo {
 运行结果：
 
 ```
-[fd1]
-[48e, fd1]
-[eea, 48e, fd1, 0d8]
-[eea, 48e, fd1]
-[eea, 48e, fd1, 0d8, b3f]
-[eea, 48e, fd1, dfe, 0d8, b3f]
-[eea, 48e, cf3, fd1, dfe, 0d8, b3f]
-[eea, 48e, cf3, fd1, dfe, 0d8, b3f, 8bf]
-[eea, 48e, cf3, fd1, dfe, b88, 0d8, b3f, 8bf]
-[eea, 48e, cf3, fd1, dfe, 0e7, b88, 0d8, b3f, 8bf]
+[637]
+[c15, 637]
+[c15, d2d, 637, d90]
+[c15, d2d, 866, 637, d90]
+[c15, 637, d90]
+[e50, 54a, c15, d2d, 866, 637, d90]
+[e50, c15, d2d, 866, 637, d90]
+[e50, 54a, c15, d2d, 866, 118, 637, d90]
+[e50, 54a, fd0, c15, d2d, 866, 118, 637, d90]
+[e50, 02c, 54a, fd0, c15, d2d, 866, 118, 637, d90]
+
+Process finished with exit code 0
 ```
 
 
@@ -1223,16 +1251,18 @@ public class Demo {
 运行结果：
 
 ```
-[d28]
-[487, d28]
-[04e, 487, b33, 0e9, d28]
-[04e, 487, b33, 0e9, acf, d28]
-[04e, 487, d28]
-[04e, 487, 0e9, d28]
-[396, 04e, 487, b33, 0e9, acf, d28]
-[396, 04e, 487, b33, 0e9, acf, 6c6, d28]
-[396, 04e, 487, b33, 0e9, 477, acf, 6c6, d28]
-[396, 04e, 487, b33, 0e9, 477, acf, 5d5, 6c6, d28]
+[a4f]
+[a4f, a7a, 4fa]
+[a4f, a7a]
+[a4f, 602, a7a, 4fa]
+[a4f, c25, 602, a7a, 4fa]
+[a4f, c25, 602, a7a, 4fa, bea]
+[a4f, c25, 602, a7a, 72f, 4fa, bea]
+[a4f, c25, 602, a7a, 72f, 392, 4fa, bea]
+[a4f, ffe, c25, 602, a7a, 72f, 392, 4fa, bea]
+[a4f, ffe, c25, 602, 7e6, a7a, 72f, 392, 4fa, bea]
+
+Process finished with exit code 0
 ```
 
 
@@ -1261,16 +1291,18 @@ public class Demo {
 运行结果：
 
 ```
-[b16]
-[b16, 7fe]
-[b16, 7fe, fa7]
-[b16, 7fe, fa7, 6ec, 4ab, ca8]
-[b16, 7fe, fa7, 6ec]
-[b16, 7fe, fa7, 6ec, 4ab]
-[b16, 7fe, fa7, 6ec, 4ab, ca8, 19a]
-[b16, 7fe, fa7, 6ec, 4ab, ca8, 19a, 669]
-[b16, 7fe, fa7, 6ec, 4ab, ca8, 19a, 669, 33f]
-[b16, 7fe, fa7, 6ec, 4ab, ca8, 19a, 669, 33f, 9f1]
+[80f]
+[80f, 065]
+[80f, 065, fff]
+[80f, 065, fff, b47]
+[80f, 065, fff, b47, 519, b81]
+[80f, 065, fff, b47, 519]
+[80f, 065, fff, b47, 519, b81, 173]
+[80f, 065, fff, b47, 519, b81, 173, 00c]
+[80f, 065, fff, b47, 519, b81, 173, 00c, 4af]
+[80f, 065, fff, b47, 519, b81, 173, 00c, 4af, 047]
+
+Process finished with exit code 0
 ```
 
 
@@ -1302,16 +1334,18 @@ public class Demo {
 运行结果：
 
 ```
-{4=506}
-{4=506, 9=fbc}
-{0=51b, 4=506, 7=2b2, 9=fbc}
-{0=51b, 4=506, 9=fbc}
-{0=51b, 4=506, 7=2b2, 8=791, 9=fbc}
-{0=51b, 4=506, 6=b9f, 7=2b2, 8=791, 9=fbc}
-{0=51b, 3=6dc, 4=506, 6=b9f, 7=2b2, 8=791, 9=fbc}
-{0=51b, 2=564, 3=6dc, 4=506, 6=b9f, 7=2b2, 8=791, 9=fbc}
-{0=51b, 1=1ff, 2=564, 3=6dc, 4=506, 6=b9f, 7=2b2, 8=791, 9=fbc}
-{0=51b, 1=1ff, 2=564, 3=6dc, 4=506, 5=57f, 6=b9f, 7=2b2, 8=791, 9=fbc}
+{8=6ec}
+{0=836, 6=6f9, 8=6ec}
+{6=6f9, 8=6ec}
+{0=836, 5=c87, 6=6f9, 8=6ec}
+{0=836, 5=c87, 6=6f9, 8=6ec, 9=5f9}
+{0=836, 5=c87, 6=6f9, 7=4f6, 8=6ec, 9=5f9}
+{0=836, 2=878, 5=c87, 6=6f9, 7=4f6, 8=6ec, 9=5f9}
+{0=836, 2=878, 3=f0b, 5=c87, 6=6f9, 7=4f6, 8=6ec, 9=5f9}
+{0=836, 1=634, 2=878, 3=f0b, 5=c87, 6=6f9, 7=4f6, 8=6ec, 9=5f9}
+{0=836, 1=634, 2=878, 3=f0b, 4=186, 5=c87, 6=6f9, 7=4f6, 8=6ec, 9=5f9}
+
+Process finished with exit code 0
 ```
 
 
@@ -1342,16 +1376,18 @@ public class Demo {
 运行结果：
 
 ```
-{0=5a3}
-{0=5a3, 5=953, 8=276}
-{0=5a3, 3=eea, 5=953, 8=276}
-{0=5a3, 5=953}
-{0=5a3, 3=eea, 5=953, 7=358, 8=276}
-{0=5a3, 1=51d, 3=eea, 5=953, 7=358, 8=276}
-{0=5a3, 1=51d, 2=f52, 3=eea, 5=953, 7=358, 8=276}
-{0=5a3, 1=51d, 2=f52, 3=eea, 5=953, 6=56d, 7=358, 8=276}
-{0=5a3, 1=51d, 2=f52, 3=eea, 5=953, 6=56d, 7=358, 8=276, 9=b48}
-{0=5a3, 1=51d, 2=f52, 3=eea, 4=af8, 5=953, 6=56d, 7=358, 8=276, 9=b48}
+{0=13f}
+{0=13f, 4=bae}
+{0=13f, 2=528, 4=bae, 7=d9b}
+{0=13f, 2=528, 4=bae, 7=d9b, 8=a2e}
+{0=13f, 2=528, 4=bae}
+{0=13f, 2=528, 3=d24, 4=bae, 7=d9b, 8=a2e}
+{0=13f, 2=528, 3=d24, 4=bae, 7=d9b, 8=a2e, 9=8c0}
+{0=13f, 2=528, 3=d24, 4=bae, 5=1c3, 7=d9b, 8=a2e, 9=8c0}
+{0=13f, 1=3a6, 2=528, 3=d24, 4=bae, 5=1c3, 7=d9b, 8=a2e, 9=8c0}
+{0=13f, 1=3a6, 2=528, 3=d24, 4=bae, 5=1c3, 6=345, 7=d9b, 8=a2e, 9=8c0}
+
+Process finished with exit code 0
 ```
 
 
@@ -1381,16 +1417,18 @@ public class Demo {
 运行结果：
 
 ```
-{2=aae, 5=136}
-{2=aae, 3=034, 5=136, 7=691}
-{2=aae, 5=136, 7=691}
-{0=d99, 2=aae, 3=034, 5=136, 7=691}
-{2=aae, 5=136}
-{0=d99, 2=aae, 3=034, 4=02a, 5=136, 7=691}
-{0=d99, 1=57b, 2=aae, 3=034, 4=02a, 5=136, 7=691}
-{0=d99, 1=57b, 2=aae, 3=034, 4=02a, 5=136, 7=691, 8=6ce}
-{0=d99, 1=57b, 2=aae, 3=034, 4=02a, 5=136, 7=691, 8=6ce, 9=dbe}
-{0=d99, 1=57b, 2=aae, 3=034, 4=02a, 5=136, 6=ca8, 7=691, 8=6ce, 9=dbe}
+{0=1c4}
+{0=1c4, 2=401, 4=755}
+{0=1c4, 2=401, 4=755, 6=7e5}
+{0=1c4, 2=401, 4=755, 6=7e5, 7=e63}
+{0=1c4, 4=755}
+{0=1c4, 2=401, 4=755, 5=632, 6=7e5, 7=e63}
+{0=1c4, 2=401, 3=0e4, 4=755, 5=632, 6=7e5, 7=e63}
+{0=1c4, 1=c08, 2=401, 3=0e4, 4=755, 5=632, 6=7e5, 7=e63}
+{0=1c4, 1=c08, 2=401, 3=0e4, 4=755, 5=632, 6=7e5, 7=e63, 9=468}
+{0=1c4, 1=c08, 2=401, 3=0e4, 4=755, 5=632, 6=7e5, 7=e63, 8=af8, 9=468}
+
+Process finished with exit code 0
 ```
 
 
@@ -1427,13 +1465,15 @@ public class Demo {
 运行结果：
 
 ```
-Thread-3.run
-Thread-0.run
-Thread-2.run
-Thread-5.run
-Thread-1.run
 Thread-4.run
+Thread-0.run
+Thread-5.run
+Thread-3.run
+Thread-2.run
+Thread-1.run
 main
+
+Process finished with exit code 0
 ```
 
 
@@ -1465,34 +1505,36 @@ public class Demo {
 运行结果：
 
 ```
-Thread-4.run
-Thread-10.run
-Thread-7.run
-Thread-5.run
-Thread-13.run
-Thread-20.run
-Thread-2.run
-Thread-8.run
-Thread-16.run
-Thread-9.run
-Thread-12.run
-Thread-6.run
-Thread-14.run
-Thread-21.run
-Thread-15.run
-CyclicBarrier.run
-Thread-0.run
-Thread-18.run
-CyclicBarrier.run
 Thread-3.run
-Thread-19.run
+Thread-4.run
+Thread-1.run
+Thread-7.run
+Thread-9.run
+Thread-11.run
+Thread-13.run
+Thread-16.run
+Thread-14.run
+Thread-6.run
+Thread-2.run
+Thread-5.run
+Thread-0.run
+Thread-8.run
+Thread-22.run
+Thread-15.run
+Thread-12.run
 CyclicBarrier.run
 Thread-17.run
-Thread-11.run
-Thread-1.run
-Thread-22.run
+Thread-10.run
+CyclicBarrier.run
+Thread-18.run
+Thread-19.run
+CyclicBarrier.run
+Thread-20.run
+Thread-21.run
 Thread-23.run
 CyclicBarrier.run
+
+Process finished with exit code 0
 ```
 
 
@@ -1526,18 +1568,20 @@ public class Demo {
 运行结果：
 
 ```
-Thread-2: acquire
 Thread-0: acquire
-Thread-1: acquire
-Thread-1: release
-Thread-4: acquire
-Thread-4: release
+Thread-2: acquire
 Thread-2: release
 Thread-5: acquire
+Thread-4: acquire
 Thread-0: release
+Thread-1: acquire
+Thread-5: release
 Thread-3: acquire
 Thread-3: release
-Thread-5: release
+Thread-4: release
+Thread-1: release
+
+Process finished with exit code 0
 ```
 
 
@@ -1860,7 +1904,7 @@ public class Demo {
 }
 ```
 
-运行结果（未返回）：
+运行结果（未结束）：
 
 ```
 [abc]
@@ -1911,6 +1955,8 @@ def
 Exception in thread "main" java.util.NoSuchElementException
 	at java.base/java.util.AbstractQueue.element(AbstractQueue.java:136)
 	at Demo.main(Demo.java:22)
+
+Process finished with exit code 1
 ```
 
 
@@ -1962,4 +2008,132 @@ Process finished with exit code 0
 
 
 ## 线程池
+
+newFixedThreadPool
+newSingleThreadExecutor
+newCachedThreadPool
+
+
+
+### newFixedThreadPool
+
+```java
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class Demo {
+    public static void main(String[] args) {
+        ExecutorService threadPool = Executors.newFixedThreadPool(5);
+        for (int i = 1; i <= 10; i++) {
+            threadPool.execute(() -> {
+                System.out.println(Thread.currentThread().getName());
+            });
+        }
+        threadPool.shutdown();
+    }
+}
+```
+
+运行结果：
+
+```
+pool-1-thread-1
+pool-1-thread-1
+pool-1-thread-1
+pool-1-thread-5
+pool-1-thread-2
+pool-1-thread-2
+pool-1-thread-3
+pool-1-thread-4
+pool-1-thread-1
+pool-1-thread-5
+
+Process finished with exit code 0
+```
+
+
+
+### newSingleThreadExecutor
+
+```java
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class Demo {
+    public static void main(String[] args) {
+        ExecutorService threadPool = Executors.newSingleThreadExecutor();
+        for (int i = 1; i <= 10; i++) {
+            threadPool.execute(() -> {
+                System.out.println(Thread.currentThread().getName());
+            });
+        }
+        threadPool.shutdown();
+    }
+}
+```
+
+运行结果：
+
+```
+pool-1-thread-1
+pool-1-thread-1
+pool-1-thread-1
+pool-1-thread-1
+pool-1-thread-1
+pool-1-thread-1
+pool-1-thread-1
+pool-1-thread-1
+pool-1-thread-1
+pool-1-thread-1
+
+Process finished with exit code 0
+```
+
+
+
+### newCachedThreadPool
+
+```java
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class Demo {
+    public static void main(String[] args) {
+        ExecutorService threadPool = Executors.newCachedThreadPool();
+        for (int i = 1; i <= 20; i++) {
+            threadPool.execute(() -> {
+                System.out.println(Thread.currentThread().getName());
+            });
+        }
+        threadPool.shutdown();
+    }
+}
+```
+
+运行结果：
+
+```
+pool-1-thread-1
+pool-1-thread-4
+pool-1-thread-2
+pool-1-thread-3
+pool-1-thread-5
+pool-1-thread-6
+pool-1-thread-7
+pool-1-thread-8
+pool-1-thread-10
+pool-1-thread-7
+pool-1-thread-2
+pool-1-thread-3
+pool-1-thread-6
+pool-1-thread-1
+pool-1-thread-9
+pool-1-thread-5
+pool-1-thread-8
+pool-1-thread-4
+pool-1-thread-11
+pool-1-thread-12
+
+Process finished with exit code 0
+```
 
