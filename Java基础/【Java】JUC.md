@@ -2137,3 +2137,60 @@ pool-1-thread-12
 Process finished with exit code 0
 ```
 
+
+
+### 自定义线程池
+
+```java
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+public class Demo {
+    public static void main(String[] args) {
+        ExecutorService threadPool = new ThreadPoolExecutor(
+                2,
+                5,
+                2L,
+                TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(3),
+                Executors.defaultThreadFactory(),
+                new ThreadPoolExecutor.AbortPolicy()
+        );
+        for (int i = 1; i <= 10; i++) {
+            threadPool.execute(() -> {
+                System.out.println(Thread.currentThread().getName());
+            });
+        }
+        threadPool.shutdown();
+    }
+}
+```
+
+运行结果（未结束）：
+
+```
+pool-1-thread-1
+pool-1-thread-3
+pool-1-thread-3
+pool-1-thread-3
+pool-1-thread-2
+pool-1-thread-4
+pool-1-thread-1
+pool-1-thread-5
+Exception in thread "main" java.util.concurrent.RejectedExecutionException: Task Demo$$Lambda$14/0x00000008010031f0@52cc8049 rejected from java.util.concurrent.ThreadPoolExecutor@5b480cf9[Running, pool size = 5, active threads = 5, queued tasks = 1, completed tasks = 1]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2081)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:841)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1376)
+	at Demo.main(Demo.java:19)
+```
+
+
+
+## 分支合并
+
+```
+```
+

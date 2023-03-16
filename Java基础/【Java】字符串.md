@@ -382,6 +382,48 @@ abc
 
 
 
+### getBytes
+
+```java
+import java.util.Arrays;
+
+public class Demo {
+    public static void main(String[] args) {
+        String s = "abc";
+        byte[] arr = s.getBytes();
+        System.out.println(Arrays.toString(arr));
+    }
+}
+```
+
+运行结果：
+
+```
+[97, 98, 99]
+```
+
+
+
+### byte[] → String
+
+```java
+public class Demo {
+    public static void main(String[] args) {
+        byte[] arr = {97, 98, 99};
+        String s = new String(arr);
+        System.out.println(s);
+    }
+}
+```
+
+运行结果：
+
+```
+abc
+```
+
+
+
 ### toLowerCase、toUpperCase
 
 ```java
