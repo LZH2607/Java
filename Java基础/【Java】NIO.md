@@ -28,10 +28,6 @@ Channel
 	SocketChannel：TCP
 	ServerSocketChannel：TCP
 
-DatagramChannel：传输数据
-SocketChannel：传输数据
-ServerSocketChannel：监听传入的连接、创建新的SocketChannel对象
-
 
 
 ### FileChannel
@@ -49,22 +45,29 @@ import java.nio.channels.FileChannel;
 
 public class Demo {
     public static void main(String[] args) throws Exception {
-        RandomAccessFile file = new RandomAccessFile("D:\\demo\\file.txt", "rw");
-        FileChannel channel = file.getChannel();
-        ByteBuffer buffer = ByteBuffer.allocate(256);
+        String path = "D:\\demo\\file.txt";
+        RandomAccessFile randomAccessFile = new RandomAccessFile(path, "rw");
+        FileChannel fileChannel = randomAccessFile.getChannel();
+        ByteBuffer byteBuffer = ByteBuffer.allocate(5);
         StringBuilder stringBuilder = new StringBuilder();
-        while (channel.read(buffer) > 0) {
-            buffer.flip();
-            while (buffer.hasRemaining()) {
-                stringBuilder.append((char) buffer.get());
+        while (fileChannel.read(byteBuffer) != -1) {
+            byteBuffer.flip();
+            while (byteBuffer.hasRemaining()) {
+                stringBuilder.append((char) byteBuffer.get());
             }
-            buffer.clear();
+            byteBuffer.clear();
         }
         System.out.println(stringBuilder);
-        channel.close();
-        file.close();
+        fileChannel.close();
+        randomAccessFile.close();
     }
 }
+```
+
+file.txt（程序运行前）：
+
+```
+Hello, World!
 ```
 
 运行结果：
@@ -84,22 +87,23 @@ import java.nio.channels.FileChannel;
 
 public class Demo {
     public static void main(String[] args) throws Exception {
-        RandomAccessFile file = new RandomAccessFile("D:\\demo\\file.txt", "rw");
-        FileChannel channel = file.getChannel();
-        ByteBuffer buffer = ByteBuffer.allocate(256);
+        String path = "D:\\demo\\file.txt";
+        RandomAccessFile randomAccessFile = new RandomAccessFile(path, "rw");
+        FileChannel fileChannel = randomAccessFile.getChannel();
+        ByteBuffer byteBuffer = ByteBuffer.allocate(256);
         String str = "Hello, World!";
-        buffer.put(str.getBytes());
-        buffer.flip();
-        while (buffer.hasRemaining()) {
-            channel.write(buffer);
+        byteBuffer.put(str.getBytes());
+        byteBuffer.flip();
+        while (byteBuffer.hasRemaining()) {
+            fileChannel.write(byteBuffer);
         }
-        channel.close();
-        file.close();
+        fileChannel.close();
+        randomAccessFile.close();
     }
 }
 ```
 
-file.txt：
+file.txt（程序运行后）：
 
 ```
 Hello, World!
@@ -109,16 +113,7 @@ Hello, World!
 
 #### 常用方法
 
-```
-position
-size
-truncate
-force
-transferTo
-transferFrom
-```
-
-
+##### transferFrom
 
 ```java
 import java.io.RandomAccessFile;
@@ -126,8 +121,11 @@ import java.nio.channels.FileChannel;
 
 public class Demo {
     public static void main(String[] args) throws Exception {
-        RandomAccessFile file1 = new RandomAccessFile("D:\\demo\\file1.txt", "rw");
-        RandomAccessFile file2 = new RandomAccessFile("D:\\demo\\file2.txt", "rw");
+        String path1 = "D:\\demo\\file1.txt";
+        String path2 = "D:\\demo\\file2.txt";
+
+        RandomAccessFile file1 = new RandomAccessFile(path1, "rw");
+        RandomAccessFile file2 = new RandomAccessFile(path2, "rw");
 
         FileChannel channel1 = file1.getChannel();
         FileChannel channel2 = file2.getChannel();
@@ -143,19 +141,21 @@ public class Demo {
 }
 ```
 
-file1.txt：
+file1.txt（程序运行前）：
 
 ```
 Hello, World!
 ```
 
-file2.txt：
+file2.txt（程序运行后）：
 
 ```
 Hello, World!
 ```
 
 
+
+##### transferTo
 
 ```java
 import java.io.RandomAccessFile;
@@ -163,8 +163,11 @@ import java.nio.channels.FileChannel;
 
 public class Demo {
     public static void main(String[] args) throws Exception {
-        RandomAccessFile file1 = new RandomAccessFile("D:\\demo\\file1.txt", "rw");
-        RandomAccessFile file2 = new RandomAccessFile("D:\\demo\\file2.txt", "rw");
+        String path1 = "D:\\demo\\file1.txt";
+        String path2 = "D:\\demo\\file2.txt";
+
+        RandomAccessFile file1 = new RandomAccessFile(path1, "rw");
+        RandomAccessFile file2 = new RandomAccessFile(path2, "rw");
 
         FileChannel channel1 = file1.getChannel();
         FileChannel channel2 = file2.getChannel();
@@ -180,19 +183,155 @@ public class Demo {
 }
 ```
 
-file1.txt：
+file1.txt（程序运行前）：
 
 ```
 Hello, World!
 ```
 
-file2.txt：
+file2.txt（程序运行后）：
 
 ```
 Hello, World!
+```
+
+
+
+### ServerSocketChannel
+
+Client.java：
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.Socket;
+
+public class Client {
+    public static void main(String[] args) throws IOException {
+        Socket socket = new Socket(InetAddress.getLocalHost(), 9999);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        String str = bufferedReader.readLine();
+        System.out.println(str);
+        bufferedReader.close();
+        socket.close();
+    }
+}
+```
+
+Server.java：
+
+```java
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+
+public class Server {
+    public static void main(String[] args) throws Exception {
+        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+        serverSocketChannel.socket().bind(new InetSocketAddress(9999));
+        serverSocketChannel.configureBlocking(false);
+        while (true) {
+            SocketChannel socketChannel = serverSocketChannel.accept();
+            if (socketChannel == null) {
+                Thread.sleep(2000);
+            } else {
+                System.out.println(socketChannel.socket().getRemoteSocketAddress());
+                String str = "Hello, World!";
+                ByteBuffer byteBuffer = ByteBuffer.wrap(str.getBytes());
+                socketChannel.write(byteBuffer);
+                socketChannel.close();
+                break;
+            }
+        }
+        serverSocketChannel.close();
+    }
+}
+```
+
+先运行Server.java，再运行Client.java
+
+Client.java的运行结果：
+
+```
+Hello, World!
+```
+
+Server.java的运行结果：
+
+```
+/7.249.48.104:50709
 ```
 
 
 
 ### SocketChannel
+
+（存疑）
+
+Client.java：
+
+```java
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
+
+public class Client {
+    public static void main(String[] args) throws IOException {
+        SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress("localhost", 9999));
+        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+        int len = socketChannel.read(byteBuffer);
+        System.out.print(new String(byteBuffer.array(), 0, len));
+        socketChannel.close();
+    }
+}
+```
+
+Server.java：
+
+```java
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+
+public class Server {
+    public static void main(String[] args) throws Exception {
+        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+        serverSocketChannel.socket().bind(new InetSocketAddress(9999));
+        serverSocketChannel.configureBlocking(false);
+        while (true) {
+            SocketChannel socketChannel = serverSocketChannel.accept();
+            if (socketChannel == null) {
+                Thread.sleep(2000);
+            } else {
+                System.out.println(socketChannel.socket().getRemoteSocketAddress());
+                String str = "Hello, World!";
+                ByteBuffer byteBuffer = ByteBuffer.wrap(str.getBytes());
+                socketChannel.write(byteBuffer);
+                socketChannel.close();
+                break;
+            }
+        }
+        serverSocketChannel.close();
+    }
+}
+```
+
+先运行Server.java，再运行Client.java
+
+Client.java的运行结果：
+
+```
+Hello, World!
+```
+
+Server.java的运行结果：
+
+```
+/127.0.0.1:64505
+```
 

@@ -43,21 +43,12 @@
 
 装饰器模式
 
-字节流
-	InputStream（字节输入流）
-		BufferedInputStream（缓冲区字节输入流）
-		ObjectInputStream（对象字节输入流）
-	OutputStream（字节输出流）
-		BufferedOutputStream（缓冲区字节输出流）
-		ObjectOutputStream（对象字节输出流）
+BufferedInputStream（缓冲区字节输入流）、BufferedOutputStream（缓冲区字节输出流）
+BufferedReader（缓冲区字符输入流）、BufferedWriter（缓冲区字符输出流）
 
-字符流
-	Reader（字符输入流）
-		BufferedReader（缓冲区字符输入流）
-		InputStreamReader（）
-	Writer（字符输出流）
-		BufferedWriter（缓冲区字符输出流）
-		OutputStreamWriter（）
+ObjectInputStream（对象字节输入流）、ObjectOutputStream（对象字节输出流）
+
+转换流（字节流 → 字符流）：InputStreamReader、OutputStreamWriter
 
 
 
@@ -281,7 +272,7 @@ public class Demo {
         FileInputStream fileInputStream = new FileInputStream(path);
         int i;
         while ((i = fileInputStream.read()) != -1) {
-            System.out.println((char) i);
+            System.out.print((char) i);
         }
         fileInputStream.close();
     }
@@ -297,19 +288,7 @@ Hello, World!
 运行结果：
 
 ```
-H
-e
-l
-l
-o
-,
- 
-W
-o
-r
-l
-d
-!
+Hello, World!
 ```
 
 
@@ -324,7 +303,7 @@ public class Demo {
         FileInputStream fileInputStream = new FileInputStream(path);
         byte[] arr = new byte[5];
         while ((fileInputStream.read(arr)) != -1) {
-            System.out.println(new String(arr));
+            System.out.print(new String(arr));
         }
         fileInputStream.close();
     }
@@ -340,9 +319,7 @@ Hello, World!
 运行结果：
 
 ```
-Hello
-, Wor
-ld!or
+Hello, World!or
 ```
 
 
@@ -358,7 +335,7 @@ public class Demo {
         byte[] arr = new byte[5];
         int len;
         while ((len = fileInputStream.read(arr)) != -1) {
-            System.out.println(new String(arr, 0, len));
+            System.out.print(new String(arr, 0, len));
         }
         fileInputStream.close();
     }
@@ -374,9 +351,7 @@ Hello, World!
 运行结果：
 
 ```
-Hello
-, Wor
-ld!
+Hello, World!
 ```
 
 
@@ -519,7 +494,7 @@ public class Demo {
         FileReader fileReader = new FileReader(path);
         int i;
         while ((i = fileReader.read()) != -1) {
-            System.out.println((char) i);
+            System.out.print((char) i);
         }
         fileReader.close();
     }
@@ -536,28 +511,8 @@ Hello, World!
 运行结果：
 
 ```
-H
-e
-l
-l
-o
-,
- 
-W
-o
-r
-l
-d
-!
-
-
-
-你
-好
-，
-世
-界
-！
+Hello, World!
+你好，世界！
 ```
 
 
@@ -572,7 +527,7 @@ public class Demo {
         FileReader fileReader = new FileReader(path);
         char[] arr = new char[5];
         while ((fileReader.read(arr)) != -1) {
-            System.out.println(new String(arr));
+            System.out.print(new String(arr));
         }
         fileReader.close();
     }
@@ -589,12 +544,8 @@ Hello, World!
 运行结果：
 
 ```
-Hello
-, Wor
-ld!
-
-你好，世界
-！好，世界
+Hello, World!
+你好，世界！好，世界
 ```
 
 
@@ -610,7 +561,7 @@ public class Demo {
         char[] arr = new char[5];
         int len;
         while ((len = fileReader.read(arr)) != -1) {
-            System.out.println(new String(arr, 0, len));
+            System.out.print(new String(arr, 0, len));
         }
         fileReader.close();
     }
@@ -627,12 +578,8 @@ Hello, World!
 运行结果：
 
 ```
-Hello
-, Wor
-ld!
-
-你好，世界
-！
+Hello, World!
+你好，世界！
 ```
 
 
@@ -765,28 +712,115 @@ Hello, World!
 
 
 
-## BufferedInputStream、
+## BufferedInputStream、BufferedOutputStream
 
 ### BufferedInputStream
 
 ```java
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class Demo {
+    public static void main(String[] args) throws IOException {
+        String path = "D:\\demo\\file.txt";
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(path));
+        byte[] arr = new byte[5];
+        while ((bufferedInputStream.read(arr)) != -1) {
+            System.out.print(new String(arr));
+        }
+        bufferedInputStream.close();
+    }
+}
+```
+
+file.txt：
+
+```
+abcdef
+ghijkl
+mnopqr
+```
+
+运行结果：
+
+```
+abcdef
+ghijkl
+mnopqrnop
 ```
 
 
-
-```
-```
-
-
-
-### 
 
 ```java
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class Demo {
+    public static void main(String[] args) throws IOException {
+        String path = "D:\\demo\\file.txt";
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(path));
+        byte[] arr = new byte[5];
+        int len;
+        while ((len = bufferedInputStream.read(arr)) != -1) {
+            System.out.print(new String(arr, 0, len));
+        }
+        bufferedInputStream.close();
+    }
+}
+```
+
+file.txt：
+
+```
+abcdef
+ghijkl
+mnopqr
+```
+
+运行结果：
+
+```
+abcdef
+ghijkl
+mnopqr
 ```
 
 
 
+### BufferedOutputStream
+
+```java
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class Demo {
+    public static void main(String[] args) throws IOException {
+        String path1 = "D:\\demo\\file1.txt";
+        String path2 = "D:\\demo\\file2.txt";
+        BufferedOutputStream bufferedOutputStream1 = new BufferedOutputStream(new FileOutputStream(path1));
+        BufferedOutputStream bufferedOutputStream2 = new BufferedOutputStream(new FileOutputStream(path2));
+        String str = "Hello, World!";
+        bufferedOutputStream1.write(str.getBytes());
+        bufferedOutputStream2.write(str.getBytes(), 8, 3);
+        bufferedOutputStream1.close();
+        bufferedOutputStream2.close();
+    }
+}
 ```
+
+file1.txt（程序运行后）：
+
+```
+Hello, World!
+```
+
+file2.txt（程序运行后）：
+
+```
+orl
 ```
 
 
@@ -794,14 +828,44 @@ Hello, World!
 ### 拷贝文件
 
 ```java
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class Demo {
+    public static void main(String[] args) throws IOException {
+        String path1 = "D:\\demo\\file1.txt";
+        String path2 = "D:\\demo\\file2.txt";
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(path1));
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(path2));
+        byte[] arr = new byte[5];
+        int len;
+        while ((len = bufferedInputStream.read(arr)) != -1) {
+            bufferedOutputStream.write(arr, 0, len);
+        }
+        bufferedInputStream.close();
+        bufferedOutputStream.close();
+    }
+}
 ```
 
-
+file1.txt（程序运行前）：
 
 ```
+abcdef
+ghijkl
+mnopqr
 ```
 
+file2.txt（程序运行后）：
 
+```
+abcdef
+ghijkl
+mnopqr
+```
 
 
 
@@ -943,6 +1007,471 @@ file2.txt（程序运行后）：
 abc
 def
 ghi
+
+```
+
+
+
+## ObjectOutputStream、ObjectInputStream
+
+### ObjectOutputStream
+
+```java
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Demo {
+    public static void main(String[] args) throws IOException {
+        String path = "D:\\demo\\file.dat";
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(path));
+        byte b = 1;
+        short s = 2;
+        int i = 3;
+        long l = 4L;
+        float f = 0.1F;
+        double d = 3.14;
+        char ch = 'a';
+        boolean bool = true;
+        String str = "Hello, World!";
+        C c = new C(1);
+        objectOutputStream.writeByte(b);
+        objectOutputStream.writeShort(s);
+        objectOutputStream.writeInt(i);
+        objectOutputStream.writeLong(l);
+        objectOutputStream.writeFloat(f);
+        objectOutputStream.writeDouble(d);
+        objectOutputStream.writeChar(ch);
+        objectOutputStream.writeBoolean(bool);
+        objectOutputStream.writeUTF(str);
+        objectOutputStream.writeObject(c);
+        objectOutputStream.close();
+    }
+}
+
+class C implements Serializable {
+    int i;
+
+    public C(int i) {
+        this.i = i;
+    }
+
+    @Override
+    public String toString() {
+        return "C{" +
+                "i=" + i +
+                '}';
+    }
+}
+```
+
+
+
+### ObjectInputStream
+
+```java
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+
+public class Demo {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        String path = "D:\\demo\\file.dat";
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(path));
+        byte b = objectInputStream.readByte();
+        short s = objectInputStream.readShort();
+        int i = objectInputStream.readInt();
+        long l = objectInputStream.readLong();
+        float f = objectInputStream.readFloat();
+        double d = objectInputStream.readDouble();
+        char ch = objectInputStream.readChar();
+        boolean bool = objectInputStream.readBoolean();
+        String str = objectInputStream.readUTF();
+        C c = (C) objectInputStream.readObject();
+        System.out.println(b);
+        System.out.println(s);
+        System.out.println(i);
+        System.out.println(l);
+        System.out.println(f);
+        System.out.println(d);
+        System.out.println(ch);
+        System.out.println(bool);
+        System.out.println(str);
+        System.out.println(c);
+        objectInputStream.close();
+    }
+}
+
+class C implements Serializable {
+    int i;
+
+    public C(int i) {
+        this.i = i;
+    }
+
+    @Override
+    public String toString() {
+        return "C{" +
+                "i=" + i +
+                '}';
+    }
+}
+```
+
+运行结果：
+
+```
+1
+2
+3
+4
+0.1
+3.14
+a
+true
+Hello, World!
+C{i=1}
+```
+
+
+
+## System.in、System.out
+
+|            |  编译类型   |      运行类型       | 默认设备 |
+| :--------: | :---------: | :-----------------: | :------: |
+| System.in  | InputStream | BufferedInputStream |   键盘   |
+| System.out | PrintStream |     PrintStream     |  显示器  |
+
+```java
+public class Demo {
+    public static void main(String[] args) {
+        System.out.println(System.in.getClass());
+        System.out.println(System.out.getClass());
+    }
+}
+```
+
+运行结果：
+
+```
+class java.io.BufferedInputStream
+class java.io.PrintStream
+```
+
+
+
+## InputStreamReader、OutputStreamWriter
+
+转换流（字节流 → 字符流）InputStreamReader、OutputStreamWriter
+
+
+
+### InputStreamReader
+
+```java
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Demo {
+    public static void main(String[] args) throws IOException {
+        String path = "D:\\demo\\file.txt";
+        InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(path), "gbk");
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        String str;
+        while ((str = bufferedReader.readLine()) != null) {
+            System.out.println(str);
+        }
+        bufferedReader.close();
+    }
+}
+```
+
+file.txt（ANSI编码）：
+
+```
+你好，世界！
+```
+
+运行结果：
+
+```
+你好，世界！
+```
+
+
+
+### OutputStreamWriter
+
+```java
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
+public class Demo {
+    public static void main(String[] args) throws IOException {
+        String path = "D:\\demo\\file.txt";
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path), "gbk");
+        String str = "你好，世界！";
+        outputStreamWriter.write(str);
+        outputStreamWriter.close();
+    }
+}
+```
+
+file.txt（程序运行后，ANSI编码）：
+
+```
+你好，世界！
+```
+
+
+
+## PrintStream、PrintWriter
+
+PrintStream（字节打印流）
+PrintWriter（字符打印流）
+
+
+
+### PrintStream
+
+```java
+import java.io.PrintStream;
+
+public class Demo {
+    public static void main(String[] args) {
+        PrintStream printStream = System.out;
+        String str = "Hello, World!";
+        printStream.print(str);
+        printStream.close();
+    }
+}
+```
+
+运行结果：
+
+```
+Hello, World!
+```
+
+
+
+```java
+import java.io.PrintStream;
+
+public class Demo {
+    public static void main(String[] args) {
+        PrintStream printStream = System.out;
+        String str = null;
+        printStream.print(str);
+        printStream.close();
+    }
+}
+```
+
+运行结果：
+
+```
+null
+```
+
+
+
+```java
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+
+public class Demo {
+    public static void main(String[] args) throws FileNotFoundException {
+        String path = "D:\\demo\\file.txt";
+        PrintStream printStream = new PrintStream(path);
+        String str = "Hello, World!";
+        printStream.print(str);
+        printStream.close();
+    }
+}
+```
+
+file.txt（程序运行后）：
+
+```
+Hello, World!
+```
+
+
+
+### PrintWriter
+
+```java
+import java.io.PrintWriter;
+
+public class Demo {
+    public static void main(String[] args) {
+        PrintWriter printWriter = new PrintWriter(System.out);
+        String str = "Hello, World!";
+        printWriter.print(str);
+        printWriter.close();
+    }
+}
+```
+
+运行结果：
+
+```
+Hello, World!
+```
+
+
+
+```java
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class Demo {
+    public static void main(String[] args) throws IOException {
+        String path = "D:\\demo\\file.txt";
+        PrintWriter printWriter = new PrintWriter(new FileWriter(path));
+        String str = "Hello, World!";
+        printWriter.print(str);
+        printWriter.close();
+    }
+}
+```
+
+file.txt（程序运行后）：
+
+```
+Hello, World!
+```
+
+
+
+## Properties
+
+### load、list、getProperty
+
+```java
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
+public class Demo {
+    public static void main(String[] args) throws IOException {
+        String path = "src\\project.properties";
+        Properties properties = new Properties();
+        properties.load(new FileReader(path));
+        properties.list(System.out);
+    }
+}
+```
+
+project.properties：
+
+```
+name=Tom
+age=18
+```
+
+运行结果：
+
+```
+-- listing properties --
+age=18
+name=Tom
+```
+
+
+
+```java
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
+public class Demo {
+    public static void main(String[] args) throws IOException {
+        String path = "src\\project.properties";
+        Properties properties = new Properties();
+        properties.load(new FileReader(path));
+        String name = properties.getProperty("name");
+        System.out.println(name);
+    }
+}
+```
+
+project.properties：
+
+```
+name=Tom
+age=18
+```
+
+运行结果：
+
+```
+Tom
+```
+
+
+
+### setProperty、store
+
+```java
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+public class Demo {
+    public static void main(String[] args) throws IOException {
+        Properties properties = new Properties();
+        properties.setProperty("name", "Jack");
+        properties.setProperty("age", "20");
+
+        String path = "src\\project.properties";
+        properties.store(new FileOutputStream(path), "This is a comment.");
+    }
+}
+```
+
+project.properties（程序运行后）：
+
+```
+#This is a comment.
+#Sun Mar 26 20:02:20 CST 2023
+age=20
+name=Jack
+
+```
+
+
+
+```java
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+public class Demo {
+    public static void main(String[] args) throws IOException {
+        Properties properties = new Properties();
+        properties.setProperty("name", "小明");
+        properties.setProperty("age", "22");
+
+        String path = "src\\project.properties";
+        properties.store(new FileOutputStream(path), null);
+    }
+}
+```
+
+project.properties（程序运行后）：
+
+```
+#Sun Mar 26 20:03:17 CST 2023
+age=22
+name=\u5C0F\u660E
 
 ```
 
