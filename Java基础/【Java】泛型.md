@@ -36,20 +36,21 @@ class C1<T> {
     }
 }
 
-class C2<S, T> {
-    S s;
+class C2<T, S> {
     T t;
+    S s;
 
-    public C2(S s, T t) {
-        this.s = s;
+    public C2(T t, S s) {
         this.t = t;
+        this.s = s;
     }
+
 
     @Override
     public String toString() {
         return "C2{" +
-                "s=" + s +
-                ", t=" + t +
+                "t=" + t +
+                ", s=" + s +
                 '}';
     }
 }
@@ -59,7 +60,7 @@ class C2<S, T> {
 
 ```
 C1{t=Hello, World!}
-C2{s=1, t=3.14}
+C2{t=1, s=3.14}
 ```
 
 
@@ -92,20 +93,21 @@ class C1<T> {
     }
 }
 
-class C2<S, T> {
-    S s;
+class C2<T, S> {
     T t;
+    S s;
 
-    public C2(S s, T t) {
-        this.s = s;
+    public C2(T t, S s) {
         this.t = t;
+        this.s = s;
     }
+
 
     @Override
     public String toString() {
         return "C2{" +
-                "s=" + s +
-                ", t=" + t +
+                "t=" + t +
+                ", s=" + s +
                 '}';
     }
 }
@@ -115,7 +117,7 @@ class C2<S, T> {
 
 ```
 C1{t=Hello, World!}
-C2{s=1, t=3.14}
+C2{t=1, s=3.14}
 ```
 
 
@@ -139,8 +141,8 @@ interface I1<T> {
     void f(T t);
 }
 
-interface I2<S, T> {
-    void f(S s, T t);
+interface I2<T, S> {
+    void f(T t, S s);
 }
 
 class C1 implements I1<String> {
@@ -184,8 +186,8 @@ interface I1<T> {
     void f(T t);
 }
 
-interface I2<S, T> {
-    void f(S s, T t);
+interface I2<T, S> {
+    void f(T t, S s);
 }
 
 class C1<T> implements I1<T> {
@@ -194,10 +196,10 @@ class C1<T> implements I1<T> {
     }
 }
 
-class C2<S, T> implements I2<S, T> {
-    public void f(S s, T t) {
-        System.out.println("C2.f: " + s);
+class C2<T, S> implements I2<T, S> {
+    public void f(T t, S s) {
         System.out.println("C2.f: " + t);
+        System.out.println("C2.f: " + s);
     }
 }
 ```
@@ -228,9 +230,9 @@ class C {
         System.out.println("f1: " + t);
     }
 
-    public <S, T> void f2(S s, T t) {
-        System.out.println("f2: " + s);
+    public <T, S> void f2(T t, S s) {
         System.out.println("f2: " + t);
+        System.out.println("f2: " + s);
     }
 }
 ```
