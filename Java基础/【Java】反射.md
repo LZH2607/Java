@@ -195,10 +195,8 @@ C.java：
 package org.example;
 
 public class C {
-    public byte b = 1;
-    public short s = 2;
-    public int i = 3;
-    public long l = 4;
+    public int i1 = 1;
+    public int i2 = 2;
 }
 ```
 
@@ -227,14 +225,10 @@ public class Demo {
 运行结果：
 
 ```
-b
+i1
 1
-s
+i2
 2
-i
-3
-l
-4
 ```
 
 
@@ -286,4 +280,342 @@ public org.example.C(int)
 ```
 
 
+
+## 获取Class
+
+### Class.forName
+
+```java
+package org.example;
+
+public class Demo {
+    public static void main(String[] args) throws ReflectiveOperationException {
+        String className = "org.example.C";
+        Class clazz = Class.forName(className);
+        System.out.println(clazz);
+    }
+}
+```
+
+运行结果：
+
+```
+class org.example.C
+```
+
+
+
+### 类名.class
+
+```java
+package org.example;
+
+public class Demo {
+    public static void main(String[] args) {
+        Class clazz = C.class;
+        System.out.println(clazz);
+    }
+}
+```
+
+运行结果：
+
+```
+class org.example.C
+```
+
+
+
+### 对象名.getClass
+
+```java
+package org.example;
+
+public class Demo {
+    public static void main(String[] args) {
+        C c = new C();
+        Class clazz = c.getClass();
+        System.out.println(clazz);
+    }
+}
+```
+
+运行结果：
+
+```
+class org.example.C
+```
+
+
+
+### 基本数据类型.class
+
+```java
+package org.example;
+
+public class Demo {
+    public static void main(String[] args) {
+        Class clazz1 = byte.class;
+        Class clazz2 = short.class;
+        Class clazz3 = int.class;
+        Class clazz4 = long.class;
+        Class clazz5 = float.class;
+        Class clazz6 = double.class;
+        Class clazz7 = char.class;
+        Class clazz8 = boolean.class;
+
+        System.out.println(clazz1);
+        System.out.println(clazz2);
+        System.out.println(clazz3);
+        System.out.println(clazz4);
+        System.out.println(clazz5);
+        System.out.println(clazz6);
+        System.out.println(clazz7);
+        System.out.println(clazz8);
+    }
+}
+```
+
+运行结果：
+
+```
+byte
+short
+int
+long
+float
+double
+char
+boolean
+```
+
+
+
+### 包装类.TYPE
+
+```java
+package org.example;
+
+public class Demo {
+    public static void main(String[] args) {
+        Class clazz1 = Byte.TYPE;
+        Class clazz2 = Short.TYPE;
+        Class clazz3 = Integer.TYPE;
+        Class clazz4 = Long.TYPE;
+        Class clazz5 = Float.TYPE;
+        Class clazz6 = Double.TYPE;
+        Class clazz7 = Character.TYPE;
+        Class clazz8 = Boolean.TYPE;
+
+        System.out.println(clazz1);
+        System.out.println(clazz2);
+        System.out.println(clazz3);
+        System.out.println(clazz4);
+        System.out.println(clazz5);
+        System.out.println(clazz6);
+        System.out.println(clazz7);
+        System.out.println(clazz8);
+    }
+}
+```
+
+运行结果：
+
+```
+byte
+short
+int
+long
+float
+double
+char
+boolean
+```
+
+
+
+基本数据类型.class == 包装类.TYPE：
+
+```java
+package org.example;
+
+public class Demo {
+    public static void main(String[] args) {
+        Class clazz1 = byte.class;
+        Class clazz2 = short.class;
+        Class clazz3 = int.class;
+        Class clazz4 = long.class;
+        Class clazz5 = float.class;
+        Class clazz6 = double.class;
+        Class clazz7 = char.class;
+        Class clazz8 = boolean.class;
+
+        Class clazz9 = Byte.TYPE;
+        Class clazz10 = Short.TYPE;
+        Class clazz11 = Integer.TYPE;
+        Class clazz12 = Long.TYPE;
+        Class clazz13 = Float.TYPE;
+        Class clazz14 = Double.TYPE;
+        Class clazz15 = Character.TYPE;
+        Class clazz16 = Boolean.TYPE;
+
+        System.out.println(clazz1 == clazz9);
+        System.out.println(clazz2 == clazz10);
+        System.out.println(clazz3 == clazz11);
+        System.out.println(clazz4 == clazz12);
+        System.out.println(clazz5 == clazz13);
+        System.out.println(clazz6 == clazz14);
+        System.out.println(clazz7 == clazz15);
+        System.out.println(clazz8 == clazz16);
+    }
+}
+```
+
+运行结果：
+
+```
+true
+true
+true
+true
+true
+true
+true
+true
+```
+
+
+
+注意：包装类.class != 包装类.TYPE
+
+```java
+package org.example;
+
+public class Demo {
+    public static void main(String[] args) {
+        Class clazz1 = Byte.class;
+        Class clazz2 = Short.class;
+        Class clazz3 = Integer.class;
+        Class clazz4 = Long.class;
+        Class clazz5 = Float.class;
+        Class clazz6 = Double.class;
+        Class clazz7 = Character.class;
+        Class clazz8 = Boolean.class;
+
+        System.out.println(clazz1);
+        System.out.println(clazz2);
+        System.out.println(clazz3);
+        System.out.println(clazz4);
+        System.out.println(clazz5);
+        System.out.println(clazz6);
+        System.out.println(clazz7);
+        System.out.println(clazz8);
+    }
+}
+```
+
+运行结果：
+
+```
+class java.lang.Byte
+class java.lang.Short
+class java.lang.Integer
+class java.lang.Long
+class java.lang.Float
+class java.lang.Double
+class java.lang.Character
+class java.lang.Boolean
+```
+
+
+
+## 存在Class对象的类型
+
+基本数据类型
+外部类
+内部类
+接口
+数组
+枚举类
+注解
+void
+
+C1.java：
+
+```java
+package org.example;
+
+public class C1 {
+    class C2 {
+    }
+}
+```
+
+E.java：
+
+```java
+package org.example;
+
+public enum E {
+}
+```
+
+I.java：
+
+```java
+package org.example;
+
+public interface I {
+}
+```
+
+Demo.java：
+
+```java
+package org.example;
+
+public class Demo {
+    public static void main(String[] args) {
+        Class clazz1 = C1.class;
+        Class clazz2 = C1.C2.class;
+        Class clazz3 = I.class;
+        Class clazz4 = int[].class;
+        Class clazz5 = int[][].class;
+        Class clazz6 = E.class;
+        Class clazz7 = Override.class;
+        Class clazz8 = void.class;
+
+        System.out.println(clazz1);
+        System.out.println(clazz2);
+        System.out.println(clazz3);
+        System.out.println(clazz4);
+        System.out.println(clazz5);
+        System.out.println(clazz6);
+        System.out.println(clazz7);
+        System.out.println(clazz8);
+    }
+}
+```
+
+运行结果：
+
+```
+class org.example.C1
+class org.example.C1$C2
+interface org.example.I
+class [I
+class [[I
+class org.example.E
+interface java.lang.Override
+void
+```
+
+
+
+## 类加载
+
+|          | 加载类 |
+| :------: | :----: |
+| 静态加载 | 编译时 |
+| 动态加载 | 运行时 |
 

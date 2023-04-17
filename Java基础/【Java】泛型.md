@@ -11,41 +11,55 @@
 ### 写法一
 
 ```java
-public class Test {
-	public static void main(String[] args) {
-		C<Integer> c1 = new C(1);
-		C<Double> c2 = new C(1.0);
-		C<String> c3 = new C("Hello, World!");
+public class Demo {
+    public static void main(String[] args) {
+        C1<String> c1 = new C1("Hello, World!");
+        C2<Integer, Double> c2 = new C2(1, 3.14);
 
-		System.out.println(c1.getT());
-		System.out.println(c2.getT());
-		System.out.println(c3.getT());
-	}
+        System.out.println(c1);
+        System.out.println(c2);
+    }
 }
 
-class C<T> {
-	T t;
+class C1<T> {
+    T t;
 
-	C(T t) {
-		this.t = t;
-	}
+    C1(T t) {
+        this.t = t;
+    }
 
-	public void setT(T t) {
-		this.t = t;
-	}
+    @Override
+    public String toString() {
+        return "C1{" +
+                "t=" + t +
+                '}';
+    }
+}
 
-	public T getT() {
-		return t;
-	}
+class C2<S, T> {
+    S s;
+    T t;
+
+    public C2(S s, T t) {
+        this.s = s;
+        this.t = t;
+    }
+
+    @Override
+    public String toString() {
+        return "C2{" +
+                "s=" + s +
+                ", t=" + t +
+                '}';
+    }
 }
 ```
 
 运行结果：
 
 ```
-1
-1.0
-Hello, World!
+C1{t=Hello, World!}
+C2{s=1, t=3.14}
 ```
 
 
@@ -53,83 +67,55 @@ Hello, World!
 ### 写法二
 
 ```java
-public class Test {
-	public static void main(String[] args) {
-		C<Integer> c1 = new C<Integer>(1);
-		C<Double> c2 = new C<Double>(1.0);
-		C<String> c3 = new C<String>("Hello, World!");
+public class Demo {
+    public static void main(String[] args) {
+        C1<String> c1 = new C1<>("Hello, World!");
+        C2<Integer, Double> c2 = new C2<>(1, 3.14);
 
-		System.out.println(c1.getT());
-		System.out.println(c2.getT());
-		System.out.println(c3.getT());
-	}
+        System.out.println(c1);
+        System.out.println(c2);
+    }
 }
 
-class C<T> {
-	T t;
+class C1<T> {
+    T t;
 
-	C(T t) {
-		this.t = t;
-	}
+    C1(T t) {
+        this.t = t;
+    }
 
-	public void setT(T t) {
-		this.t = t;
-	}
-
-	public T getT() {
-		return t;
-	}
-}
-```
-
-运行结果：
-
-```
-1
-1.0
-Hello, World!
-```
-
-
-
-### 写法三
-
-```java
-public class Test {
-	public static void main(String[] args) {
-		C<Integer> c1 = new C<>(1);
-		C<Double> c2 = new C<>(1.0);
-		C<String> c3 = new C<>("Hello, World!");
-
-		System.out.println(c1.getT());
-		System.out.println(c2.getT());
-		System.out.println(c3.getT());
-	}
+    @Override
+    public String toString() {
+        return "C1{" +
+                "t=" + t +
+                '}';
+    }
 }
 
-class C<T> {
-	T t;
+class C2<S, T> {
+    S s;
+    T t;
 
-	C(T t) {
-		this.t = t;
-	}
+    public C2(S s, T t) {
+        this.s = s;
+        this.t = t;
+    }
 
-	public void setT(T t) {
-		this.t = t;
-	}
-
-	public T getT() {
-		return t;
-	}
+    @Override
+    public String toString() {
+        return "C2{" +
+                "s=" + s +
+                ", t=" + t +
+                '}';
+    }
 }
 ```
 
 运行结果：
 
 ```
-1
-1.0
-Hello, World!
+C1{t=Hello, World!}
+C2{s=1, t=3.14}
 ```
 
 
@@ -139,47 +125,44 @@ Hello, World!
 ### 方法一
 
 ```java
-public class Test {
-	public static void main(String[] args) {
-		C1 c1 = new C1();
-		C2 c2 = new C2();
-		C3 c3 = new C3();
+public class Demo {
+    public static void main(String[] args) {
+        C1 c1 = new C1();
+        C2 c2 = new C2();
 
-		c1.func(1);
-		c2.func(1.0);
-		c3.func("Hello, World!");
-	}
+        c1.f("Hello, World!");
+        c2.f(1, 3.14);
+    }
 }
 
-interface I<T> {
-	void func(T t);
+interface I1<T> {
+    void f(T t);
 }
 
-class C1 implements I<Integer> {
-	public void func(Integer i) {
-		System.out.println(i);
-	}
+interface I2<S, T> {
+    void f(S s, T t);
 }
 
-class C2 implements I<Double> {
-	public void func(Double d) {
-		System.out.println(d);
-	}
+class C1 implements I1<String> {
+    public void f(String s) {
+        System.out.println("C1.f: " + s);
+    }
 }
 
-class C3 implements I<String> {
-	public void func(String s) {
-		System.out.println(s);
-	}
+class C2 implements I2<Integer, Double> {
+    public void f(Integer i, Double d) {
+        System.out.println("C2.f: " + i);
+        System.out.println("C2.f: " + d);
+    }
 }
 ```
 
 运行结果：
 
 ```
-1
-1.0
-Hello, World!
+C1.f: Hello, World!
+C2.f: 1
+C2.f: 3.14
 ```
 
 
@@ -187,35 +170,44 @@ Hello, World!
 ### 方法二
 
 ```java
-public class Test {
-	public static void main(String[] args) {
-		C<Integer> c1 = new C<Integer>();
-		C<Double> c2 = new C<Double>();
-		C<String> c3 = new C<String>();
+public class Demo {
+    public static void main(String[] args) {
+        C1<String> c1 = new C1<>();
+        C2<Integer, Double> c2 = new C2<>();
 
-		c1.func(1);
-		c2.func(1.0);
-		c3.func("Hello, World!");
-	}
+        c1.f("Hello, World!");
+        c2.f(1, 3.14);
+    }
 }
 
-interface I<T> {
-	void func(T t);
+interface I1<T> {
+    void f(T t);
 }
 
-class C<T> implements I<T> {
-	public void func(T t) {
-		System.out.println(t);
-	}
+interface I2<S, T> {
+    void f(S s, T t);
+}
+
+class C1<T> implements I1<T> {
+    public void f(T t) {
+        System.out.println("C1.f: " + t);
+    }
+}
+
+class C2<S, T> implements I2<S, T> {
+    public void f(S s, T t) {
+        System.out.println("C2.f: " + s);
+        System.out.println("C2.f: " + t);
+    }
 }
 ```
 
 运行结果：
 
 ```
-1
-1.0
-Hello, World!
+C1.f: Hello, World!
+C2.f: 1
+C2.f: 3.14
 ```
 
 
@@ -223,27 +215,179 @@ Hello, World!
 ## 泛型方法
 
 ```java
-public class Test {
-	public static void main(String[] args) {
-		C c = new C();
-		c.func(1);
-		c.func(1.0);
-		c.func("Hello, World!");
-	}
+public class Demo {
+    public static void main(String[] args) {
+        C c = new C();
+        c.f1("Hello, World!");
+        c.f2(1, 3.14);
+    }
 }
 
 class C {
-	public <T> void func(T t) {
-		System.out.println(t);
-	}
+    public <T> void f1(T t) {
+        System.out.println("f1: " + t);
+    }
+
+    public <S, T> void f2(S s, T t) {
+        System.out.println("f2: " + s);
+        System.out.println("f2: " + t);
+    }
 }
 ```
 
 运行结果：
 
 ```
-1
-1.0
-Hello, World!
+f1: Hello, World!
+f2: 1
+f2: 3.14
+```
+
+
+
+## 通配
+
+|     泛型      |    类型     |    规定    |
+| :-----------: | :---------: | :--------: |
+|      <?>      |    任意     |     无     |
+| <? extends C> | C类及其子类 | 泛型的上限 |
+|  <? super C>  | C类及其父类 | 泛型的下限 |
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class Demo {
+    public static void main(String[] args) {
+        List<Object> list1 = new ArrayList<>();
+        List<C1> list2 = new ArrayList<>();
+        List<C2> list3 = new ArrayList<>();
+        List<C3> list4 = new ArrayList<>();
+
+        list1.add(new Object());
+        list2.add(new C1());
+        list3.add(new C2());
+        list4.add(new C3());
+
+        f(list1);
+        f(list2);
+        f(list3);
+        f(list4);
+    }
+
+    public static void f(List<?> list) {
+        System.out.println(list);
+    }
+}
+
+class C1 {
+}
+
+class C2 extends C1 {
+}
+
+class C3 extends C2 {
+}
+```
+
+运行结果：
+
+```
+[java.lang.Object@74a14482]
+[C1@1540e19d]
+[C2@677327b6]
+[C3@14ae5a5]
+```
+
+
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class Demo {
+    public static void main(String[] args) {
+        List<C1> list1 = new ArrayList<>();
+        List<C2> list2 = new ArrayList<>();
+        List<C3> list3 = new ArrayList<>();
+
+        list1.add(new C1());
+        list2.add(new C2());
+        list3.add(new C3());
+
+        f(list1);
+        f(list2);
+        f(list3);
+    }
+
+    public static void f(List<? extends C1> list) {
+        System.out.println(list);
+    }
+}
+
+class C1 {
+}
+
+class C2 extends C1 {
+}
+
+class C3 extends C2 {
+}
+```
+
+运行结果：
+
+```
+[C1@74a14482]
+[C2@1540e19d]
+[C3@677327b6]
+```
+
+
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class Demo {
+    public static void main(String[] args) {
+        List<Object> list1 = new ArrayList<>();
+        List<C1> list2 = new ArrayList<>();
+        List<C2> list3 = new ArrayList<>();
+        List<C3> list4 = new ArrayList<>();
+
+        list1.add(new Object());
+        list2.add(new C1());
+        list3.add(new C2());
+        list4.add(new C3());
+
+        f(list1);
+        f(list2);
+        f(list3);
+        f(list4);
+    }
+
+    public static void f(List<? super C3> list) {
+        System.out.println(list);
+    }
+}
+
+class C1 {
+}
+
+class C2 extends C1 {
+}
+
+class C3 extends C2 {
+}
+```
+
+运行结果：
+
+```
+[java.lang.Object@74a14482]
+[C1@1540e19d]
+[C2@677327b6]
+[C3@14ae5a5]
 ```
 
