@@ -2,8 +2,14 @@
 已完成：
 
 ===================================================================
+==作废
+==String的变量名为str，特殊情况除外
 
-String的变量名为str，特殊情况除外
+String和short同时出现时，String的变量名为str，short的变量名为s
+String不和short同时出现时，String的变量名为s
+short不和String同时出现时，short的变量名为s
+特殊情况特殊处理
+
 已完成：
 
 ===================================================================
@@ -53,10 +59,17 @@ C() {
 ===================================================================
 
 Java集合
+==[作废]
+==将集合改为
+==List<String> l = new ArrayList<>();
+==Set<String> s = new HashSet<>();
+==Map<String, String> m = new HashMap<>();
+==的形式
+
 将集合改为
-List<String> l = new ArrayList<>();
-Set<String> s = new HashSet<>();
-Map<String, String> m = new HashMap<>();
+List<String> list = new ArrayList<>();
+Set<String> set = new HashSet<>();
+Map<String, String> map = new HashMap<>();
 的形式
 
 ===================================================================
