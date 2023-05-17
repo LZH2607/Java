@@ -832,3 +832,55 @@ public class Demo {
 [3, 5, 7]
 ```
 
+
+
+### 案例三
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Demo {
+    public static void main(String[] args) {
+        List<String> list1 = new ArrayList<>();
+        list1.add("Tom:18");
+        list1.add("Jack:19");
+        list1.add("Mike:20");
+
+        List<Student> list2 = list1.stream()
+                .map(s -> {
+                    String name = s.split(":")[0];
+                    int age = Integer.parseInt(s.split(":")[1]);
+                    return new Student(name, age);
+                })
+                .collect(Collectors.toList());
+        System.out.println(list2);
+    }
+}
+
+class Student {
+    String name;
+    int age;
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+```
+
+运行结果：
+
+```
+[Student{name='Tom', age=18}, Student{name='Jack', age=19}, Student{name='Mike', age=20}]
+```
+
